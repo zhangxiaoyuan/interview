@@ -19,5 +19,16 @@
  只能在最后一个case标号（没有default分支的情况下）或者default标号后面定义变量，或者引入块语句来定义变量
  
 7.流输入输出：
- 
+                    ios
+istream  fstreambase  strstreambase  ostream
+
+ifstream::istream fstreambase
+ofstream::ostream fstreambase
+istrstream::istream strstreambase
+ostrstream::ostream strstreambase
+
+iostream::istream ostream
+fstream::iostream fstreambase
+strstream::iostream strstreambase
+
 
