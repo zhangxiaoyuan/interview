@@ -1,0 +1,51 @@
+1.基本数据类型：
+ 整形(signed/unsigned char/short/int/long/bool)、浮点(float/double)、void
+ 
+2.常量类型：
+ 整形常量、浮点型常量、字符常量、字符串常量、转义字符常量、地址常量
+ 
+3.操作符分类：
+ 操作数分类：一元操作符，二元操作符，三元操作符
+ 功能分类：算数操作符、关系操作符、逻辑操作符、位操作符、赋值操作符、自增自减操作符、箭头操作符、条件操作符、sizeof操作符、逗号操作符
+
+4.变量初始化：
+ 直接初始化（利用构造函数初始化）: int a(100);
+ 赋值初始化：int a = 100;
+ 
+5.变量作用域：
+ 全局作用域、局部作用域、语句作用域
+ 
+6.switch语句中定义变量
+ 只能在最后一个case标号（没有default分支的情况下）或者default标号后面定义变量，或者引入块语句来定义变量
+ 
+7.流输入输出：
+                    ios
+istream  fstreambase  strstreambase  ostream
+
+ifstream::istream fstreambase
+ofstream::ostream fstreambase
+istrstream::istream strstreambase
+ostrstream::ostream strstreambase
+
+iostream::istream ostream
+fstream::iostream fstreambase
+strstream::iostream strstreambase
+
+8.动态内存分配：
+ int* p = new int;  delete p;
+ int* q = new int[100];  delete[] q;
+ 
+9.虚函数和纯虚函数：
+ 虚函数：虚函数在基类中定义且必须是非静态函数，然后在基类中实现，也可在子类中重载
+ 纯虚函数:必须在抽象类中定义，定义了纯虚函数的类就是抽象类，抽象类中可以定义非纯虚函数，这些函数通过多态形式被调用，在抽象类中定义的非纯虚函数必须要实现，抽象类中定义的虚函数和纯虚函数是在运行时动态加载的（多态的原理），但是抽象类中的定义的非虚函数（普通函数），则是在编译的时候已经绑定，因此不能实现多态（多态的原理）
+ 多态实现：父类的引用指向子类的实例
+ 
+ 10.构造函数和析构函数：
+  有继承类时(Class Son : Class Father)，有三种情况，不同情况构造函数和析构函数使用不同：
+  a.Father* father = new Father();  delete father;  
+   单独构造基类实例时，只调用基类的构造函数和析构函数处理
+  b.Son* son = new Son();  delete son;   单独构造子类实例时，先调用父类构造函数，在调用子类构造函数，析构时先调用子类析构函数，在调用父类析构函数(不论父类的析构函数是否为虚函数)
+  c.Father* fatherRef = new Son(); delete fatherRef;  
+   使用多态实现基类引用指向子类实例时，先调用父类构造函数，再调用子类构造函数，析构时先调用子类析构函数，再调用父类析构函数（父类的析构函数必须定义为虚函数，如果父类析构函数不是虚函数，则析构时不会调用子类的析构函数进行析构，导致只析构父类，不析构子类，内存泄漏,因为基类的析构函数定义为虚函数时，这个类就有一个虚函数指针指向子类的虚函数表，然后再delete基类指针时，就可以同过虚函数指针将子类也删除，避免内存泄漏）
+
+11.   
