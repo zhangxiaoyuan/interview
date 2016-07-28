@@ -1,5 +1,5 @@
-#ifndef __COMMON_SORT_H__
-#define __COMMON_SORT_H__
+#ifndef __SORT_CLIENT_H__
+#define __SORT_CLIENT_H__
 
 #ifdef _cplusplus
 extern "C"{
