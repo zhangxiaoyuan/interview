@@ -24,5 +24,25 @@ void insertSort(int* pArray, int arrLen)
 	return;
 }
 
+/*改进版:减少交换次数*/
+void insertSort1(int* pArray, int arrLen)
+{
+	int temp;
+	int pos;
+	for (int i = 1; i < arrLen; i++)
+	{
+		temp = pArray[i];
+		pos = i - 1;
+		while(pos >= 0 && temp < pArray[pos])
+		{
+			pArray[pos+1] = pArray[pos];
+			pos--;
+		}
+		pArray[pos+1]= temp;
+	}
+
+}
+}
+
 
 
