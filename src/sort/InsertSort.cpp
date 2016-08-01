@@ -20,7 +20,7 @@ void insertSort(int* pArray, int arrLen)
 			}
 		}
 	}
-
+	
 	return;
 }
 
