@@ -68,3 +68,7 @@ OSI中的层 功能 TCP/IP协议族
 网络层 为数据包选择路由 IP，ICMP，RIP，OSPF，BGP，IGMP
 数据链路层 传输有地址的帧以及错误检测功能 SLIP，CSLIP，PPP，ARP，RARP，MTU
 物理层 以二进制数据形式在物理媒体上传输数据 ISO2110，IEEE802，IEEE802.2
+
+15.MVC模式
+16.进程同步机制
+17.linux与windows的进程调度区别：
