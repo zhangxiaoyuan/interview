@@ -35,9 +35,12 @@ CMyString& CMyString::operator=(const CMyString& mystr)
    if (*this != mystr)
    {
       CMyString tempStr(mystr);
-      tempStr.pstr = mystr.pstr;
-      mystr.pstr = this.pstr;
-      this.pstr = temp.pstr;
+      
+      char* ptemp = tempstr.pstr;
+      tempstr.pstr = this->pstr;
+      this->pstr = ptem;
+      
+      memcpy(this->pstr, mystr->pstr);
    }
 
    return *this;   
