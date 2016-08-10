@@ -1,5 +1,8 @@
 
-/*从一个已排序数组的旋转数组中找出最小值*/
+/*
+从一个已排序数组的旋转数组中找出最小值
+两种方法，一种时采用递归的方式，一种时采用循环的方式
+*/
 int getNum(int* pstart, int* pend)
 {
 	int* ptemp = pstart;
@@ -71,3 +74,81 @@ void main()
 	int ret = getMin(arr, 5);
 	cout << ret << endl;
 }
+
+#include <iostream>
+
+using namespace std;
+
+int getMinByOrder(int arr[], int start, int end)
+{
+	int result = arr[start];
+	for (int i = start+1; i <= end; i++)
+	{
+		if (result >= arr[i])
+		{
+			return arr[i];
+		}
+	}
+	return result;
+}
+
+
+int getMinNum(int arr[], int length)
+{
+    if (arr == NULL)
+	{
+		return -1;
+	}
+	if (length < 1)
+	{
+		return -1;
+	}
+
+    int startIdx = 0;
+	int endIdx = length - 1;
+	int midIdx = startIdx;//这里赋值为start，是因为有可能只有一个元素的时候
+	while(arr[startIdx] >= arr[endIdx])
+	{
+		if (startIdx + 1 == endIdx)
+		{
+			midIdx = endIdx;
+			break;
+		}
+
+		midIdx = (startIdx + endIdx) / 2;
+		//三个指针指向位置的值相同的场景,如：1,0,1,1,1
+		if (arr[startIdx] == arr[endIdx]
+			&& arr[midIdx] == arr[endIdx])
+		{
+			return getMinByOrder(arr, startIdx, endIdx);
+		}
+
+		if (arr[midIdx] >= arr[startIdx])
+		{
+			startIdx = midIdx;
+		}
+		else if (arr[midIdx] <= arr[endIdx])
+		{			
+			endIdx = midIdx;
+		}
+	}
+	
+	return arr[midIdx];
+}
+
+
+int main()
+{
+//    cout << "hello linux ,hello vim" << endl;
+	int arr[] = {1};
+	cout << getMinNum(arr, 1) << endl;
+	//int a = getMinByOrder(arr, 0, 4);
+	
+    return 0;
+}
+
+
+
+
+
+
