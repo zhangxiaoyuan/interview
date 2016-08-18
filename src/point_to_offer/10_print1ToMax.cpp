@@ -80,7 +80,42 @@ void Get1ToMax(int n)
 	return;
 }
 
+
+void print1ToMaxRecursion(char* num, int len, int idx)
+{
+	if(idx == len - 1)
+	{
+		PrintNum(num);
+		return;
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		num[idx + 1] = '0' + i;
+		print1ToMaxRecursion(num, len, idx + 1);
+	}
+}
+/*采用递归思想，给一位数从0-9循环*/
+void Print1ToMaxAnother(int n)
+{
+	if (n < 1)
+		return;
+	
+	char* number = new char[n + 1];
+	number[n] = '\0';
+
+	for (int i = 0; i < 10; i++)
+	{
+		number[0] = '0' + i;
+		print1ToMaxRecursion(number, n, 0);
+	}
+	
+	delete[] number;
+}
+
+
 void main()
 {
 	Get1ToMax(10);
+	Print1ToMaxAnother(2);
 }
