@@ -60,6 +60,71 @@ void ReorderOddEvn2(int* arr, unsigned int length)
 }
 
 
+void ReorderOddEvn(int *pData, unsigned int length)
+{
+	if (NULL == pData || length < 1)
+	{
+		return;
+	}
+
+	for (int i = 0; i < length - 1; i ++)
+	{
+		for (int j = i + 1; j < length; j++)
+		{
+			if ((pData[i] % 2 == 0) && (pData[j] % 2 != 0))
+			{
+				int temp = pData[j];
+				pData[j] = pData[i];
+				pData[i] = temp;
+			}
+		}
+	}
+}
+
+/*用函数指针实现判断和前后拆分解耦，可以提高判断条件的扩展性*/
+void Reorder(int* arr, int length, bool (*pfun)(int))
+{
+	if (NULL == arr || length < 1)
+	{
+		return;
+	}
+
+	int* pHead = arr;
+	int* pTail = arr + length - 1;
+
+	while(pHead < pTail)
+	{
+		/*向后移动头指针，直到它指向偶数*/
+		while(pHead < pTail && !pfun(*pHead))
+		{
+			pHead++;
+		}
+
+		/*向前移动尾指针，直到它指向奇数*/
+		while (pHead < pTail && pfun(*pTail))
+		{
+			pTail--;
+		}
+
+		if (pHead < pTail)
+		{
+			int temp = *pTail;
+			*pTail = *pHead;
+			*pHead = temp;
+		}
+	}
+}
+
+bool isEven(int number)
+{
+	return (number & 0x01) == 0;
+}
+
+void ReorderOddEvn3(int* arr, unsigned int length)
+{
+	Reorder(arr, length, isEven);
+}
+
 void main()
 {
 	int arr[] = {1,2,3,4,5,6,7,8,9,10,11,12,13};
