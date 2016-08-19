@@ -1,6 +1,6 @@
 //  Created by mango on 16/8/19.
 //  Copyright © 2016年 mango. All rights reserved.
-//
+/*输入一个二叉树，输出他的镜像*/
 
 #include <iostream>
 
