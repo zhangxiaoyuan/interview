@@ -1,0 +1,103 @@
+1.linux的文件描述符fd和文件指针flip:
+  fd是一个整数，在调用open()时返回，起到一个索引的作用，进程通过PCB中的文件描述符表fd找到该fd所指向的文件指针filp
+  文件描述符fd是open()返回的值,内核会在每个进程空间中维护一个文件描述符表表中有fd和flip对应关系，所有打开的文件都将通过此表中的fd来引用flip找到对应的文件而流(如: fopen)返回的是一个FILE结构指针, FILE结构是包含有文件描述符fd的，FILE结构可以看作是对fd直接操作的系统调用的封装, 它的优点是带有I/O缓存每个进程在PCB（ProcessControlBlock）即进程控制块中都保存着一份文件描述符表，表中有fd和flip的关联关系，fd就是这个表的索引，文件描述表中每个表项都有一个指向已打开文件的指针flip
+
+2.共享内存:共享内存是最快的IPC(进程间通信)方式，它允许多个不相关的进程去访问同一片逻辑内存，共享内存是由IPC分配的一段地址空间，
+  所有共享这段地址的进程都可以把这段地址加入到自己进程的地址空间段中，所有的进程就可以同时访问这块内存地址，如果一个进程对这段地址的数据了
+  改动，那么其他进程来读取这段地址就可以看到数据的改变，因此共享内存对于共享数据的传输是非常高效的。
+  共享内存原理：共享内存是最有用的进程间通信方式之一，也是最快的IPC形式。两个不同进程A、B共享内存的意思是，同一块物理内存被映射到进程A、B各自的进程地址空间。进程A可以即时看到进程B对共享内存中数据的更新，反之亦然。
+
+3.ELF：Linux Excutable and Linktable Format,ELF标准作为工作在32位INTEL体系上不同操作系统之间可移植的二进制文件格式
+
+4.C++进程内存空间分布：
+  linux系统中一个进程占用的最大空间为2的32次方=4G，即一个进程有4G的虚拟内存空间,其中1G为内核空间，3G为用户空间
+  用户空间中从高到低依次是 《栈stack->内存映射区memory mapping->堆heap->未初始化数据区BSS->数据区data->代码区code》
+  内存映射区memory mapping：共享内存就在内存映射区
+  栈空间：栈地址从高到低分配，栈顶地址和栈大小固定2M，常量区也在栈空间上
+  堆空间：链表形式，有效的虚拟内存空间，最大3G
+  BSS段：可执行程序分为BSS段，数据段，代码段(文本段)；在C++中BSS(Block Started by Symbol)是指用来存放未初始化的静态变量和全局变量的内存段，
+  是可读写的内存，特点是在程序运行之前BSS会自动清0，这就是为什么c++中未初始化的静态变量和全局变量会默认为0的原因
+  初始化的静态变量和全局变量、成员变量、临时变量都是存放在数据段中
+  1.程序段（text）:  程序段为程序代码在内存中的映射.一个程序可以在内存中多有个副本.
+  2.文字常量区: 常量字符串就是放在这里的。
+  3.初始化过的数据(data):  在程序运行之初已经对变量进行初始化的全局变量和静态变量的存储是放在一块的，初始化的全局变量和静态变量在一块区域， 未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。
+  4.未初始化过的数据（bss）: 在程序运行初未对变量进行初始化的数据。
+  5.堆栈(stack): 存储局部,临时变量,在程序块开始时自动分配内存,结束时自动释放内存.存储函数的返回指针. 当函数被调用时，它们被压入栈；当函数返回时，它们就要被弹出堆栈。
+  6.堆(heap): 存储动态内存分配,需要程序员手工分配（c中malloc函数，c++中new函数）,手工释放（free 和 delete 函数）.
+  3和4称为静态存储区，6和7称为动态存储区
+    size a.out可以查看可执行文件的段大小
+  
+  //main.cpp 
+  int a = 0; 全局初始化区--data区 
+  char *p1; 全局未初始化区--BSS区
+  main() 
+  { 
+  int b; 栈--statck
+  char s[] = "abc"; 栈--stack 
+  char *p2; 栈--stack 
+  char *p3 = "123456"; 123456\0在常量区，p3在栈上-stack。 
+  static int c =0； 全局（静态）初始化区--data区
+  p1 = (char *)malloc(10);--堆heap 
+  p2 = (char *)malloc(20);--堆heap
+  分配得来得10和20字节的区域就在堆区。 
+  strcpy(p1, "123456"); 123456\0放在常量区，编译器可能会将它与p3所指向的"123456"优化成一个地方。 
+  }
+
+6.进程间通信机制：
+  消息队列：
+  socket套接字：
+  共享内存：
+  信号量：
+
+2.常用命令：
+netstat: 显示网络状态
+两部分状态：
+SZX1000123220:/usr/src # netstat
+Active Internet connections (w/o servers)  //有源TCP连接
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 SZX1000123220:ssh       10.63.165.179:51154     ESTABLISHED 
+tcp        0      0 localhost:32000         localhost:31000         ESTABLISHED 
+tcp        0      0 localhost:32001         localhost:31001         ESTABLISHED 
+tcp       24      0 SZX1000123220:45099     10.82.138.216%3148:8089 CLOSE_WAIT  
+
+Active UNIX domain sockets (w/o servers)  //有源UNIX套接字，由于本机通信
+Proto RefCnt Flags       Type       State         I-Node Path
+unix  3      [ ]         STREAM     CONNECTED     10057  /tmp/diskmon.0.3521
+unix  3      [ ]         STREAM     CONNECTED     10072  /tmp/diskmon.0.3520
+unix  2      [ ]         DGRAM                    2945   @/org/kernel/udev/udevd
+unix  2      [ ]         DGRAM                    10033  /var/run/hook-localserver
+
+tcpdump:抓取本机所有网络接口的数据报文头，配置灵活，配置各种抓取规则
+SZX1000123220:/usr/src # tcpdump
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), capture size 96 bytes
+09:39:01.680786 IP SZX1000123220.ssh > 10.63.165.179.51154: P 4084071868:4084072064(196) ack 1275033461 win 73
+09:39:01.681285 IP SZX1000123220.60322 > ns.huawei.com.domain: 61206+ PTR? 179.165.63.10.in-addr.arpa. (44)
+609 packets captured
+610 packets received by filter
+0 packets dropped by kernel
+
+ipcs:查看进程间通信设施状态
+SZX1000123220:/usr/src # ipcs
+------ Shared Memory Segments --------  //共享内存
+key        shmid      owner      perms      bytes      nattch     status      
+0x00000000 32768      gdm        600        393216     2          dest         
+0x00000000 65537      gdm        600        196608     2          dest         
+------ Semaphore Arrays --------  //信号量数组
+key        semid      owner      perms      nsems     
+------ Message Queues --------   //消息队列
+key        msqid      owner      perms      used-bytes   messages   
+
+ipcrm:删除对应上面的信息
+
+cat /proc/cpuinfo: 查询cpu所有信息
+cat /proc/meminfo:查询内存所有信息
+df -lh：查看硬盘信息
+fdisk -l:查看硬盘信息
+cat /proc/scsi/scsi：硬盘详细信息
+dmesg:查看一些外设信息，比如网卡，蓝牙，cpu等
+dmesg |grep eth：查看网卡信息
+uname -a:查询机器的libux版本，机器名等详细信息
+
+
+
