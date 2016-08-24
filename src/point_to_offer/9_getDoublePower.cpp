@@ -1,7 +1,7 @@
 
 /*
 主要考虑涉及多种边界场景
-1.base为0的场景 2.幂数为负的场景 3.
+1.base为0的场景 2.幂数为负的场景 3.浮点数相等的判断，不能之间用==判断
 */
 
 double getPowerWithUnsigned(double baseN, unsigned int expo)
