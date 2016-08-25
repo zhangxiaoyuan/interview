@@ -1,0 +1,175 @@
+1.linux的文件描述符fd和文件指针flip:
+  fd是一个整数，在调用open()时返回，起到一个索引的作用，进程通过PCB中的文件描述符表fd找到该fd所指向的文件指针filp
+  文件描述符fd是open()返回的值,内核会在每个进程空间中维护一个文件描述符表表中有fd和flip对应关系，所有打开的文件都将通过此表中的fd来引用flip找到对应的文件而流(如: fopen)返回的是一个FILE结构指针, FILE结构是包含有文件描述符fd的，FILE结构可以看作是对fd直接操作的系统调用的封装, 它的优点是带有I/O缓存每个进程在PCB（ProcessControlBlock）即进程控制块中都保存着一份文件描述符表，表中有fd和flip的关联关系，fd就是这个表的索引，文件描述表中每个表项都有一个指向已打开文件的指针flip
+
+2.共享内存:共享内存是最快的IPC(进程间通信)方式，它允许多个不相关的进程去访问同一片逻辑内存，共享内存是由IPC分配的一段地址空间，
+  所有共享这段地址的进程都可以把这段地址加入到自己进程的地址空间段中，所有的进程就可以同时访问这块内存地址，如果一个进程对这段地址的数据了
+  改动，那么其他进程来读取这段地址就可以看到数据的改变，因此共享内存对于共享数据的传输是非常高效的。
+  共享内存原理：共享内存是最有用的进程间通信方式之一，也是最快的IPC形式。两个不同进程A、B共享内存的意思是，同一块物理内存被映射到进程A、B各自的进程地址空间。进程A可以即时看到进程B对共享内存中数据的更新，反之亦然。
+
+3.ELF：Linux Excutable and Linktable Format,ELF标准作为工作在32位INTEL体系上不同操作系统之间可移植的二进制文件格式
+
+4.C++进程内存空间分布：
+  linux系统中一个进程占用的最大空间为2的32次方=4G，即一个进程有4G的虚拟内存空间,其中1G为内核空间，3G为用户空间
+  用户空间中从高到低依次是 《栈stack->内存映射区memory mapping->堆heap->未初始化数据区BSS->数据区data->代码区code》
+  内存映射区memory mapping：共享内存就在内存映射区
+  栈空间：栈地址从高到低分配，栈顶地址和栈大小固定2M，常量区也在栈空间上
+  堆空间：链表形式，有效的虚拟内存空间，最大3G
+  BSS段：可执行程序分为BSS段，数据段，代码段(文本段)；在C++中BSS(Block Started by Symbol)是指用来存放未初始化的静态变量和全局变量的内存段，
+  是可读写的内存，特点是在程序运行之前BSS会自动清0，这就是为什么c++中未初始化的静态变量和全局变量会默认为0的原因
+  初始化的静态变量和全局变量、成员变量、临时变量都是存放在数据段中
+  1.程序段（text）:  程序段为程序代码在内存中的映射.一个程序可以在内存中多有个副本.
+  2.文字常量区: 常量字符串就是放在这里的。
+  3.初始化过的数据(data):  在程序运行之初已经对变量进行初始化的全局变量和静态变量的存储是放在一块的，初始化的全局变量和静态变量在一块区域， 未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。
+  4.未初始化过的数据（bss）: 在程序运行初未对变量进行初始化的数据。
+  5.堆栈(stack): 存储局部,临时变量,在程序块开始时自动分配内存,结束时自动释放内存.存储函数的返回指针. 当函数被调用时，它们被压入栈；当函数返回时，它们就要被弹出堆栈。
+  6.堆(heap): 存储动态内存分配,需要程序员手工分配（c中malloc函数，c++中new函数）,手工释放（free 和 delete 函数）.
+  3和4称为静态存储区，6和7称为动态存储区
+    size a.out可以查看可执行文件的段大小
+    
+  //main.cpp 
+  int a = 0; 全局初始化区--data区 
+  char *p1; 全局未初始化区--BSS区
+  main() 
+  { 
+  int b; 栈--statck
+  char s[] = "abc"; 栈--stack 
+  char *p2; 栈--stack 
+  char *p3 = "123456"; 123456\0在常量区，p3在栈上-stack。 
+  static int c =0； 全局（静态）初始化区--data区
+  p1 = (char *)malloc(10);--堆heap 
+  p2 = (char *)malloc(20);--堆heap
+  分配得来得10和20字节的区域就在堆区。 
+  strcpy(p1, "123456"); 123456\0放在常量区，编译器可能会将它与p3所指向的"123456"优化成一个地方。 
+  }
+
+5.makefile编写：
+  makedir mf
+  cd mf
+  vim makefile.mk
+  hello.o:hello.c hello.h
+    gcc -c hello.o -Lm
+  make  
+  ./hello
+  预处理-----> 编译 ----> 汇编 ----> 链接 
+  #gcc -E hello.c -o hello.i
+  #gcc –S hello.i –o hello.s 
+  #gcc –c hello.s –o hello.o 
+  #gcc hello.o –o hello.exe 
+  #./hello.exe
+  
+6.GDB: GNU debugger 安装GDB之后，在生成执行文件时加上-g   如：gcc -g -o hello hello.c
+  list / info / break / file / continue / run / step / display / run / quit
+
+7.静态链接和动态链接：
+  动态链接是指在生成可执行文件时不将所有程序用到的函数链接到一个文件，因为有许多函数在操作系统带的dll文件中，当程序运行时直接从操作系统中，而静态链接就是把所有用到的函数全部链接到exe文件中。
+  动态链接是只建立一个引用的接口，而真正的代码和数据存放在另外的可执行模块中，在运行时再装入；而静态链接是把所有的代码和数据都复制到本模块中，运行时就不再需要库了
+
+8.多进程和多线程的差异比较：
+  维度               |       多进程                                        |         多线程                   
+ 数据共享同步        | 进程间数据是独享的，共享复杂，需要IPC，同步简单     | 多线程共享进程数据，共享简单，同步复杂
+ 内存/CPU            | 进程占用内存大，切换复杂，CPU利用率低               | 线程内存占用少，切换简单，CPU利用率高
+ 创建、销毁、切换    | 创建、切换、销毁复杂，速度慢                        | 比较简单，速度快
+ 编程、调试          | 简单                                                | 复杂
+ 可靠性              | 进程间不会相互影响                                  | 一个线程挂掉导致整个进程的所有线程都挂掉
+ 分布式              | 适合多核、多机分布                                  | 适用于多核分布
+ 
+ 线程私有的东西：线程ID，一组寄存器，栈，调度优先级和策略，线程私有数据
+ 
+9.线程和进程：
+  进程——资源分配的最小单位，线程——程序执行的最小单位
+  一般运行一个程序就是一个进程
+  进程可以创建一个线程，也可以创建一个进程
+  线程是由进程管理，线程之间、线程与父进程之后可以共享内存变量
+  进程之间一般不可以直接共享内存变量，需要使用一些进程间的控制共享内存变量
+  进程是个容器或者说资源管理者，有独立的内存地址空间。
+  线程依赖于它所在的进程，共享进程的资源和内存地址空间
+  应用场景：
+  需要频繁创建销毁的优先使用线程
+  需要进行大量计算的有限使用线程，大量计算就意味着需要频繁切换cpu和对cpu的大量消耗
+  强相关的处理用线程，弱相关的处理用进程
+  涉及到多机分布的用进程，涉及到多核分布的用线程
+  一个进程的开销大约是一个线程开销的30倍左右
+  http://www.cnblogs.com/obama/archive/2013/04/12/3016509.html
+
+10.线程同步与互:
+  线程同步是指线程之间所具有的一种制约关系，一个线程的执行依赖另一个线程的消息，当它没得到另一个线程的消息时应等待，直到消息到达时才被唤。
+  互斥是指对于共享的进程系统资源，在各单个线程访问时的排它性。当有若干个线程都要使用某一共享资源时，任何时刻最多只允许一个线程去使用，其它要使用该资源的线程必须等待，直到占用资源者释放该资源。线程互斥可以看成是一种特殊的线程同步
+  
+11.进程间通信机制：
+  消息队列：
+  socket套接字：
+  共享内存：
+  信号量：
+  信号：
+  管道：
+  
+12.VxWorks相关：
+  VxWorks是单进程多线程的系统，多任务类似于多线程，一个进程用于申请内存空间和系统资源，任务之间实现内存和资源的共享
+  二进制信号量：最常用的，主要用于互斥和同步
+  互斥信号量：二进制的特殊情况，主要用于优先级继承、安全删除、递归等
+  计数信号量：主要用于保护一个资源的多个实例
+
+13.TCP和UDP:
+  面向连接：TCP是面向连接的，面向连接意味着两个TCP应用在使用之前需要通过3次握手建立一个TCP链接，在一个TCP只有两方彼此通信，多播和广播不能用于TCP；UDP不需要面向连接的，因此在传输之后不需要经过握手，直接发送数据即可，因此可以使用与多播和广播
+  可靠性：TCP通过端到端的流量控制，对收到的数据包进行确认，采用超时重发，对失序的数据进行重新排序的机制以保证数据的可靠性，UDP是不可靠的传输，接收方可能会收不到发送方的报文
+  传输模式：TCP是字节流模式协议，UDP是数据报模式协议，TCP应用程序产生的全体数据与真正发送的单个IP数据报可能没有什么联系，进程的每个输出操作都正好产生一个UDP数据报，并组装成一份待发送的IP数据报
+  效率上：速度上，一般TCP速度慢，传输过程中需要对数据进行确认，超时重发，还要对数据进行排序；UDP没有这些机制所以速度快，数据比例，TCP头至少20个字节，UDP头8个字节，相对效率高
+  用途上：用于TCP可靠性，http，ftp使用。而由于UDP速度快，视频，在线游戏多用UDP，保证实时性
+  
+  
+  
+
+
+2.常用命令：
+netstat: 显示网络状态
+两部分状态：
+SZX1000123220:/usr/src # netstat
+Active Internet connections (w/o servers)  //有源TCP连接
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 SZX1000123220:ssh       10.63.165.179:51154     ESTABLISHED 
+tcp        0      0 localhost:32000         localhost:31000         ESTABLISHED 
+tcp        0      0 localhost:32001         localhost:31001         ESTABLISHED 
+tcp       24      0 SZX1000123220:45099     10.82.138.216%3148:8089 CLOSE_WAIT  
+
+Active UNIX domain sockets (w/o servers)  //有源UNIX套接字，由于本机通信
+Proto RefCnt Flags       Type       State         I-Node Path
+unix  3      [ ]         STREAM     CONNECTED     10057  /tmp/diskmon.0.3521
+unix  3      [ ]         STREAM     CONNECTED     10072  /tmp/diskmon.0.3520
+unix  2      [ ]         DGRAM                    2945   @/org/kernel/udev/udevd
+unix  2      [ ]         DGRAM                    10033  /var/run/hook-localserver
+
+tcpdump:抓取本机所有网络接口的数据报文头，配置灵活，配置各种抓取规则
+SZX1000123220:/usr/src # tcpdump
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), capture size 96 bytes
+09:39:01.680786 IP SZX1000123220.ssh > 10.63.165.179.51154: P 4084071868:4084072064(196) ack 1275033461 win 73
+09:39:01.681285 IP SZX1000123220.60322 > ns.huawei.com.domain: 61206+ PTR? 179.165.63.10.in-addr.arpa. (44)
+609 packets captured
+610 packets received by filter
+0 packets dropped by kernel
+
+ipcs:查看进程间通信设施状态
+SZX1000123220:/usr/src # ipcs
+------ Shared Memory Segments --------  //共享内存
+key        shmid      owner      perms      bytes      nattch     status      
+0x00000000 32768      gdm        600        393216     2          dest         
+0x00000000 65537      gdm        600        196608     2          dest         
+------ Semaphore Arrays --------  //信号量数组
+key        semid      owner      perms      nsems     
+------ Message Queues --------   //消息队列
+key        msqid      owner      perms      used-bytes   messages   
+
+ipcrm:删除对应上面的信息
+
+cat /proc/cpuinfo: 查询cpu所有信息
+cat /proc/meminfo:查询内存所有信息
+df -lh：查看硬盘信息
+fdisk -l:查看硬盘信息
+cat /proc/scsi/scsi：硬盘详细信息
+dmesg:查看一些外设信息，比如网卡，蓝牙，cpu等
+dmesg |grep eth：查看网卡信息
+uname -a:查询机器的libux版本，机器名等详细信息
+
+
+
