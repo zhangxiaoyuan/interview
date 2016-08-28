@@ -112,16 +112,16 @@
 ####21.树的三种遍历:
 * 前序遍历：根-左-右  下示例：abdefgc
 * 中序遍历：左-根-右  下示例：debgfac
-* 后序遍历：左-右-根  下示例：edgfbca  \n
-      a
+* 后序遍历：左-右-根  下示例：edgfbca  
+*     a
      / \
     b   c
   /  \
  d    f
  \   / 
   e g
-\n
- 前序遍历：abdefgc
+
+ * 前序遍历：abdefgc
  中序遍历：debgfac
  后序遍历：edgfbca
 
