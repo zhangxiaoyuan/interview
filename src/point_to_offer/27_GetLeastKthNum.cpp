@@ -3,7 +3,7 @@
 1.对数组整个排序，然后取出前k个数字即可
 2.以k位置的数字为中位数，比k位置上大的数字放到右边，比k位置上小的数字放到左边，最后k位置之前的数字就是需要的最小的k个数字
 3.使用set或者堆，从n个数字中取出k个数先放入到set或者堆中，然后排序这k个数字，找出最大值，然后从k+1开始和堆中的最大数比较，
-  比他大的就比较下一个，比它小的就置换进set中
+  比他大的就比较下一个，比它小的就置换进set中,使用set有个缺陷，输入数组中不能有重复数字，否则会丢失
 */
 
 
@@ -68,6 +68,48 @@ void GetLeastNum(int *input, int len, int* output, int k)
     
     return;
 }
+
+
+#include <set>
+void GetLeastKthNum(int* input, int len, int* output, int k)
+{
+    if (len < 1 || k < 1
+        || input == NULL || output == NULL)
+    {
+        return;
+    }
+    
+    set<int, greater<int>> outSet;
+    
+    for (int i =0; i < len; i++)
+    {
+        if (i < k)
+        {
+            outSet.insert(input[i]);
+        }
+        else
+        {
+            set<int, greater<int>>::iterator ite = outSet.begin();
+            if (*ite > input[i])
+            {
+                outSet.erase(ite);
+                outSet.insert(input[i]);
+            }
+        }
+    }
+    
+    set<int, greater<int>>::iterator ite = outSet.begin();
+    int i = 0;
+    while (ite != outSet.end())
+    {
+        output[i] = *ite;
+        ++i;
+        ++ite;
+    }
+    
+    return;
+}
+
 
 int main(int argc, const char * argv[])
 {
