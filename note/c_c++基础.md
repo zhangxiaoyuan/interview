@@ -20,20 +20,20 @@
  
 ####7.流输入输出：
                     ios
- istream  fstreambase  strstreambase  ostream
+ * istream  fstreambase  strstreambase  ostream
 
- ifstream::istream fstreambase
- ofstream::ostream fstreambase
- istrstream::istream strstreambase
- ostrstream::ostream strstreambase
+ * ifstream::istream fstreambase
+ * ofstream::ostream fstreambase
+ * istrstream::istream strstreambase
+ * ostrstream::ostream strstreambase
 
- iostream::istream ostream
- fstream::iostream fstreambase
- strstream::iostream strstreambase
+ * iostream::istream ostream
+ * fstream::iostream fstreambase
+ * strstream::iostream strstreambase
 
 ####8.动态内存分配：
- int* p = new int;  delete p;
- int* q = new int[100];  delete[] q;
+ * int* p = new int;  delete p;
+ * int* q = new int[100];  delete[] q;
  
 ####9.虚函数和纯虚函数：
  * 虚函数：虚函数在基类中定义且必须是非静态函数，然后在基类中实现，也可在子类中重载
@@ -49,8 +49,8 @@
    使用多态实现基类引用指向子类实例时，先调用父类构造函数，再调用子类构造函数，析构时先调用子类析构函数，再调用父类析构函数（父类的析构函数必须定义为虚函数，如果父类析构函数不是虚函数，则析构时不会调用子类的析构函数进行析构，导致只析构父类，不析构子类，内存泄漏,因为基类的析构函数定义为虚函数时，这个类就有一个虚函数指针指向子类的虚函数表，然后再delete基类指针时，就可以同过虚函数指针将子类也删除，避免内存泄漏）
 
 ####11. 结构体与类:
- c语言只有结构体的概念，在C++中可以在结构体中声明函数，但是在C语言中是不允许的
- 实例化的类对象存储中堆内存中，而结构存储在栈内存中，结构的执行效率比较高，结构没有析构函数
+ * c语言只有结构体的概念，在C++中可以在结构体中声明函数，但是在C语言中是不允许的
+ * 实例化的类对象存储中堆内存中，而结构存储在栈内存中，结构的执行效率比较高，结构没有析构函数
  
 ####12.静态成员：
  * 类的静态成员变量可以作为成员函数的可选参数，但是普通成员变量不可以 
@@ -72,15 +72,15 @@
  * 宏多态：采用宏定义实现初级形式的静态多态
  
 ####15.深拷贝和浅拷贝：
-  如果一个类中拥有资源，那么在复制的过程中如果发生资源重新分配，这就是深拷贝，反之就是浅拷贝
-  比如，在有指针的情况下，浅拷贝只是增加了一个指针指向已经存在的内存，而深拷贝就是增加一个指针并且申请一个新的内存，使这
+  * 如果一个类中拥有资源，那么在复制的过程中如果发生资源重新分配，这就是深拷贝，反之就是浅拷贝
+  * 比如，在有指针的情况下，浅拷贝只是增加了一个指针指向已经存在的内存，而深拷贝就是增加一个指针并且申请一个新的内存，使这
   增加的指针指向这个新的内存，采用深拷贝的情况下，释放内存的时候就不会出现在浅拷贝时重复释放同一内存的错误
    
 ####16.复制构造函数和类型转化构造函数：
   * 复制构造函数:又称为拷贝构造函数，是一种特殊的构造函数，它由编译器调用来完成一些基于同一类的其他对象的构建及初始化，有3中使用场景
-   一个对象以值传递的方式传入函数体
-   一个对象已值传递的方式从函数返回
-   一个对象需要通过另外一个对象进行初始化
+   * 一个对象以值传递的方式传入函数体
+   * 一个对象已值传递的方式从函数返回
+   * 一个对象需要通过另外一个对象进行初始化
   * 类型转化构造函数:一个类的构造函数只有一个参数，并且这个参数不是该类的类型而是其他类型，这个构造函数就称为类型转换构造函数
   
 ####17.静态函数访问非静态成员变量:
@@ -112,7 +112,7 @@
 ####21.树的三种遍历:
 * 前序遍历：根-左-右  下示例：abdefgc
 * 中序遍历：左-根-右  下示例：debgfac
-* 后序遍历：左-右-根  下示例：edgfbca
+* 后序遍历：左-右-根  下示例：edgfbca  \n
       a
      / \
     b   c
@@ -120,18 +120,18 @@
  d    f
  \   / 
   e g
-
+\n
  前序遍历：abdefgc
  中序遍历：debgfac
  后序遍历：edgfbca
 
 ####21.设计模式：
  * 创建型模式：抽象了类的实例化过程，帮助系统如何创建、组合、表示那些对象
-   工厂模式(FACTORY)、生成器模式(BUILDER)、工厂方法模式(FACTORY METHOD)、原型模式(PROTOTYPE)、单例模式(SINGLETON)
+   * 工厂模式(FACTORY)、生成器模式(BUILDER)、工厂方法模式(FACTORY METHOD)、原型模式(PROTOTYPE)、单例模式(SINGLETON)
  * 行为型模式：解决类实体之间的通讯关系，描述一个控制流程
-   职责链模式(CHAIN OF RESPONSIBLEITY)、命令模式(COMMAND)、解释器模式(INTERPRETER)、迭代器模式(ITERATOR)、中介者模式(MEDIATOR)、备忘录模式(MEMENTO)、观察者模式(OBSERVER)、状态模式(STATE)、策略模式(STRATEGY)、模板方法模式(TEMPLATE METHOD)、访问者模式(VISITOR)
+   * 职责链模式(CHAIN OF RESPONSIBLEITY)、命令模式(COMMAND)、解释器模式(INTERPRETER)、迭代器模式(ITERATOR)、中介者模式(MEDIATOR)、备忘录模式(MEMENTO)、观察者模式(OBSERVER)、状态模式(STATE)、策略模式(STRATEGY)、模板方法模式(TEMPLATE METHOD)、访问者模式(VISITOR)
  * 结构型模式：如何组合类与对象以获得更大的结构，采用继承机制组合接口与实现
-   适配器模式(ADAPTER)、桥接模式(BRIDGE)、合成模式(COMPOSITE)、装饰者模式(DECORATOR)、外观模式(FACADOR)、享元模式(FLYWEIGHT)、代理模式(PROXY)
+   * 适配器模式(ADAPTER)、桥接模式(BRIDGE)、合成模式(COMPOSITE)、装饰者模式(DECORATOR)、外观模式(FACADOR)、享元模式(FLYWEIGHT)、代理模式(PROXY)
    
 ####22.关系数据库设计范式：
  * 第一范式(1NF):确保数据库列中的值不重复（实体中的某个属性不能有重复值或者不能有重复的属性）
