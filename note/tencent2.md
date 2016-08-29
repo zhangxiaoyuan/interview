@@ -9,15 +9,15 @@ __Linux的进程管理由进程控制块、进程调度、中断处理、任务�
    __进程还要根据其进程ID号插入到一个hash表当中，目的是加快进程搜索速度__
    __Linux系统的进程控制块用数据结构task_struct表示__，这个数据结构占用1680个字节,进程运行状态包括如下几个：
 
-   * a.__TASK_RUNNIN__:   
+   * __TASK_RUNNIN__:   
        正在运行或在就绪队列run-queue中准备运行的进程，实际参与进程调度。
-   * b.__TASK_INTERRUPTIBLE__:   
+   * __TASK_INTERRUPTIBLE__:   
        处于等待队列中的进程，待资源有效时唤醒，也可由其它进程通过信号或定时中断唤醒后进入就绪队列run-queue。
-   * c.__TASK_UNINTERRUPTIBLE__:  
+   * __TASK_UNINTERRUPTIBLE__:  
        处于等待队列的进程，待资源有效时唤醒，不可由其它进程通过信号或者定时中断唤醒。
-   * d.__TASK_ZOMBIE__ :  
+   * __TASK_ZOMBIE__ :  
        表示进程结束但尚未消亡的一种状态（僵死），此时，进程已经结束运行并且已经释放了大部分资源，但是尚未释放进程控制块.
-   * e.__TASK_STOPPED__:   
+   * __TASK_STOPPED__:   
        进程暂停，通过其它进程的信号才能唤醒。
      
 * 2.__进程调度__：
