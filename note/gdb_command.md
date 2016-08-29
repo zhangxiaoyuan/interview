@@ -2,7 +2,8 @@
 * 编译文件：g++ -g xxx.cpp -o xxx / g++ -g -o xxx xxx.cpp
 * 输入gdb xxx(上一步编译生成的科执行文件xxx)
 * 这时候就进入了gdb，输入list查看源代码
-  > list/l:查看源码
+
+> list/l：查看源代码
   break/b 行号/函数名：对应位置打断点
   delete 断点编号：删除对应断点，断点编号可以用i b查询
   info break/i b:查看断点信息
