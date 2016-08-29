@@ -18,7 +18,10 @@
 ####2.常用命令：
 * netstat: 显示网络状态
   * 两部分状态：
-    * SZX1000123220:/usr/src # netstat
+ 
+ * * *
+
+    SZX1000123220:/usr/src # netstat
     Active Internet connections (w/o servers)  //有源TCP连接
     Proto Recv-Q Send-Q Local Address           Foreign Address         State      
     tcp        0      0 SZX1000123220:ssh       10.63.165.179:51154     ESTABLISHED 
@@ -26,7 +29,7 @@
     tcp        0      0 localhost:32001         localhost:31001         ESTABLISHED 
     tcp       24      0 SZX1000123220:45099     10.82.138.216%3148:8089 CLOSE_WAIT  
 
-***
+* * *
 
     * Active UNIX domain sockets (w/o servers)  //有源UNIX套接字，由于本机通信
     Proto RefCnt Flags       Type       State         I-Node Path
@@ -35,7 +38,7 @@
     unix  2      [ ]         DGRAM                    2945   @/org/kernel/udev/udevd
     unix  2      [ ]         DGRAM                    10033  /var/run/hook-localserver
     
-***
+* * *
 
 * tcpdump:抓取本机所有网络接口的数据报文头，配置灵活，配置各种抓取规则
     SZX1000123220:/usr/src # tcpdump
