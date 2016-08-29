@@ -26,7 +26,6 @@
 ####2.常用命令：
 * netstat: 显示网络状态
   * 两部分状态：
- 
 * * *
     SZX1000123220:/usr/src # netstat
     Active Internet connections (w/o servers)  //有源TCP连接
@@ -45,7 +44,6 @@
 
 
 * tcpdump:抓取本机所有网络接口的数据报文头，配置灵活，配置各种抓取规则
-
 * * *
     SZX1000123220:/usr/src # tcpdump
     tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
@@ -57,7 +55,6 @@
     0 packets dropped by kernel
 
 * ipcs:查看进程间通信设施状态
-
 * * *
     SZX1000123220:/usr/src # ipcs
     ------ Shared Memory Segments --------  //共享内存
