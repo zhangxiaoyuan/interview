@@ -1,4 +1,4 @@
-* #首先确保安装了gdb#
+* __首先确保安装了gdb__
 * 编译文件：g++ -g xxx.cpp -o xxx / g++ -g -o xxx xxx.cpp
 * 输入gdb xxx(上一步编译生成的科执行文件xxx)
 * 这时候就进入了gdb，输入list查看源代码
