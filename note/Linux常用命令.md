@@ -13,7 +13,7 @@
 * 13.Sendmail邮件系统使用的两个主要协议是： SMTP 和 POP ,前者用来发送邮件,后者用来接收邮件.
 * 14. rm命令可删除文件或目录,其主要差别就是是否使用递归开关 -r或-R 
 * 15.shell不仅是 用户命令的解释器 ,它同时也是一种功能强大的编程语言. bash是Linux的缺省shell.
-* 
+
 
 ####2.常用命令：
 * netstat: 显示网络状态
@@ -25,14 +25,14 @@
     tcp        0      0 localhost:32000         localhost:31000         ESTABLISHED 
     tcp        0      0 localhost:32001         localhost:31001         ESTABLISHED 
     tcp       24      0 SZX1000123220:45099     10.82.138.216%3148:8089 CLOSE_WAIT  
-***
+* * *
     * Active UNIX domain sockets (w/o servers)  //有源UNIX套接字，由于本机通信
     Proto RefCnt Flags       Type       State         I-Node Path
     unix  3      [ ]         STREAM     CONNECTED     10057  /tmp/diskmon.0.3521
     unix  3      [ ]         STREAM     CONNECTED     10072  /tmp/diskmon.0.3520
     unix  2      [ ]         DGRAM                    2945   @/org/kernel/udev/udevd
     unix  2      [ ]         DGRAM                    10033  /var/run/hook-localserver
-***
+* * *
 * tcpdump:抓取本机所有网络接口的数据报文头，配置灵活，配置各种抓取规则
     SZX1000123220:/usr/src # tcpdump
     tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
