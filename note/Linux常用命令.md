@@ -25,14 +25,14 @@
     tcp        0      0 localhost:32000         localhost:31000         ESTABLISHED 
     tcp        0      0 localhost:32001         localhost:31001         ESTABLISHED 
     tcp       24      0 SZX1000123220:45099     10.82.138.216%3148:8089 CLOSE_WAIT  
-
+***
     * Active UNIX domain sockets (w/o servers)  //有源UNIX套接字，由于本机通信
     Proto RefCnt Flags       Type       State         I-Node Path
     unix  3      [ ]         STREAM     CONNECTED     10057  /tmp/diskmon.0.3521
     unix  3      [ ]         STREAM     CONNECTED     10072  /tmp/diskmon.0.3520
     unix  2      [ ]         DGRAM                    2945   @/org/kernel/udev/udevd
     unix  2      [ ]         DGRAM                    10033  /var/run/hook-localserver
-
+***
 * tcpdump:抓取本机所有网络接口的数据报文头，配置灵活，配置各种抓取规则
     SZX1000123220:/usr/src # tcpdump
     tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
