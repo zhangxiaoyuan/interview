@@ -19,17 +19,19 @@
  只能在最后一个case标号（没有default分支的情况下）或者default标号后面定义变量，或者引入块语句来定义变量
  
 ####7.流输入输出：
+
+* * * 
                     ios
- * istream  fstreambase  strstreambase  ostream
+    istream  fstreambase  strstreambase  ostream
 
- * ifstream::istream fstreambase
- * ofstream::ostream fstreambase
- * istrstream::istream strstreambase
- * ostrstream::ostream strstreambase
+    ifstream::istream fstreambase
+    ofstream::ostream fstreambase
+    istrstream::istream strstreambase
+    ostrstream::ostream strstreambase
 
- * iostream::istream ostream
- * fstream::iostream fstreambase
- * strstream::iostream strstreambase
+    iostream::istream ostream
+    fstream::iostream fstreambase
+    strstream::iostream strstreambase
 
 ####8.动态内存分配：
  * int* p = new int;  delete p;
@@ -113,17 +115,19 @@
 * 前序遍历：根-左-右  下示例：abdefgc
 * 中序遍历：左-根-右  下示例：debgfac
 * 后序遍历：左-右-根  下示例：edgfbca  
-*     a
-     / \
-    b   c
-  /  \
- d    f
- \   / 
-  e g
 
- * 前序遍历：abdefgc
- 中序遍历：debgfac
- 后序遍历：edgfbca
+* * * 
+         a
+        / \
+       b   c
+     /  \
+    d    f
+    \   / 
+     e g
+     
+    前序遍历：abdefgc
+    中序遍历：debgfac
+    后序遍历：edgfbca
 
 ####21.设计模式：
  * 创建型模式：抽象了类的实例化过程，帮助系统如何创建、组合、表示那些对象
