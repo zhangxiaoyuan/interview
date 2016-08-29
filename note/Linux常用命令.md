@@ -28,7 +28,6 @@
   * 两部分状态：
  
 * * *
-
     SZX1000123220:/usr/src # netstat
     Active Internet connections (w/o servers)  //有源TCP连接
     Proto Recv-Q Send-Q Local Address           Foreign Address         State      
@@ -43,14 +42,12 @@
     unix  3      [ ]         STREAM     CONNECTED     10072  /tmp/diskmon.0.3520
     unix  2      [ ]         DGRAM                    2945   @/org/kernel/udev/udevd
     unix  2      [ ]         DGRAM                    10033  /var/run/hook-localserver
-    
-* * *
+
 
 * tcpdump:抓取本机所有网络接口的数据报文头，配置灵活，配置各种抓取规则
 
 * * *
-
-  SZX1000123220:/usr/src # tcpdump
+    SZX1000123220:/usr/src # tcpdump
     tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
     listening on eth0, link-type EN10MB (Ethernet), capture size 96 bytes
     09:39:01.680786 IP SZX1000123220.ssh > 10.63.165.179.51154: P 4084071868:4084072064(196) ack 1275033461 win 73
