@@ -27,7 +27,6 @@
 * netstat: 显示网络状态
   * 两部分状态：
 
-* * *
     SZX1000123220:/usr/src # netstat
     Active Internet connections (w/o servers)  //有源TCP连接
     Proto Recv-Q Send-Q Local Address           Foreign Address         State      
@@ -46,7 +45,6 @@
 
 * tcpdump:抓取本机所有网络接口的数据报文头，配置灵活，配置各种抓取规则
 
-* * *
     SZX1000123220:/usr/src # tcpdump
     tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
     listening on eth0, link-type EN10MB (Ethernet), capture size 96 bytes
@@ -58,16 +56,15 @@
 
 * ipcs:查看进程间通信设施状态
 
-* * *
-    SZX1000123220:/usr/src # ipcs
-    ------ Shared Memory Segments --------  //共享内存
-    key        shmid      owner      perms      bytes      nattch     status      
-    0x00000000 32768      gdm        600        393216     2          dest         
-    0x00000000 65537      gdm        600        196608     2          dest         
-    ------ Semaphore Arrays --------  //信号量数组
-    key        semid      owner      perms      nsems     
-    ------ Message Queues --------   //消息队列
-    key        msqid      owner      perms      used-bytes   messages   
+     SZX1000123220:/usr/src # ipcs
+     ------ Shared Memory Segments --------  //共享内存
+     key        shmid      owner      perms      bytes      nattch     status      
+     0x00000000 32768      gdm        600        393216     2          dest         
+     0x00000000 65537      gdm        600        196608     2          dest         
+     ------ Semaphore Arrays --------  //信号量数组
+     key        semid      owner      perms      nsems     
+     ------ Message Queues --------   //消息队列
+     key        msqid      owner      perms      used-bytes   messages   
 
 
 * * *
