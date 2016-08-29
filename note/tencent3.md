@@ -36,10 +36,10 @@ __5种I/O模式__：
 
 * __I/O多路复用__:  
 
-> I/O多路复用实际就是常说的select()/poll()/epool(),或者称之为event driven I/O，好处就在于一个process可以同时处理多个网络连接的I/O，
- 基本原理就是select()/poll()/epoll()会不断的轮训各自所负责的所有socket连接，当其中一个socket中有数据到达时，就通知用户进程处理。
- 实际上当用户进程调用select()，那么整个进程就会被bolck,而同时，kernel会监视所有select负责的socket，当任何一个socket中有数据准备好了，
- 就会返回oK给用户进程，这时候用户进程在调用read操作将数据从kernel中拷贝到用户进程
+ > I/O多路复用实际就是常说的select()/poll()/epool(),或者称之为event driven I/O，好处就在于一个process可以同时处理多个网络连接的I/O，
+  基本原理就是select()/poll()/epoll()会不断的轮训各自所负责的所有socket连接，当其中一个socket中有数据到达时，就通知用户进程处理。
+  实际上当用户进程调用select()，那么整个进程就会被bolck,而同时，kernel会监视所有select负责的socket，当任何一个socket中有数据准备好了，
+  就会返回oK给用户进程，这时候用户进程在调用read操作将数据从kernel中拷贝到用户进程
  
  在IO multiplexing Model中，实际中，对于每一个socket，一般都设置成为non-blocking，但是，整个用户的process其实是一直被block的。
  只不过process是被select这个函数block，而不是被socket IO给block
@@ -48,10 +48,10 @@ __5种I/O模式__：
  
 * __信号I/O__：  
 
-> 用户进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，
- 首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，
- kernel会给用户进程发送一个signal，告诉它read操作完成了。
- 一个对信号驱动 I/O 比较实用的方面是NTP（网络时间协议 Network TimeProtocol）服务器，它使用 UDP.
+ > 用户进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，
+   首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，
+   kernel会给用户进程发送一个signal，告诉它read操作完成了。
+   一个对信号驱动 I/O 比较实用的方面是NTP（网络时间协议 Network TimeProtocol）服务器，它使用 UDP.
 
 * __异步I/O__:  
 
@@ -62,6 +62,8 @@ __5种I/O模式__：
   * 1、信号驱动 I/O 模式下，内核在操作可以被操作的时候通知给我们的应用程序发送SIGIO 消息。
   * 2、异步 I/O 模式下，内核在所有的操作都已经被内核操作结束之后才会通知我们的应用程序。   
  
+* * * 
+
 * select()/poll()/epoll()差异：
  * __select__：  
   select 函数监视的文件描述符分3类，分别是writefds、readfds、和exceptfds。调用后select函数会阻塞，直到有描述副就绪
@@ -77,9 +79,9 @@ __5种I/O模式__：
   是前两种的加强版，epoll更灵活，没有文件描述符限制，epoll使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到
     内核的一个事件表中，这样在用户空间和内核空间的copy只需一次。
 
-  > int epoll_create(int size)；//创建一个epoll的句柄，size告诉内核这个监听的数目一共有多大，只是对内核初始分配内部数据结构的一个建议
-  int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
-  int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
+     int epoll_create(int size)；//创建一个epoll的句柄，size告诉内核这个监听的数目一共有多大，只是对内核初始分配内部数据结构的一个建议
+     int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
+     int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
  
   * __epool优势__:
    PPC(process per connection)/TPC(thread per connection):  
@@ -94,6 +96,6 @@ __5种I/O模式__：
    epoll: 没有最大并发连接的限制,大的优点就在于它只管你“活跃”的连接，而跟连接总数无关，因此在实际的网络环境中，Epoll 的效率就会远远高于select 和 poll, 
    
  Epoll 在这点上使用了“共享内存”，这个内存拷贝也省略了。Epoll不仅会告诉应用程序有I/0事件到来，
-         还会告诉应用程序相关的信息，这些信息是应用程序填充的，因此根据这些信息应用程序就能直接定位到事件，而不必遍历整个FD 集合。
+ 还会告诉应用程序相关的信息，这些信息是应用程序填充的，因此根据这些信息应用程序就能直接定位到事件，而不必遍历整个FD 集合。
    
 ####25.
