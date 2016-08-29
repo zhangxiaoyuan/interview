@@ -32,7 +32,7 @@
  基本原理就是select()/poll()/epoll()会不断的轮训各自所负责的所有socket连接，当其中一个socket中有数据到达时，就通知用户进程处理。
  实际上当用户进程调用select()，那么整个进程就会被bolck,而同时，kernel会监视所有select负责的socket，当任何一个socket中有数据准备好了，
  就会返回oK给用户进程，这时候用户进程在调用read操作将数据从kernel中拷贝到用户进程
- 在IO multiplexing Model中，实际中，对于每一个socket，一般都设置成为non-blocking，但是，如上图所示，整个用户的process其实是一直被block的。
+ 在IO multiplexing Model中，实际中，对于每一个socket，一般都设置成为non-blocking，但是，整个用户的process其实是一直被block的。
  只不过process是被select这个函数block，而不是被socket IO给block
  所以,I/O复用特点就是通过一种机制实现一个用户进程同时等待多个文件描述符(套接字描述符)，当其中一个文件描述符进入读就绪状态，select就返回ok
  
@@ -55,4 +55,6 @@
  * poll:不同与select使用三个位图来表示三个fdset的方式，poll使用一个 pollfd的指针实现。pollfd结构包含了要监视的event和发生的event，
  不再使用select“参数-值”传递的方式。同时，pollfd并没有最大数量限制（但是数量过大后性能也是会下降）。 
  和select函数一样，poll返回后，需要轮询pollfd来获取就绪的描述符。
-  
+ * epoll:
+ 
+####25.
