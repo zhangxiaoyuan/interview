@@ -1,6 +1,7 @@
 ####22.Linux内核调度：
   * [linux内核调度机制](http://www.cppblog.com/baby-fly/archive/2011/01/27/139436.html)
   * [Linux内核进程调度以及定时器实现机制](http://www.cppblog.com/baby-fly/archive/2011/01/27/139436.html)
+  
   * Linux的进程管理由进程控制块、进程调度、中断处理、任务队列、定时器、bottom half队列、系统调用、进程通信等等部分组成。
   
     * 1.进程控制块数据结构：
