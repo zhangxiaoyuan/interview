@@ -50,11 +50,26 @@
  
 * select()/poll()/epoll()差异：
  * select：select 函数监视的文件描述符分3类，分别是writefds、readfds、和exceptfds。调用后select函数会阻塞，直到有描述副就绪
- （有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回。当select函数返回后，
- 可以 通过遍历fdset，来找到就绪的描述符。支持跨平台，缺点是对fd的数量有限制，默认1024
+  （有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回。当select函数返回后，
+  可以 通过遍历fdset，来找到就绪的描述符。支持跨平台，缺点是对fd的数量有限制，默认1024
+
  * poll:不同与select使用三个位图来表示三个fdset的方式，poll使用一个 pollfd的指针实现。pollfd结构包含了要监视的event和发生的event，
- 不再使用select“参数-值”传递的方式。同时，pollfd并没有最大数量限制（但是数量过大后性能也是会下降）。 
- 和select函数一样，poll返回后，需要轮询pollfd来获取就绪的描述符。
- * epoll:
+  不再使用select“参数-值”传递的方式。同时，pollfd并没有最大数量限制（但是数量过大后性能也是会下降）。和select函数一样，poll返回后，
+  需要轮询pollfd来获取就绪的描述符。
+
+ * epoll:是前两种的加强版，epoll更灵活，没有文件描述符限制，epoll使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到
+    内核的一个事件表中，这样在用户空间和内核空间的copy只需一次。
+  int epoll_create(int size)；//创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大，只是对内核初始分配内部数据结构的一个建议
+  int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
+  int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
+  
  
+  * 优势:
+   PPC(process per connection)/TPC(thread per connection):这两种模型思想类似，就是让每一个到来的连接一边自己做事去，别再来烦我.
+   只是 PPC 是为它开了一个进程，而 TPC 开了一个线程。可是别烦我是有代价的，它要时间和空间啊，连接多了之后
+   那么多的进程 / 线程切换，这开销就上来了；因此这类模型能接受的最大连接数都不会高，一般在几百个左右
+   select/poll: 最大并发数限制 默认1024.select 每次调用都会线性扫描全部的 FD 集合，这样效率就会呈现线性下降,采用内存拷贝传递内核数据
+   epoll: 没有最大并发连接的限制,大的优点就在于它只管你“活跃”的连接，而跟连接总数无关，因此在实际的网络环境中，Epoll 的效率就会远远高于          select 和 poll, Epoll 在这点上使用了“共享内存”，这个内存拷贝也省略了。Epoll不仅会告诉应用程序有I/0事件到来，
+         还会告诉应用程序相关的信息，这些信息是应用程序填充的，因此根据这些信息应用程序就能直接定位到事件，而不必遍历整个FD 集合。
+   
 ####25.
