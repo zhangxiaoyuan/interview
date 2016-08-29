@@ -47,4 +47,12 @@
  异步 I/O 和  信号驱动I/O的区别是：
   * 1、信号驱动 I/O 模式下，内核在操作可以被操作的时候通知给我们的应用程序发送SIGIO 消息。
   * 2、异步 I/O 模式下，内核在所有的操作都已经被内核操作结束之后才会通知我们的应用程序。   
+ 
+* select()/poll()/epoll()差异：
+ * select：select 函数监视的文件描述符分3类，分别是writefds、readfds、和exceptfds。调用后select函数会阻塞，直到有描述副就绪
+ （有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回。当select函数返回后，
+ 可以 通过遍历fdset，来找到就绪的描述符。支持跨平台，缺点是对fd的数量有限制，默认1024
+ * poll:不同与select使用三个位图来表示三个fdset的方式，poll使用一个 pollfd的指针实现。pollfd结构包含了要监视的event和发生的event，
+ 不再使用select“参数-值”传递的方式。同时，pollfd并没有最大数量限制（但是数量过大后性能也是会下降）。 
+ 和select函数一样，poll返回后，需要轮询pollfd来获取就绪的描述符。
   
