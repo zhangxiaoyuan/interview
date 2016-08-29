@@ -1,4 +1,5 @@
 ####1.基本数据类型：
+>
  整形(signed/unsigned char/short/int/long/bool)、浮点(float/double)、void
  
 ####2.常量类型：
