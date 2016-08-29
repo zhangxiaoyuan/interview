@@ -19,9 +19,9 @@
 * netstat: 显示网络状态
   * 两部分状态：
  
- * * *
+* * *
 
-    SZX1000123220:/usr/src # netstat
+    * SZX1000123220:/usr/src # netstat
     Active Internet connections (w/o servers)  //有源TCP连接
     Proto Recv-Q Send-Q Local Address           Foreign Address         State      
     tcp        0      0 SZX1000123220:ssh       10.63.165.179:51154     ESTABLISHED 
