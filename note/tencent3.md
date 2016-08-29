@@ -11,7 +11,7 @@
  * 1. __等待数据准备 (Waiting for the data to be ready)__
  * 2. __将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)__
 
-5种I/O模式：
+__5种I/O模式__：
 
 * __阻塞式I/O__: 默认I/O模式，即open()和socket()创建的I/O都是阻塞I/O，进程处于阻塞模式时，让出CPU，进入休眠状态  
 
