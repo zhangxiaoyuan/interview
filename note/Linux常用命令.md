@@ -13,7 +13,15 @@
 * 13.Sendmail邮件系统使用的两个主要协议是： SMTP 和 POP ,前者用来发送邮件,后者用来接收邮件.
 * 14. rm命令可删除文件或目录,其主要差别就是是否使用递归开关 -r或-R 
 * 15.shell不仅是 用户命令的解释器 ,它同时也是一种功能强大的编程语言. bash是Linux的缺省shell.
-* 
+* 16.ipcrm:删除对应上面的信息
+* 17.cat /proc/cpuinfo: 查询cpu所有信息
+* 18.cat /proc/meminfo:查询内存所有信息
+* 19.df -lh：查看硬盘信息
+* 20.fdisk -l:查看硬盘信息
+* 21.cat /proc/scsi/scsi：硬盘详细信息
+* 22.dmesg:查看一些外设信息，比如网卡，蓝牙，cpu等
+* 23.dmesg |grep eth：查看网卡信息
+* 24.uname -a:查询机器的libux版本，机器名等详细信息
 
 ####2.常用命令：
 * netstat: 显示网络状态
@@ -21,7 +29,7 @@
  
 * * *
 
-    * SZX1000123220:/usr/src # netstat
+    SZX1000123220:/usr/src # netstat
     Active Internet connections (w/o servers)  //有源TCP连接
     Proto Recv-Q Send-Q Local Address           Foreign Address         State      
     tcp        0      0 SZX1000123220:ssh       10.63.165.179:51154     ESTABLISHED 
@@ -29,7 +37,7 @@
     tcp        0      0 localhost:32001         localhost:31001         ESTABLISHED 
     tcp       24      0 SZX1000123220:45099     10.82.138.216%3148:8089 CLOSE_WAIT  
 
-    * Active UNIX domain sockets (w/o servers)  //有源UNIX套接字，由于本机通信
+    Active UNIX domain sockets (w/o servers)  //有源UNIX套接字，由于本机通信
     Proto RefCnt Flags       Type       State         I-Node Path
     unix  3      [ ]         STREAM     CONNECTED     10057  /tmp/diskmon.0.3521
     unix  3      [ ]         STREAM     CONNECTED     10072  /tmp/diskmon.0.3520
@@ -41,7 +49,8 @@
 * tcpdump:抓取本机所有网络接口的数据报文头，配置灵活，配置各种抓取规则
 
 * * *
-  * SZX1000123220:/usr/src # tcpdump
+
+  SZX1000123220:/usr/src # tcpdump
     tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
     listening on eth0, link-type EN10MB (Ethernet), capture size 96 bytes
     09:39:01.680786 IP SZX1000123220.ssh > 10.63.165.179.51154: P 4084071868:4084072064(196) ack 1275033461 win 73
@@ -49,7 +58,6 @@
     609 packets captured
     610 packets received by filter
     0 packets dropped by kernel
-
 
 * ipcs:查看进程间通信设施状态
 
@@ -64,15 +72,7 @@
     ------ Message Queues --------   //消息队列
     key        msqid      owner      perms      used-bytes   messages   
 
-* ipcrm:删除对应上面的信息
-* cat /proc/cpuinfo: 查询cpu所有信息
-* cat /proc/meminfo:查询内存所有信息
-* df -lh：查看硬盘信息
-* fdisk -l:查看硬盘信息
-* cat /proc/scsi/scsi：硬盘详细信息
-* dmesg:查看一些外设信息，比如网卡，蓝牙，cpu等
-* dmesg |grep eth：查看网卡信息
-* uname -a:查询机器的libux版本，机器名等详细信息
+
 
 [腾讯后台面试题](http://blog.csdn.net/ibmfahsion/article/details/11992403?utm_source=tuicool&utm_medium=referral)
 
