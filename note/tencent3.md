@@ -82,15 +82,15 @@ __5种I/O模式__：
      int epoll_create(int size)；//创建一个epoll的句柄，size告诉内核这个监听的数目一共有多大，只是对内核初始分配内部数据结构的一个建议
      int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
      int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
- 
-  * __epool优势__:
-   PPC(process per connection)/TPC(thread per connection):  
+
+ * __epool优势__:  
+   PPC(process per connection)/TPC(thread per connection):    
    
    > 这两种模型思想类似，就是让每一个到来的连接一边自己做事去，别再来烦我.只是 PPC 是为它开了一个进程，而 TPC 开了一个线程。
     可是别烦我是有代价的，它要时间和空间啊，连接多了之后那么多的进程 / 线程切换，这开销就上来了；
     因此这类模型能接受的最大连接数都不会高，一般在几百个左右
 
-   select/poll:
+   select/poll:  
    
    > 最大并发数限制 默认1024.select 每次调用都会线性扫描全部的 FD 集合，这样效率就会呈现线性下降,采用内存拷贝传递内核数据
    epoll: 没有最大并发连接的限制,大的优点就在于它只管你“活跃”的连接，而跟连接总数无关，因此在实际的网络环境中，Epoll 的效率就会远远高于select 和 poll, 
