@@ -17,9 +17,9 @@
 
 static void handle_recv_msg(int sockfd, char *buf) 
 {
-printf("client recv msg is:%s\n", buf);
-sleep(5);
-write(sockfd, buf, strlen(buf) +1);
+  printf("client recv msg is:%s\n", buf);
+  sleep(5);
+  write(sockfd, buf, strlen(buf) +1);
 }
 
 static void handle_connection(int sockfd)
