@@ -79,9 +79,6 @@ __5种I/O模式__：
   是前两种的加强版，epoll更灵活，没有文件描述符限制，epoll使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到
   内核的一个事件表中，这样在用户空间和内核空间的copy只需一次。
 
-         int epoll_create(int size)；//创建一个epoll的句柄，size告诉内核这个监听的数目一共有多大，只是对内核初始分配内部数据结构的一个建议
-         int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
-         int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
     * __int epoll_create(int size)__:  
     
       > 创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大,参数size并不是限制了epoll所能监听的描述符最大个数，只是对
@@ -103,6 +100,19 @@ __5种I/O模式__：
       > 等待epfd上的io事件，最多返回maxevents个事件,   参数events用来从内核得到事件的集合，maxevents告之内核这个events有多大，
         这个maxevents的值不能大于创建epoll_create()时的size，参数timeout是超时时间（毫秒，0会立即返回，-1将不确定，也有说法说是永久阻塞）。
         该函数返回需要处理的事件数目，如返回0表示已超时。
+    
+    * epoll工作模式：
+      * __LT(level trigger)模式__:缺省工作模式   
+        当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序可以不立即处理该事件。
+        下次调用epoll_wait时，会再次响应应用程序并通知此事件
+        并且同时支持block和no-block socket.在这种做法中，内核告诉你一个文件描述符是否就绪了，然后你可以对这个就绪的fd进行IO操作。
+        如果你不作任何操作，内核还是会继续通知你的
+        
+      * __ET(edge trigger)模式__:ET模式在很大程度上减少了epoll事件被重复触发的次数，因此效率要比LT模式高       
+        当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序必须立即处理该事件。
+        如果不处理，下次调用epoll_wait时，不会再次响应应用程序并通知此事件
+        只支持no-block socket，当描述符从未就绪变为就绪时，内核通过epoll告诉你， 然后它会假设你知道文件描述符已经就绪，并且不会再为那个文件描述符发送更多的就绪通知，直到你做了某些操作导致那个
+        文件描述符不再为就绪状态了(比如，你在发送，接收或者接收请求，或者发送接收的数据少于一定量时导致了一个EWOULDBLOCK 错误）。但是请注意，如果一直不对这个fd作IO操作(从而导致它再次变成未就绪)，内核不会发送更多的通知(only once)
 
 * __epool优势__:  
  PPC(process per connection)/TPC(thread per connection):    
