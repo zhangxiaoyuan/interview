@@ -82,27 +82,27 @@ __5种I/O模式__：
          int epoll_create(int size)；//创建一个epoll的句柄，size告诉内核这个监听的数目一共有多大，只是对内核初始分配内部数据结构的一个建议
          int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
          int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
-  * __int epoll_create(int size)__:  
+    * __int epoll_create(int size)__:  
     
-    > 创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大,参数size并不是限制了epoll所能监听的描述符最大个数，只是对
+      > 创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大,参数size并不是限制了epoll所能监听的描述符最大个数，只是对
       内核初始分配内部数据结构的一个建议, 使用完epoll后，必须调用close()关闭，否则可能导致fd被耗尽
 
-  * __int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)__:  
+    * __int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)__:  
     
-    > epfd：是epoll_create()的返回值  
-      op：表示op操作,添加EPOLL_CTL_ADD，删除EPOLL_CTL_DEL，修改EPOLL_CTL_MOD  
-      fd：是需要监听的fd（文件描述符）  
-      epoll_event：是告诉内核需要监听什么事，struct epoll_event结构如下  
-          struct epoll_event {
-            __uint32_t events;  /* Epoll events */
-            epoll_data_t data;  /* User data variable */
-          };
+      > epfd：是epoll_create()的返回值  
+        op：表示op操作,添加EPOLL_CTL_ADD，删除EPOLL_CTL_DEL，修改EPOLL_CTL_MOD  
+        fd：是需要监听的fd（文件描述符）  
+        epoll_event：是告诉内核需要监听什么事，struct epoll_event结构如下  
+            struct epoll_event {
+              __uint32_t events;  /* Epoll events */
+              epoll_data_t data;  /* User data variable */
+            };
       
-  * __int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout)__： 
+    * __int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout)__： 
     
-    > 等待epfd上的io事件，最多返回maxevents个事件,   参数events用来从内核得到事件的集合，maxevents告之内核这个events有多大，
-      这个maxevents的值不能大于创建epoll_create()时的size，参数timeout是超时时间（毫秒，0会立即返回，-1将不确定，也有说法说是永久阻塞）。
-      该函数返回需要处理的事件数目，如返回0表示已超时。
+      > 等待epfd上的io事件，最多返回maxevents个事件,   参数events用来从内核得到事件的集合，maxevents告之内核这个events有多大，
+        这个maxevents的值不能大于创建epoll_create()时的size，参数timeout是超时时间（毫秒，0会立即返回，-1将不确定，也有说法说是永久阻塞）。
+        该函数返回需要处理的事件数目，如返回0表示已超时。
 
 * __epool优势__:  
  PPC(process per connection)/TPC(thread per connection):    
