@@ -64,7 +64,7 @@ __5种I/O模式__：
  
 * * * 
 
-* select()/poll()/epoll()差异：
+* [select()/poll()/epoll()总结](http://www.cnblogs.com/Anker/p/3265058.html)：
  * __select__：  
   select 函数监视的文件描述符分3类，分别是writefds、readfds、和exceptfds。调用后select函数会阻塞，直到有描述副就绪
   （有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回。当select函数返回后，
