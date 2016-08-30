@@ -18,6 +18,7 @@
 __inux Excutable and Linktable Format,ELF标准作为工作在32位INTEL体系上不同操作系统之间可移植的二进制文件格式__
 
 ####4.C++进程内存空间分布：
+[linux虚拟地址空间分配](http://www.cnblogs.com/clover-toeic/p/3754433.html)
 >
   * __linux系统中一个进程占用的最大空间为2的32次方=4G，即一个进程有4G的虚拟内存空间,其中1G为内核空间，3G为用户空间__
   * __用户空间中从高到低依次是 《栈stack->内存映射区memory mapping->堆heap->未初始化数据区BSS->数据区data->代码区code》__
