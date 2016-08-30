@@ -79,9 +79,9 @@ __5种I/O模式__：
   是前两种的加强版，epoll更灵活，没有文件描述符限制，epoll使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到
     内核的一个事件表中，这样在用户空间和内核空间的copy只需一次。
 
-     > int epoll_create(int size)；//创建一个epoll的句柄，size告诉内核这个监听的数目一共有多大，只是对内核初始分配内部数据结构的一个建议
-     int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
-     int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
+         > int epoll_create(int size)；//创建一个epoll的句柄，size告诉内核这个监听的数目一共有多大，只是对内核初始分配内部数据结构的一个建议
+         int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
+         int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
 
 * __epool优势__:  
  PPC(process per connection)/TPC(thread per connection):    
