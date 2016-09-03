@@ -1,4 +1,4 @@
-c++编译的时候，对函数名进行修饰，用于实现函数充载，而c里面没有这个，所以需要用extern “C” 在对头文件进行声明的时候加以区分。这个用于链接的时候进行函数名查找####1.位操作：
+####1.位操作：
 [位操作主要用于操作寄存器之类的硬件强相关的或者数据变化使用](http://blog.csdn.net/morewindows/article/details/7354571)
 >
 * __& 按位与__: 两个位都为1时，结果才为1
@@ -164,11 +164,9 @@ c++编译的时候，对函数名进行修饰，用于实现函数充载，而c�
   * hash_map,hash_set,hash_multiset,hash_multimap-基于hashtable
 
 ####8.杂:
-* extern "C" : c++编译的时候，对函数名进行修饰，用于实现函数充载，而c里面没有这个， 所以需要用extern “C” 在对头文件进行声明的时候加以区分。
-  告知编译器采用不同的编译和连接方式
+* extern "C" : c++编译的时候，对函数名进行修饰，用于实现函数充载，而c里面没有这个， 所以需要用extern “C” 在对头文件进行声明的时候加以区分。告知编译器采用不同的编译和连接方式
 * volatile：CPU内存数据缓存寄存器机制，编译器会在编译时将代码游欢，导致可能读取“脏数据”，因此告知编译器不优化代码，每次都从内存读取数据
-* hash: 取其他合数时，都会不同程度的导致c的某些位”失效”，从而在一些常见应用中导致冲突．但是取质数，基本可以保证c的每一位都参
-  与H( c )的运算，从而在常见应用中减小冲突几率.
+* hash: 取其他合数时，都会不同程度的导致c的某些位”失效”，从而在一些常见应用中导致冲突．但是取质数，基本可以保证c的每一位都参与H( c )的运算，从而在常见应用中减小冲突几率.
 
 ####9.TCP连接状态：
  [TCP连接状态](http://blog.csdn.net/kimylrong/article/details/50933169)
@@ -195,24 +193,25 @@ c++编译的时候，对函数名进行修饰，用于实现函数充载，而c�
 * __小端序__：低位字节排放在内存低地址，高位字节排放在内存高地址
 * __网络序是按照大端序__
 
-    typedef union
-    {
-        unsigned int a;
-        unsigned char b[4];
-    }Test;
-    
-    int main(int argc, const char * argv[])
-    {
-       
-        Test test;
-        test.a = 0x12345678;
-        cout << test.b[0] << " "<< test.b[1] << " "<< test.b[2] << " "<< test.b[3] << " " <<endl;
-        if (test.b[0] == 0x12 && test.b[1] == 0x34 && test.b[2] == 0x56 && test.b[3] == 0x78)
-        {
-            cout << "big ending" << endl;
-        }
-        else
-        {
-            cout << "little ending" << endl;
-        }
-     }
+
+     typedef union
+     {
+         unsigned int a;
+         unsigned char b[4];
+     }Test;
+     
+     int main(int argc, const char * argv[])
+     {
+        
+         Test test;
+         test.a = 0x12345678;
+         cout << test.b[0] << " "<< test.b[1] << " "<< test.b[2] << " "<< test.b[3] << " " <<endl;
+         if (test.b[0] == 0x12 && test.b[1] == 0x34 && test.b[2] == 0x56 && test.b[3] == 0x78)
+         {
+             cout << "big ending" << endl;
+         }
+         else
+         {
+             cout << "little ending" << endl;
+         }
+      }
