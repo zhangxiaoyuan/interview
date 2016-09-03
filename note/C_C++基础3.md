@@ -195,24 +195,24 @@ c++编译的时候，对函数名进行修饰，用于实现函数充载，而c�
 * __小端序__：低位字节排放在内存低地址，高位字节排放在内存高地址
 * __网络序是按照大端序__
 
-        typedef union
+    typedef union
+    {
+        unsigned int a;
+        unsigned char b[4];
+    }Test;
+    
+    int main(int argc, const char * argv[])
+    {
+       
+        Test test;
+        test.a = 0x12345678;
+        cout << test.b[0] << " "<< test.b[1] << " "<< test.b[2] << " "<< test.b[3] << " " <<endl;
+        if (test.b[0] == 0x12 && test.b[1] == 0x34 && test.b[2] == 0x56 && test.b[3] == 0x78)
         {
-            unsigned int a;
-            unsigned char b[4];
-        }Test;
-        
-        int main(int argc, const char * argv[])
+            cout << "big ending" << endl;
+        }
+        else
         {
-           
-            Test test;
-            test.a = 0x12345678;
-            cout << test.b[0] << " "<< test.b[1] << " "<< test.b[2] << " "<< test.b[3] << " " <<endl;
-            if (test.b[0] == 0x12 && test.b[1] == 0x34 && test.b[2] == 0x56 && test.b[3] == 0x78)
-            {
-                cout << "big ending" << endl;
-            }
-            else
-            {
-                cout << "little ending" << endl;
-            }
-         }
+            cout << "little ending" << endl;
+        }
+     }
