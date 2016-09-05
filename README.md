@@ -1,4 +1,4 @@
 # interview
-prepare for interview‘s c/c++ code
+##prepare for c/c++ coder's interview
 
-reademe first
+> reademe first
