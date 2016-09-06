@@ -1,4 +1,4 @@
-## [linux内存分配机制](http://blog.csdn.net/wxzking/article/details/5905214)：
+## [linux内存管理机制](http://blog.csdn.net/yusiguyuan/article/details/23554927)：
 
 * [Linux应用程序在内存中的布局，由高地址到低地址依次为：栈、Memory       mapping、堆、BSS段、数据段、代码段](http://www.cnblogs.com/51qianrushi/p/4294264.html)
   代码段的起始地址固定为0x8048000，无论哪一个应用程序它的代码段起始地址一定是0x8048000，这里的地址虚拟地址，映射到不同的物理地址中去。。
@@ -28,7 +28,7 @@
 * 物理内存：实际的内存。物理地址被分成离散的单元，成为页（page）。目前大多数系统的页面大小都为4k。CPU外部地址总线上的寻址信号，
   是地址变换的最终结果，一个物理地址始终对应实际内存中的一个存储单元
 
-####3.地址转换:
+####[3.地址转换](http://blog.csdn.net/wxzking/article/details/5905214):
 * linux将逻辑地址转换为物理地址需要两步：
   
   逻辑地址 -----[分段管理机制]-----> 线性地址 -------[分页管理机制]------> 物理地址
