@@ -1,3 +1,10 @@
+ [腾讯后台面试题](http://blog.csdn.net/ibmfahsion/article/details/11992403?utm_source=tuicool&utm_medium=referral)
+
+ [后端开发面试题](https://github.com/monklof/Back-End-Developer-Interview-Questions)
+
+ [BAT面试题](https://github.com/kaiye/kaiye.github.com/issues/3)
+ 
+
 ####1.linux的文件描述符fd和文件指针flip:
 >
   fd是一个整数，在调用open()时返回，起到一个索引的作用，进程通过PCB中的文件描述符表找到该fd所指向的文件指针filp
