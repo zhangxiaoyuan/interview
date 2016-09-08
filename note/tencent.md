@@ -11,7 +11,8 @@
   文件描述符fd是open()返回的值,内核会在每个进程空间中维护一个文件描述符表表中有fd和flip对应关系，所有打开的文件都将通过此表中的fd
   来引用flip找到对应的文件而流(如: fopen)返回的是一个FILE结构指针,FILE结构是包含有文件描述符fd的，FILE结构可以看作是对fd直接操作
   的系统调用的封装, 它的优点是带有I/O缓存每个进程在PCB（ProcessControlBlock）即进程控制块中都保存着一份文件描述符表，
-  表中有fd和flip的关联关系，fd就是这个表的索引，文件描述表中每个表项都有一个指向已打开文件的指针flip   
+  表中有fd和flip的关联关系，fd就是这个表的索引，文件描述表中每个表项都有一个指向已打开文件的指针flip,打开的文件在内核中以file_struct的
+  结构体表示，flip就指向文件文件结构体。    
   [open()和fopen()的差别](http://blog.csdn.net/hairetz/article/details/4150193)
 
 ####2.共享内存:
