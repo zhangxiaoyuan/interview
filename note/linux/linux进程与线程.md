@@ -10,11 +10,11 @@
 条件变量是利用线程间共享全局变量进行同步的一种机制，条件变量操作：触发条件(当条件边为true),等待条件，挂起线程直到其他条件触发；
  * 初始化条件变量: pthread_cond_init();
  * 等待条件：
-  * 无条件等待：pthread_cond_wait();
-  * 计时等待：pthread_Cond-timewait(); 如果在给定时刻前条件没有满足，则返回ETIMEOUT，结束等待
+   * 无条件等待：pthread_cond_wait();
+   * 计时等待：pthread_Cond-timewait(); 如果在给定时刻前条件没有满足，则返回ETIMEOUT，结束等待
  * 激发条件：
-  * 激活一个等待该条件的线程（存在多个等待线程时按入队顺序激活其中一个）：pthread_cond_signal()
-  * 激活所有等待线程:pthread_cond_broadcast()
+   * 激活一个等待该条件的线程（存在多个等待线程时按入队顺序激活其中一个）：pthread_cond_signal()
+   * 激活所有等待线程:pthread_cond_broadcast()
  * 销毁条件变量：只有在没有线程在该条件变量上等待的时候才能销毁这个条件变量，否则返回EBUSY,  pthread_cond_destroy().
 
 * 信号量：
