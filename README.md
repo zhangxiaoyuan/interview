@@ -5,6 +5,6 @@
 _include_   __C/C++__  **Linux**  __TCP/IP__
 
 
-![hello](pics/welcome.jpg =100*20)
+![hello](pics/welcome.jpg)
 
 > reademe first
