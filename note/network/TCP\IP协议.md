@@ -106,7 +106,7 @@ TCP基本，被设计成基于流的协议，TCP需要先建立链接，后续�
   这样发送端在收到窗口不为0的通告，那么肯定是一个比较大的窗口，因此发送端可以一次性发出一个很大的TCP分段，包含大量数据
   
 ###4.[UDP协议:](http://blog.csdn.net/dog250/article/details/6896949)
-* UDP的无连接性已经深入人心，协议上的无连接性指的是一个UDP的Endpoint1(IP,PORT)，可以向多个UDP的Endpointi(IP,PORT)发送数据包，也可以接收来自多个UDP的Endpointi(IP,PORT)的数据包。
+* [UDP的无连接性已经深入人心，协议上的无连接性指的是一个UDP的Endpoint1(IP,PORT)，可以向多个UDP的Endpointi(IP,PORT)发送数据包，也可以接收来自多个UDP的Endpointi(IP,PORT)的数据包。](http://blog.csdn.net/chenlycly/article/details/51582257)
 
 * 实现上，需要考虑这样一个特殊情况：UDP Client 在Endpoint_C1只往UDP Server的Endpoint_S1发送数据包，
 并且只接收来自Endpoint_S1的数据包，把UDP通信双方都固定下来，这样不就形成一条单向的虚”连接”了么？
