@@ -4,7 +4,14 @@
 
 _include_   __C/C++__  **Linux**  __TCP/IP__
 
+test
 
-![hello](pics/welcome.jpg)
+>
+ readme first
 
-> reademe first
+![hello](/pics/welcome.jpg)
+
+<div align="center">
+<img src="/pics/welcome.jpg" width = "500" height = "500" alt="welcome" align=center />
+</div>
+
