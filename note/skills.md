@@ -18,3 +18,9 @@
  
 7.项目管理：
  开发模式、开发流程、项目管理
+
+[腾讯后台面试题](http://blog.csdn.net/ibmfahsion/article/details/11992403?utm_source=tuicool&utm_medium=referral)
+
+[后端开发面试题](https://github.com/monklof/Back-End-Developer-Interview-Questions)
+
+[BAT面试题](https://github.com/kaiye/kaiye.github.com/issues/3)
