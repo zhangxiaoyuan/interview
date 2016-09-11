@@ -1,5 +1,5 @@
 1语言：
- linux下c/c++、python、perl、java、ruby、lua、PHP
+ linux下c/c++、python、shell、java、ruby、lua
 
 2.数据库：
  MySQL、Oracle、NoSQL数据库管理、开发、优化、缓存技术
@@ -11,7 +11,7 @@
  熟悉linux基础原理、常用工具、shell、dbg、linux下的开发、linux的后台架构设计
  
 5.基础：
- 常用数据结构、算法、STL标准库、设计模式、操作系统、数据库系统、网络安全、面向对象、操作系统、软件工程
+ 常用数据结构、算法、STL标准库、设计模式、数据库系统、网络安全、面向对象、操作系统、软件工程
 
 6.代码管理：
  svn、git
