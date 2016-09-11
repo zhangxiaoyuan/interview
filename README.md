@@ -4,10 +4,10 @@
 
 _include_   __C/C++__  **Linux**  __TCP/IP__
 
-
+>
 ![hello](/pics/welcome.jpg)
 
-<div aligen="center">
+<div align="center">
 <img src="/pics/welcome.jpg" width = "500" height = "500" alt="welcome" align=center />
 </div>
 
