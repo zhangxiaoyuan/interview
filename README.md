@@ -2,6 +2,6 @@
 
 ##prepare for c/c++ coder's interview
 
-include _C/C++_  _Linux_  _TCP/IP_
+_include_   __C/C++__  **Linux**  __TCP/IP__
 
 > reademe first
