@@ -5,6 +5,9 @@
 _include_   __C/C++__  **Linux**  __TCP/IP__
 
 
-![hello](https://github.com/zhangxiaoyuan/interview/tree/master/pics/welcome.jpg =20*20)
+![hello](https://github.com/zhangxiaoyuan/interview/tree/master/pics/welcome.jpg)
+
+
+ <img src="/pics/welcome.jpg" width = "300" height = "200" alt="welcome" align=center />
 
 > reademe first
