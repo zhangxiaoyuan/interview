@@ -188,3 +188,20 @@
  * __最短作业优先算法(SJF)__：减少平均周转时间，对预计执行时间短的作业先调度，后来的短作业不抢先正在执行的作业
  * __最高响应比优先算法(HRN)__：同时综合FCFS和SJF算法，同时考虑每个作业等待时间和执行时间的长短，从中选出响应比高的作业
  * __基于优先数调度算法(HPF)__：按照优先级高低调度
+
+###26.makefile编写：
+     makedir mf
+     cd mf
+     vim makefile.mk
+     hello.o:hello.c hello.h
+       gcc -c hello.o -Lm
+     make  
+     ./hello     
+     
+     预处理-----> 编译 ----> 汇编 ----> 链接 
+     #gcc -E hello.c -o hello.i
+     #gcc –S hello.i –o hello.s 
+     #gcc –c hello.s –o hello.o 
+     #gcc hello.o –o hello.exe 
+     #./hello.exe
+

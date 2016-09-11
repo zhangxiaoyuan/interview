@@ -69,10 +69,3 @@
      ------ Message Queues --------   //消息队列
      key        msqid      owner      perms      used-bytes   messages   
 
-
-* * *
-    [腾讯后台面试题](http://blog.csdn.net/ibmfahsion/article/details/11992403?utm_source=tuicool&utm_medium=referral)
-
-    [后端开发面试题](https://github.com/monklof/Back-End-Developer-Interview-Questions)
-
-    [BAT面试题](https://github.com/kaiye/kaiye.github.com/issues/3)

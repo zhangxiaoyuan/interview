@@ -3,6 +3,12 @@
 * 输入gdb xxx(上一步编译生成的科执行文件xxx)
 * 这时候就进入了gdb，输入list查看源代码
 
+####GDB:
+>
+ GNU debugger 安装GDB之后，在生成执行文件时加上-g   如：gcc -g -o hello hello.c
+  list / info / break / file / continue / run / step / display / run / quit
+
+
 > list/l：查看源代码  
 break/b 行号/函数名：对应位置打断点  
 delete 断点编号：删除对应断点，断点编号可以用i b查询  
