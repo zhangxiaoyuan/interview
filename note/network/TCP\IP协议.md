@@ -29,7 +29,7 @@ TCP要点有四，__一曰有连接，二曰可靠传输，三曰数据按照到
 
 IP层的作用有两点:地址管理，路由选择；IP层是没有方向的，只靠路由寻址,因此TCP被设计为有链接，这样就可以保证数据传输
 
-__TCP变化状态__：
+__TCP变化状态__：   
 客户端：主动打开SYN_SENT--->ESTABLISHED--->主动关闭FIN_WAIT_1--->FIN_WAIT_2--->TIME_WAIT    
 服务器端：LISTEN（被动打开）--->SYN_RCVD--->ESTABLISHED--->CLOSE_WAIT(被动关闭)--->LAST_ACK--->CLOSED     
 
