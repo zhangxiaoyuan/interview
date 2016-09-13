@@ -24,10 +24,15 @@ UDP是不可靠的传输，接收方可能会收不到发送方的报文
 ###[3.TCP协议](http://blog.csdn.net/dog250/article/details/6612496)：
 确切的说，TCP协议有两重身份，作为网络协议，它弥补了IP协议尽力而为服务的不足，实现了有连接，可靠传输，报文按序到达。作为一个主机软件，
 它和UDP以及左右的传输层协议隔离了主机服务和网络，它们可以被看做是一个多路复用/解复用器，将诸多的主机进程数据复用/解复用到IP层。   
+
 作为网络协议,和对端的TCP接口，实现TCP的控制逻辑，作为多路复用/解复用器，和下层IP协议接口，实现协议栈功能。   
 TCP要点有四，__一曰有连接，二曰可靠传输，三曰数据按照到达，四曰端到端流量控制__
 
 IP层的作用有两点:地址管理，路由选择；IP层是没有方向的，只靠路由寻址,因此TCP被设计为有链接，这样就可以保证数据传输
+
+__TCP变化状态__：   
+客户端：主动打开SYN_SENT--->ESTABLISHED--->主动关闭FIN_WAIT_1--->FIN_WAIT_2--->TIME_WAIT    
+服务器端：LISTEN（被动打开）--->SYN_RCVD--->ESTABLISHED--->CLOSE_WAIT(被动关闭)--->LAST_ACK--->CLOSED     
 
 * __有链接:__       　　　
 TCP基本，被设计成基于流的协议，TCP需要先建立链接，后续传输多少数据无所谓，只要是统一链接的数据能识别出来即可。
@@ -106,26 +111,26 @@ TCP基本，被设计成基于流的协议，TCP需要先建立链接，后续�
   这样发送端在收到窗口不为0的通告，那么肯定是一个比较大的窗口，因此发送端可以一次性发出一个很大的TCP分段，包含大量数据
   
 ###4.[UDP协议:](http://blog.csdn.net/dog250/article/details/6896949)
-* [UDP的无连接性已经深入人心，协议上的无连接性指的是一个UDP的Endpoint1(IP,PORT)，可以向多个UDP的Endpointi(IP,PORT)发送数据包，也可以接收来自多个UDP的Endpointi(IP,PORT)的数据包。](http://blog.csdn.net/chenlycly/article/details/51582257)
-
+* [UDP的无连接性已经深入人心，协议上的无连接性指的是一个UDP的Endpoint1(IP,PORT)，可以向多个UDP的Endpointi(IP,PORT)发送数据 包，也可以接收来自多个UDP的Endpointi(IP,PORT)的数据包。](http://blog.csdn.net/chenlycly/article/details/51582257)    
+<br /> 
 * 实现上，需要考虑这样一个特殊情况：UDP Client 在Endpoint_C1只往UDP Server的Endpoint_S1发送数据包，
-并且只接收来自Endpoint_S1的数据包，把UDP通信双方都固定下来，这样不就形成一条单向的虚”连接”了么？
-
+并且只接收来自Endpoint_S1的数据包，把UDP通信双方都固定下来，这样不就形成一条单向的虚”连接”了么？    
+<br /> 
 * __send()__:
  如果一个UDP是connect的，那就可以在connect之后直接调用send了，内核在应用connect之后就永久维护了这次UDP的连接，以后每次收
  发数据，内核不再需要分配/删除这些数据，而只是查找就可以了，同时也减少了数据的拷贝量，既然connect的UDP在内核中已经存在了
- 一个“连接”，那么无论何时，只要通信没有结束，内核总是能随时追踪到这个“连接”    
- 
+ 一个“连接”，那么无论何时，只要通信没有结束，内核总是能随时追踪到这个“连接”        
+<br /> 
 * __sendto()__:
   如果使用sendto，需要拷贝的参数就会多一些，参数到了内核空间之后，内核还要准备数据结构暂时容纳这些参数，当数据发出之后，
   内核需要释放这些暂时存储的参数(当然可以使用栈来管理这些参数以实现自动释放)。    
-
+<br /> 
 * __ 最后说明一点，UDP的连接是单向的，在调用connect的时候并不会产生任何通信流量，它只是在内核协议栈中绑定了一对五元组而已，
-  该五元组是：UDP协议/源IP/源端口/目的IP/目的端口。__
-
+  该五元组是：UDP协议/源IP/源端口/目的IP/目的端口。__      
+<br /> 
 * 有的时候，真的需要这样的“发后不管，尽力而为”的服务，TCP/IP的绝妙解决方式不是直接让IP来提供这个服务，而是在IP之上提供了
-  多路复用的UDP，结果是，针对于主机，同一个IP可以承载多个“发后不管，尽力而为”的服务，IP最终仅仅提供传输服务。
-
+  多路复用的UDP，结果是，针对于主机，同一个IP可以承载多个“发后不管，尽力而为”的服务，IP最终仅仅提供传输服务。     
+<br />  
  > 
   1.你的应用完全是udp完成，或者你不在乎tcp会受到的影响     
   2.你对网络状态很熟悉，确保udp网络中没有氓流行为，疯狂抢带宽    
@@ -133,3 +138,60 @@ TCP基本，被设计成基于流的协议，TCP需要先建立链接，后续�
   4.数据事实证明TCP真的比UDP更低效率或者你宗教般痴迷于UDP的高效率    
   5.你不在乎上述4点或者你根本不懂网络    
   6.TCP实在不方便实现多点传输的情况
+      
+##5.常见问题:
+* UDP中使用connect()的所用
+  + TCP中调用connect会引起三次握手,client与server建立连结.UDP中调用connect内核仅仅把对端ip&port记录下来
+  + UDP中可以多次调用connect,TCP只能调用一次connect.UDP多次调用connect有两种用途:     
+    - 指定一个新的ip&port连结.    
+    - 断开和之前的ip&port的连结.    
+  + UDP中使用connect可以提高效率，可以不用每次发送报文时都建立链接，只需要建立一次链接就可以发送多个报文
+  + 采用connect的UDP发送接受报文可以调用send,write和recv,read操作.当然也可以调用sendto,recvfrom    
+<br />    
+* connect会阻塞，怎么解决?(必考必问)
+  最通常的方法最有效的是加定时器；也可以采用非阻塞模式。    
+  设置非阻塞，返回之后用select检测状态   
+<br /> 
+* 如果select返回可读，结果只读到0字节，什么情况？
+  某个套接字集合中没有准备好，可能会select内存用FD_CLR清该位为0;    
+<br /> 
+* keepalive是什么东东？如何使用？
+  在TCP中有一个Keep-alive的机制可以检测死连接，原理很简单，TCP会在空闲了一定时间后发送数据给对方：   
+  + 如果主机可达，对方就会响应ACK应答，就认为是存活的。   
+  + 如果可达，但应用程序退出，对方就发RST应答，发送TCP撤消连接。   
+  + 如果可达，但应用程序崩溃，对方就发FIN消息。   
+  + 如果对方主机不响应ack, rst，继续发送直到超时，就撤消连接。这个时间就是默认的二个小时
+<br /> 
+* socket什么情况下可读？
+  每次读操作返回前都要检查是否还有剩余数据没读完，如果是的话保持数据有效标志，不这样设计的话会出现明显的不一致，
+  那就是数据在读缓冲但没有读有效标志 
+<br /> 
+##6.[TCP头结构](http://www.cnblogs.com/li-hao/archive/2011/12/07/2279912.html)：
+
+         /*TCP头定义，共20个字节*/
+        typedef struct _TCP_HEADER 
+        {
+         short m_sSourPort;        　　　　　　// 源端口号16bit
+         short m_sDestPort;       　　　　　　 // 目的端口号16bit
+         unsigned int m_uiSequNum;       　　// 序列号32bit
+         unsigned int m_uiAcknowledgeNum;  // 确认号32bit
+         short m_sHeaderLenAndFlag;      　　// 前4位：TCP头长度；中6位：保留；后6位：标志位
+         short m_sWindowSize;       　　　　　// 窗口大小16bit
+         short m_sCheckSum;        　　　　　 // 检验和16bit
+         short m_surgentPointer;      　　　　 // 紧急数据偏移量16bit
+        }__attribute__((packed))TCP_HEADER, *PTCP_HEAD 
+
+
+##7.UDP头结构：
+
+        /*UDP头定义，共8个字节*/
+        typedef struct _UDP_HEADER 
+        {
+         unsigned short m_usSourPort;    　　　// 源端口号16bit
+         unsigned short m_usDestPort;    　　　// 目的端口号16bit
+         unsigned short m_usLength;    　　　　// 数据包长度16bit
+         unsigned short m_usCheckSum;    　　// 校验和16bit
+        }__attribute__((packed))UDP_HEADER, *PUDP_HEADER;
+
+
+
