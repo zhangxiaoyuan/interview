@@ -8,8 +8,7 @@
  + 默认取址运算符
  + 默认const取址运算符
  
-* 例如:
-定义一个空的C++类：  
+例如:定义一个空的C++类：     
 
     class Empty
     {
@@ -28,7 +27,7 @@
         const Empty* operator&() const; // 取址运算符 const
     };
 
-* 应用如下:    
+应用如下:    
 
     class A
     {
