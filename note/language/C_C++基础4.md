@@ -30,14 +30,14 @@
 
 * 应用如下:
 
-     class A
-     {
+    class A
+    {
      public:
-         	A(){++m_count;}
-         	~A(){--m_count; printA();}
-         	static int m_count;
-         	void printA(){cout << "m_count " << m_count << endl;}
-     };
+        	A(){++m_count;}
+        	~A(){--m_count; printA();}
+        	static int m_count;
+        	void printA(){cout << "m_count " << m_count << endl;}
+    };
      
      int A::m_count = 0;
      
