@@ -55,5 +55,12 @@
         return 1;//返回之后，会析构a1和a2,所以打印m_count=-1,再打印m_count=-2
     }
 
+> 输出：
+ m_count 1
+ m_count 1
+ m_count 0
+ m_count 0
+ m_count -1
+ m_count -2
 
 
