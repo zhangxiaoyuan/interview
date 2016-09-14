@@ -27,7 +27,7 @@
         const Empty* operator&() const; // 取址运算符 const
     };
 
-* 应用如下:    
+应用如下:    
 
     class A
     {
