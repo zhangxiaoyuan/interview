@@ -11,10 +11,10 @@
 * 例如:
 定义一个空的C++类：
 
-    calss Empty
-    {
-    };
-    
+     calss Empty
+     {
+     };
+
 编译器编译之后就生成如下:
 
     class Empty
