@@ -1,4 +1,4 @@
-#1.［SQL语句执行顺序](http://www.jellythink.com/archives/924)：
+#1.[SQL语句执行顺序：](http://www.jellythink.com/archives/924)
 
     (7)  SELECT 
     (8)  DISTINCT <select_list>
