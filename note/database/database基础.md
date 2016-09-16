@@ -1,4 +1,29 @@
-#1.[SQL语句执行顺序：](http://www.jellythink.com/archives/924)
+＃1.SQL定义：
+struct query language   
+可以把SQL分作两个部分：`数据定义语言DDL` 和`数据操作语言DML`：   
+* DDL：DDL 提供定义、删除、修改关系模式的命令
+* DML：DML 提供从数据库中查询信息，以及在数据库中插入、删除、修改元组的能力
+
+SQL 的 DML 部分包括删除、更新、插入、查询操作：
+
+* SELECT - 从数据库表中获取数据
+* UPDATE - 更新数据库表中的数据
+* DELETE - 从数据库表中删除数据
+* INSERT INTO - 向数据库表中插入数据
+
+SQL 的数据定义语言 (DDL) 部分使我们有能力创建或删除表格。我们也可以定义索引（键），规定表之间的链接，以及施加表间的约束：
+
+* CREATE DATABASE - 创建新数据库
+* ALTER DATABASE - 修改数据库
+* CREATE TABLE - 创建新表
+* ALTER TABLE - 变更（改变）数据库表
+* DROP TABLE - 删除表
+* CREATE INDEX - 创建索引
+* DROP INDEX - 删除索引
+
+* 索引实际上就是数据结构，MySQL使用的主要是B－tree和B+tree进行索引的查询。
+
+#2.[SQL语句执行顺序：](http://www.jellythink.com/archives/924)
 
     (7)  SELECT    //要查询的数据列
     (8)  DISTINCT <select_list>   //DISTINCT表示排除重复项
