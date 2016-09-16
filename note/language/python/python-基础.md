@@ -85,7 +85,7 @@ List（列表） 是 Python 中使用最频繁的数据类型。列表是有序�
  + oct(x)   将一个整数转换为一个八进制字符串
 
 * 优先级：
-![image]http://github.com/zhangxiaoyuan/pythonStudy/raw/master/images-folder/calcPri.png
+![image](http://github.com/zhangxiaoyuan/pythonStudy/raw/master/images-folder/calcPri.png)
 
 * python命名方式：
 ```python
