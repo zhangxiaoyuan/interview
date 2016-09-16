@@ -1,15 +1,15 @@
 #1.[SQL语句执行顺序：](http://www.jellythink.com/archives/924)
 
-    (7)  SELECT 
-    (8)  DISTINCT <select_list>
-    (1)  FROM <left_table>
-    (3)  <join_type> JOIN <right_table>
-    (2)  ON <join_condition>
-    (4)  WHERE <where_condition>
-    (5)  GROUP BY <group_by_list>
-    (6)  HAVING <having_condition>
-    (9)  ORDER BY <order_by_condition>
-    (10) LIMIT <limit_number>
+    (7)  SELECT    //要查询的数据列
+    (8)  DISTINCT <select_list>   //DISTINCT表示排除重复项
+    (1)  FROM <left_table>   //要查询的数据来源
+    (3)  <join_type> JOIN <right_table>     //left jion：表示要将左表中的所有数据添加到新生表中，right join：表示将右表
+    (2)  ON <join_condition>         //表示join条件
+    (4)  WHERE <where_condition>    //从整个结果集中过滤数据
+    (5)  GROUP BY <group_by_list>   //按照指定的列分组
+    (6)  HAVING <having_condition>   //在GROUP BY分组之后过滤组内的数据
+    (9)  ORDER BY <order_by_condition>   //按照指定的列排序
+    (10) LIMIT <limit_number>   //从第一个数字的当前行取出第二个数字个行书，如：LIMIT 10,20表示从第10行开始取出20行数据
     
 > 前面序号为执行顺序
 
