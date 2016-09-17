@@ -44,66 +44,67 @@
 
 ####3.String类的实现：
 
-     class String
-     {
-     public:
-          String(const char *str = NULL);// 普通构造函数
-          String(const String &other);    // 拷贝构造函数
-          ~ String(void);    // 析构函数
-          String & operate =(const String &other);// 赋值函数
-     private:
-          char *m_data;// 用于保存字符串
-     }; 
-     请编写String的上述4个函数。
-     
-     //普通构造函数
-     String::String(const char *str)
-     {
-             if(str==NULL)
-             {
-                     m_data = new char[1]; // 得分点：对空字符串自动申请存放结束标志'\0'的//加分点：对m_data加NULL 判断
-                     *m_data = '\0';
-             }    
-             else
-             {
-              int length = strlen(str);
-              m_data = new char[length+1]; // 若能加 NULL 判断则更好
-              strcpy(m_data, str);
-             }
-     } 
-     
-     // String的析构函数
-     String::~String(void)
-     {
-             delete [] m_data; // 或delete m_data;
-     }
-     
-     //拷贝构造函数
-     String::String(const String &other) 　　　// 得分点：输入参数为const型
-     {     
-             int length = strlen(other.m_data);
-             m_data = new char[length+1]; 　　　　//加分点：对m_data加NULL 判断
-             strcpy(m_data, other.m_data);    
-     } 
-     
-     //赋值函数
-     String & String::operate =(const String &other) // 得分点：输入参数为const型
-     {     
-             if(this == &other)                  　　//得分点：检查自赋值
-                     return *this; delete [] m_data; 　　　　//得分点：释放原有的内存资源
-             int length = strlen( other.m_data );      
-             m_data = new char[length+1]; 　//加分点：对m_data加NULL 判断
-             strcpy( m_data, other.m_data );   
-             return *this;     　　　　　　　　//得分点：返回本对象的引用  
-     
-     }
-       
+```c++
+ class String
+ {
+ public:
+      String(const char *str = NULL);// 普通构造函数
+      String(const String &other);    // 拷贝构造函数
+      ~ String(void);    // 析构函数
+      String & operate =(const String &other);// 赋值函数
+ private:
+      char *m_data;// 用于保存字符串
+ }; 
+ 请编写String的上述4个函数。
+ 
+ //普通构造函数
+ String::String(const char *str)
+ {
+         if(str==NULL)
+         {
+                 m_data = new char[1]; // 得分点：对空字符串自动申请存放结束标志'\0'的//加分点：对m_data加NULL 判断
+                 *m_data = '\0';
+         }    
+         else
+         {
+          int length = strlen(str);
+          m_data = new char[length+1]; // 若能加 NULL 判断则更好
+          strcpy(m_data, str);
+         }
+ } 
+ 
+ // String的析构函数
+ String::~String(void)
+ {
+         delete [] m_data; // 或delete m_data;
+ }
+ 
+ //拷贝构造函数
+ String::String(const String &other) 　　　// 得分点：输入参数为const型
+ {     
+         int length = strlen(other.m_data);
+         m_data = new char[length+1]; 　　　　//加分点：对m_data加NULL 判断
+         strcpy(m_data, other.m_data);    
+ } 
+ 
+ //赋值函数
+ String & String::operate =(const String &other) // 得分点：输入参数为const型
+ {     
+         if(this == &other)                  　　//得分点：检查自赋值
+                 return *this; delete [] m_data; 　　　　//得分点：释放原有的内存资源
+         int length = strlen( other.m_data );      
+         m_data = new char[length+1]; 　//加分点：对m_data加NULL 判断
+         strcpy( m_data, other.m_data );   
+         return *this;     　　　　　　　　//得分点：返回本对象的引用  
+ 
+ }
+ ```
  >当类中包括指针类成员变量时，一定要重载其拷贝构造函数、赋值函数和析构函数
  
 ####4.虚函数的实现和作用：
  在有虚函数的类中，每一个虚函数都有一个虚函数指针，这些指针组成一个虚函数表VTbl，在编译的阶段，编译器会自动加入虚表，虚表的使用方法如
  下：__如果派生类在自己的定义中没有修改父类的虚函数，那么虚函数指针就指向父类的虚函数，如果派生类重写了基类的虚函数，此时虚表Vtbl中的
- 指针就指向自身的虚函数__。   
+ 指针就指向派生类重载的虚函数__。   
  C++中虚函数使用__虚函数表Vtbl__和__虚函数表指针Vptr__实现，__虚函数表是一个类的虚函数的地址表，用于索引类本身以及父类的虚函数的地址__，
  假如子类的虚函数重写了父类的虚函数，__则对应在虚函数表中会把对应的虚函数替换为子类的虚函数的地址__；虚函数表指针存在于每个对象中
  （通常出于效率考虑，会放在对象的开始地址处)，它指向对象所在类的虚函数表的地址；在多继承环境下，会存在多个虚函数表指针，分别指向
@@ -114,7 +115,7 @@
  访问普通成员函数更快，因为普通成员函数的地址在编译阶段就已确定，因此在访问时直接调  用对应地址的函数，而虚函数在调用时，需要首先在虚函数表中寻找虚函数所在地址，因此相比普 通成员函数速度要慢一些。  
 
 >
- __在什么情况下，析构函数需要是虚函数？__
+ __[在什么情况下，析构函数需要是虚函数？](http://blog.csdn.net/pathuang68/article/details/4156308)__
  在存在类继承并且析构函数中需要析构某些资源是析构函数需要是虚函数，否则若使用父类指 针指向子类对象，在delete时只会调用父类的析构函数，而不能调用子类的析构函数，造成内存泄露。  
  
 >
@@ -180,41 +181,42 @@
  
 ####10.查看系统是32位还是64位：
 
-
-    int k= -1;  //int k = ~0;
-    if ((unsigned int)k > 0xFFFFFFFF)
-    {
-        cout << k << " " <<(unsigned int)k <<" at least 32bits" << endl;
-    }
-    else
-    {
-        cout << k << " " <<(unsigned int)k <<" at least 64bits" << endl;
-    }
-    
+```c++
+ int k= -1;  //int k = ~0;
+ if ((unsigned int)k > 0xFFFFFFFF)
+ {
+     cout << k << " " <<(unsigned int)k <<" at least 32bits" << endl;
+ }
+ else
+ {
+     cout << k << " " <<(unsigned int)k <<" at least 64bits" << endl;
+ }
+```
 ####11.查看当前系统是大端序还是小端序：
 * __大端序__：高位字节排放在内存低地址，低位字节排放再内存高地址
 * __小端序__：低位字节排放在内存低地址，高位字节排放在内存高地址
 * __网络序是按照大端序__
 
-
-     typedef union
+```c++
+ typedef union
+ {
+     unsigned int a;
+     unsigned char b[4];
+ }Test;
+ 
+ int main(int argc, const char * argv[])
+ {
+    
+     Test test;
+     test.a = 0x12345678;
+     cout << test.b[0] << " "<< test.b[1] << " "<< test.b[2] << " "<< test.b[3] << " " <<endl;
+     if (test.b[0] == 0x12 && test.b[1] == 0x34 && test.b[2] == 0x56 && test.b[3] == 0x78)
      {
-         unsigned int a;
-         unsigned char b[4];
-     }Test;
-     
-     int main(int argc, const char * argv[])
+         cout << "big ending" << endl;
+     }
+     else
      {
-        
-         Test test;
-         test.a = 0x12345678;
-         cout << test.b[0] << " "<< test.b[1] << " "<< test.b[2] << " "<< test.b[3] << " " <<endl;
-         if (test.b[0] == 0x12 && test.b[1] == 0x34 && test.b[2] == 0x56 && test.b[3] == 0x78)
-         {
-             cout << "big ending" << endl;
-         }
-         else
-         {
-             cout << "little ending" << endl;
-         }
-      }
+         cout << "little ending" << endl;
+     }
+  }
+ ```

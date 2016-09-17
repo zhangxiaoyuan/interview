@@ -114,7 +114,7 @@ __5种I/O模式__：
         只支持no-block socket，当描述符从未就绪变为就绪时，内核通过epoll告诉你， 然后它会假设你知道文件描述符已经就绪，并且不会再为那个文件描述符发送更多的就绪通知，直到你做了某些操作导致那个
         文件描述符不再为就绪状态了(比如，你在发送，接收或者接收请求，或者发送接收的数据少于一定量时导致了一个EWOULDBLOCK 错误）。但是请注意，如果一直不对这个fd作IO操作(从而导致它再次变成未就绪)，内核不会发送更多的通知(only once)
 
-* __epool优势__:  
+* __[epool优势](http://blog.csdn.net/iitvip/article/details/21450793)__:  
  PPC(process per connection)/TPC(thread per connection):    
    
   > 这两种模型思想类似，就是让每一个到来的连接一边自己做事去，别再来烦我.只是 PPC 是为它开了一个进程，而 TPC 开了一个线程。
@@ -129,6 +129,7 @@ __5种I/O模式__：
  Epoll 在这点上使用了“共享内存”，这个内存拷贝也省略了。Epoll不仅会告诉应用程序有I/0事件到来，
  还会告诉应用程序相关的信息，这些信息是应用程序填充的，因此根据这些信息应用程序就能直接定位到事件，而不必遍历整个FD 集合。
 
+epoll的高效就在于，当我们调用epoll_ctl往里塞入百万个句柄时，epoll_wait仍然可以飞快的返回，并有效的将发生事件的句柄给我们用户。这是由于我们在调用epoll_create时，内核除了帮我们在epoll文件系统里建了个file结点，在内核cache里建了个红黑树用于存储以后epoll_ctl传来的socket外，还会再建立一个list链表，用于存储准备就绪的事件，当epoll_wait调用时，仅仅观察这个list链表里有没有数据即可。有数据就返回，没有数据就sleep，等到timeout时间到后即使链表没数据也返回。所以，epoll_wait非常高效
 
 ##1.[I/O同步异步](http://blog.csdn.net/yechaodechuntian/article/details/26012057)：
 首先来解释同步和异步的概念,这两个概念与消息的通知机制有关    
