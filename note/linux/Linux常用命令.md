@@ -24,7 +24,7 @@
 * 24.uname -a:查询机器的libux版本，机器名等详细信息
 
 ####2.常用命令：
-* netstat: 显示网络状态
+* netstat: [显示网络状态](http://www.cnblogs.com/ggjucheng/archive/2012/01/08/2316661.html)
   * 两部分状态：
 
 * * * 
