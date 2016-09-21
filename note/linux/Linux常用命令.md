@@ -42,6 +42,21 @@
     unix  3      [ ]         STREAM     CONNECTED     10072  /tmp/diskmon.0.3520
     unix  2      [ ]         DGRAM                    2945   @/org/kernel/udev/udevd
     unix  2      [ ]         DGRAM                    10033  /var/run/hook-localserver
+    
+>
+ 有源TCP连接的详解：
+  proto:包括协议类型，TCP/UDP  
+  Recv-Q和Send-Q：收发包队列  
+  Local Address和Foreign Address：本地连接的ip和端口，对端连接ip和端口  
+  state:表示连接状态，TCP的这种连接状态  
+  
+>
+ 有源UNIX套接字：
+  proto:协议类型  
+  RefCnt: 连接到本套接口上的进程号
+  Type：套接口类型
+  state: 连接状态
+  Path： 表示连接到套接口的其它进程使用的路径名
 
 
 * tcpdump:抓取本机所有网络接口的数据报文头，配置灵活，配置各种抓取规则
