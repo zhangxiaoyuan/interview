@@ -1,4 +1,4 @@
-＃1.SQL定义：
+#1.SQL定义：
 struct query language   
 可以把SQL分作两个部分：`数据定义语言DDL` 和`数据操作语言DML`：   
 * DDL：DDL 提供定义、删除、修改关系模式的命令
@@ -63,3 +63,5 @@ SQL语句执行顺序总共分为10步，第一步是FROM，最后一步是LIMIT
   8、DISTINCT： 对VT7中的记录进行去重。产生虚拟表VT8.  
   9、ORDER BY: 将虚拟表VT8中的记录按照<order_by_list>进行排序操作，产生虚拟表VT9.  
   10、LIMIT：取出指定行的记录，产生虚拟表VT10, 并将结果返回。   
+
+#3.[MySql常用命令](http://www.cnblogs.com/zhangzhu/archive/2013/07/04/3172486.html)
