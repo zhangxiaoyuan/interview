@@ -6,15 +6,16 @@
 int sharedi = 0;
 void increse_num(void);
 
-//加互斥锁,初始化锁
+//加互斥锁,静态初始化锁
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 int main(){
     int ret;
     pthread_t thrd1, thrd2, thrd3;
 
-    //初始化mutex
-    pthread_mutex_init(&mutex, NULL);
+    //动态初始化mutex锁，
+    //和上面的pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;操作一样，不过一个是静态初始化，一个动态初始化
+    //pthread_mutex_init(&mutex, NULL);
 
     ret = pthread_create(&thrd1, NULL, (void *)increse_num, NULL);
     ret = pthread_create(&thrd2, NULL, (void *)increse_num, NULL);
