@@ -41,6 +41,13 @@ struct sigqueue{
  非实时信号：处理完sigqueue中信息之后就会将对应的sigset_t中信息移除   
  
 ###3.3信号安装：
+ 信号安装主要是注册处理信号值与信号对应处理的映射关系，即进程将要处理哪个信号；该信号被传递给进程时，将执行何种操作  
+ 
+ 信号安装有两个函数：signale()和signale_action()。
+ + signal():主要针对前32种非实时信号，不支持传递信息
+ + signal_action():可以处理实时信号和非实时信号，区别是支持传递信号信息，由两个系统调用sys_signal和sys_rt_sigaction实现
+ 
+ 
  
  
  
