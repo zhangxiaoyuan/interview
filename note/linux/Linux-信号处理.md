@@ -61,7 +61,6 @@ typedef struct {
     unsigned long sig[_NSIG_WORDS]；
 } sigset_t
 ```
-
  - 信号抵达(delivery)：执行信号的处理动作
  - 信号未决(pending)：信号从产生到抵达之间的状态
  - 信号阻塞(block)：进程可以阻塞信号，被阻塞的信号产生时将保持在未决状态，直到进程解除对此信号的阻塞，才执行递达的动作
@@ -69,19 +68,21 @@ typedef struct {
  >
   阻塞和忽略区别：阻塞和忽略是不同的，只要信号被阻塞就不会递达，而忽略是在递达之后可选的一种处理动作
  
- 信号在内核中有三个集合表示不同的状态：
-  * block集（阻塞集、屏蔽集）：一个进程所要屏蔽的信号，在对应要屏蔽的信号位置1
-  * pending集（未决信号集）：如果某个信号在进程的阻塞集中，则也在未决集中对应位置1，表示该信号不能被递达，不会被处理
-  * handler（信号处理函数集）：表示每个信号所对应的信号处理函数，当信号不在未决集中时，将被调用
+信号在内核中有三个集合表示不同的状态：
+ * block集（阻塞集、屏蔽集）：一个进程所要屏蔽的信号，在对应要屏蔽的信号位置1
+ * pending集（未决信号集）：如果某个信号在进程的阻塞集中，则也在未决集中对应位置1，表示该信号不能被递达，不会被处理
+ * handler（信号处理函数集）：表示每个信号所对应的信号处理函数，当信号不在未决集中时，将被调用
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+```c
+struct sigaction act;
+act.sa_handler = handler;
+sigemptyset(&act.sa_mask);
+sigaddset(&act.sa_mask, SIGQUIT);
+act.sa_flags = 0;
+
+if (sigaction(SIGINT, &act, NULL) < 0)
+    ERR_EXIT("sigaction error");
+```
+安装信号SIGINT时，将SIGQUIT加入到sa_mask阻塞集中，则当SIGINT信号正在执行处理函数时，SIGQUIT信号将被阻塞，只有当SIGINT信号处理函数  
+执行完后才解除对SIGQUIT信号的阻塞，由于SIGQUIT是不可靠信号，不支持排队，所以只递达一次
 
