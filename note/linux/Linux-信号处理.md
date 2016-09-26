@@ -49,6 +49,20 @@ struct sigqueue{
  
 ###3.4信号发送：
  信号可以通过kill()/raise()/sigqueue()/alarm()/settimer()/abort()函数发送信号  
+ + kill(pid, sigid): 通过设置不同的pid，可以给不同的进程发送信号，例如指定pid发送(getpid, getppid)，可以给同一组进程发送(getpgrp)
+ + riase(sigid): 给自己进程发送信号。等效于kill(getpid(), sigid)
+ + alarm(seconds)：安排内核为进程在特定时间seconds之后发送一个SIGALRM信号。seconds为0则不发送信号，后一次设置将取消前一次设定,每次只发送一个信号
+ 
+###3.5信号集：
+ 信号集用来描述信号的集合，每个信号占用一位（64位）。Linux所支持的所有信号可以全部或部分的出现在信号集中，主要与信号阻塞相关函数配合使用。   
+ 使用如下的数据结构：    
+```c
+typedef struct {
+    unsigned long sig[_NSIG_WORDS]；
+} sigset_t
+```
+ 
+ 
  
  
  
