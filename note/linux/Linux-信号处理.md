@@ -73,6 +73,7 @@ typedef struct {
  * pending集（未决信号集）：如果某个信号在进程的阻塞集中，则也在未决集中对应位置1，表示该信号不能被递达，不会被处理
  * handler（信号处理函数集）：表示每个信号所对应的信号处理函数，当信号不在未决集中时，将被调用
  
+###3.6 sigaction信号处理:
 ```c
 struct sigaction act;
 act.sa_handler = handler;
@@ -83,6 +84,31 @@ act.sa_flags = 0;
 if (sigaction(SIGINT, &act, NULL) < 0)
     ERR_EXIT("sigaction error");
 ```
-安装信号SIGINT时，将SIGQUIT加入到sa_mask阻塞集中，则当SIGINT信号正在执行处理函数时，SIGQUIT信号将被阻塞，只有当SIGINT信号处理函数  
-执行完后才解除对SIGQUIT信号的阻塞，由于SIGQUIT是不可靠信号，不支持排队，所以只递达一次
+ 安装信号SIGINT时，将SIGQUIT加入到sa_mask阻塞集中，则当SIGINT信号正在执行处理函数时，SIGQUIT信号将被阻塞，只有当SIGINT信号处理函数  
+ 执行完后才解除对SIGQUIT信号的阻塞，由于SIGQUIT是不可靠信号，不支持排队，所以只递达一次
+ 
+ ###3.7被信号中断的系统调用和库函数处理方式：
+ 
+ 一些IO系统调用执行时, 如 read 等待输入期间, 如果收到一个信号,系统将中断read, 转而执行信号处理函数. 当信号处理返回后, 系统遇到了一个问题: 
+ 是重新开始这个系统调用, 还是让系统调用失败?
+ 
+ _事实上, 我们可以从信号的角度来解决这个问题,  安装信号的时候, 设置 SA_RESTART属性, 那么当信号处理函数返回后, 被该信号中断的系统调用将自动恢复._
+ 
+```c++
+struct sigaction action, old_action;
+
+action.sa_handler = sig_handler;
+sigemptyset(&action.sa_mask);
+action.sa_flags = 0;
+/* 版本1:不设置SA_RESTART属性
+ * 版本2:设置SA_RESTART属性 */
+//action.sa_flags |= SA_RESTART;
+
+sigaction(SIGINT, NULL, &old_action);
+if (old_action.sa_handler != SIG_IGN) {
+    sigaction(SIGINT, &action, NULL);
+}
+```
+
+
 
