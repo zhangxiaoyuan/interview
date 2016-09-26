@@ -47,6 +47,10 @@ struct sigqueue{
  + signal():主要针对前32种非实时信号，不支持传递信息
  + signal_action():可以处理实时信号和非实时信号，区别是支持传递信号信息，由两个系统调用sys_signal和sys_rt_sigaction实现
  
+###3.4信号发送：
+ 信号可以通过kill()/raise()/sigqueue()/alarm()/settimer()/abort()函数发送信号  
+ 
+ 
  
  
  
