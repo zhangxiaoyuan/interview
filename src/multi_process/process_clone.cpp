@@ -6,19 +6,19 @@ using namespace std;
 int main()
 {
     char a[] = "abc";
-    cout << "hello mutiThread" << endl;
+    cout << "hello multiprocess" << endl;
     
     pid_t pid = clone();
  
     if (pid == 0)
     {
  	a[0] = '1';
-    	cout << "this is child thread" << " pid = "<< pid << endl;
+    	cout << "this is child process" << " pid = "<< pid << endl;
 	cout << "a add = " << &a << "  a= " << a << endl;
     }
     else
     {
-	cout << "this is parent thread" << " pid = " << pid << endl;
+	cout << "this is parent process" << " pid = " << pid << endl;
 	cout << "a add = " << &a << "  a = " << a << endl;
     }
 }
