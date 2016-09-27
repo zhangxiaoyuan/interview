@@ -93,7 +93,7 @@ int main()
     pthread_join(pt2, &threadRet2);
     printf("thread2 over and said: %s", (char*)threadRet2);
     
-    pthred_mutex_destroy(mutex);
-    pthred_cond_destroy(cond);
+    pthred_mutex_destroy(&mutex);
+    pthred_cond_destroy(&cond);
     return 1;
 }
