@@ -94,6 +94,9 @@ int main()
     pthread_cancel(pt);
     pthread_join(pt, NULL);
     printf("All done -- exiting/n");
+    
+    pthread_mutex_destroy(&mutex);
+    pthread_cond_destroy(&cond);
 
     return 1;    
 }
