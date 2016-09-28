@@ -62,7 +62,8 @@
 　　虚函数的执行依赖于虚函数表，而虚函数表在构造函数中进行初始化工作，即初始化vptr,让他指向正确的虚函数表，而在构造对象期间，虚函数表还没有　　　　　　　初始化，因此无法进行。
 
 　* 析构函数定义为虚函数的原理:
-
+    http://blog.csdn.net/hudfang/article/details/50587333
+    http://blog.csdn.net/marcelxx/article/details/19921431
 
 
 ####11. 结构体与类:
