@@ -207,4 +207,7 @@
      #gcc –c hello.s –o hello.o 
      #gcc hello.o –o hello.exe 
      #./hello.exe
+     
+     
+ testetstest
 
