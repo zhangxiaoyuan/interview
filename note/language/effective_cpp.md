@@ -105,8 +105,10 @@ private:
 对原始资源的访问可能经由显示转换或隐式转换，一般而言显示转换更安全，单隐式转换更方便  
 
 ####16.Using the same form in corresponding uses of new and delete:
+new 和 delete 成对，new[] 和 delete[] 成对   
 
-
+####17.Store newed objects in smart pointer in standalone statements:
+以独立语句将newed对象存储于只能指针内，如果不这样，一旦异常被抛出，有可能导致未知错误
 
 
 
