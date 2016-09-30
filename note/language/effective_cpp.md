@@ -43,6 +43,60 @@ Test& opeartor=()
 }
 ```
 
+####11.Handle assignment to self in operator=:
+手动进行“证同测试”，确保不会删除对象本身自己  
+采用copy-and-swap技术，保证异常安全性
+
+####12.Copy all parts of an object:
+copying函数要确保复制了“对象内的所有成员变量”，并且必须手工保证，因为编译器不会报错，包括copy构造函数和copy assignment操作符  
+在有继承关系时，如果子类要写copying函数，那么必须保证所有父类的成分也得到copy  
+```c++
+class Derived :  class Base
+{
+public:
+    Derived(const Derived& rhs) : Base(rhs), test(rhs.test){};
+    Derived& operator=(const Derived& rhs)
+    {
+        Base::operator=(rhs);
+        test = rhs.test;
+        return *this;
+    }
+private:
+    int test;
+};
+```
+不要尝试以某个copying函数实现另一个copying函数，应该将共同的机制放进到第三个函数，并由两个copying函数共同调用  
+
+##3、资源管理
+####13.Use objects to manage resources:
+以对象管理资源有两个想法：
+ + 获得资源后立刻放进管理对象内
+ + 管理对象运用析构函数确保资源被释放
+
+两个常用的RAII classes分别是：std::auto_ptr和std::tr1::shared_ptr，通常使用侯后者，因为两者在copy行为上有所差异
+因为auto_ptr的copy构造函数和copy assignment操作符会将赋值的对象置为NULL，而是被赋值对象指向赋值对象，但是shared_ptr就可以保证两个对象指向同一对象  
+####14.Think carefully about copying behavior in resources-managing classes:
+设计一个资源管理器类：
+```c++
+class autoLock()
+{
+public:
+    autoLock(Mutex* mutex) : mutexPtr(mutex)
+    {
+        Lock(mutexPtr);
+    }
+    
+    ~autoLock()
+    {
+        unlock(mutexPtr);
+    }
+private:
+    Mutex* mutexPtr;
+    
+}
+```
+
+
 
 
 
