@@ -76,6 +76,8 @@ private:
 两个常用的RAII classes分别是：std::auto_ptr和std::tr1::shared_ptr，通常使用侯后者，因为两者在copy行为上有所差异
 因为auto_ptr的copy构造函数和copy assignment操作符会将赋值的对象置为NULL，而是被赋值对象指向赋值对象，但是shared_ptr就可以保证两个对象指向同一对象  
 ####14.Think carefully about copying behavior in resources-managing classes:
+复制RAII(资源取得时机是初始化时机)对象必须一并复制它所管理的资源，所以资源的copying行为决定RAII对象的copying行为
+
 设计一个资源管理器类：
 ```c++
 class autoLock()
@@ -91,10 +93,20 @@ public:
         unlock(mutexPtr);
     }
 private:
-    Mutex* mutexPtr;
-    
+    Mutex* mutexPtr; 
 }
 ```
+普通常见的RAII class copying行为：
+ + RAII对象被复制是不合理的，__禁止复制__: 将copying操作声明为private，使用条款6中的Uncopyable()继承实现  
+ + 对底层资源使用“引用计数法”：保证多个使用者持有同一个资源，类似tr1::shared_ptr。  
+
+####15.Provide access to raw resouces in resouce-managing classes:
+往往通过资源管理器访问时需要获取原始资源，所以每一个RAII class 都应该提供搞一个“取得其所管理资源”的办法   
+对原始资源的访问可能经由显示转换或隐式转换，一般而言显示转换更安全，单隐式转换更方便  
+
+####16.Using the same form in corresponding uses of new and delete:
+
+
 
 
 
