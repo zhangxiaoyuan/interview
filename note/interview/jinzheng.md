@@ -58,9 +58,11 @@ insert into mark values(44,40.0,40.0,40.0);
 insert into mark values(55,50.0,50.0,50.0);
 
 /*查询所有学生的英语平均成绩*/
-select * from cust as t1 left join mark as t2 on t1.Studentno=t2.studentno where t1.Studentno in (11,22,33,44,55);
+select avg(english) from mark;
 
 /*查询学号为11,22,33,44,55的学生的数学成绩，姓名，学生地址，电话号码*/
+select * from cust as t1 left join mark as t2 on t1.Studentno=t2.studentno where t1.Studentno in (11,22,33,44,55);
+
 select t2.math as math, t1.Name as name, t1.Address as addr, t1.Telno as no from cust as t1 left join mark as t2 on t1.Studentno=t2.studentno where t1.Studentno in (11,22,33,44,55);
 
 ```
