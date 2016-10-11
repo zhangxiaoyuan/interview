@@ -35,10 +35,10 @@ void insertSort1(int* pArray, int arrLen)
 		pos = i - 1;
 		while(pos >= 0 && temp < pArray[pos])
 		{
-			pArray[pos+1] = pArray[pos];
+			pArray[pos + 1] = pArray[pos];
 			pos--;
 		}
-		pArray[pos+1]= temp;
+		pArray[pos + 1]= temp;
 	}
 
 }
