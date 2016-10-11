@@ -14,11 +14,11 @@ int ReduceSearch(int* pArr, int firstIdx, int lastIdx, int num)
     }
     else if (pArr[midIdx] > num)
     {
-        return ReduceSearch(pArr, firstIdx, midIdx, num);
+        return ReduceSearch(pArr, firstIdx, midIdx - 1, num);
     }
     else
     {
-        return ReduceSearch(pArr, midIdx+1, lastIdx, num);
+        return ReduceSearch(pArr, midIdx + 1, lastIdx, num);
     }
 }
 
@@ -30,7 +30,7 @@ int BinarySearch(int* pArr, int len , int num)
         return -1;
     }
     
-    return ReduceSearch(pArr, 0, len-1, num);
+    return ReduceSearch(pArr, 0, len - 1, num);
 }
 
 int main(int argc, const char * argv[])
@@ -41,4 +41,6 @@ int main(int argc, const char * argv[])
     int ret = BinarySearch(arr, 8, 8);
     
     cout << ret << endl;
+    
+    return 1;
 }
