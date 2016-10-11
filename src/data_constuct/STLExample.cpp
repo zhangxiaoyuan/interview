@@ -265,6 +265,15 @@ void setTest()
 			++ite;
 		}
 	}
+	
+	//find()函数，查找一个
+	SETITE ite = find(111);
+ 	if (ite != personSet.end())
+	{
+		PERSON_NODE per = *ite;
+		cout << "name : " << per.bName << endl;
+		cout << "height : " << per.dHeight << endl;
+	}
 
 	//lower_bound 指向大于或者等于key值的第一个元素的迭代器
 	SETITE ite111 = (personSet.lower_bound(per2));
@@ -281,7 +290,10 @@ void setTest()
 
 	//size()获取set中元素个数
 	cout << "per2size():" << personSet.size()<< endl;
-
+	
+	//clear()删除所有元素
+	personSet.clear();
+	
 	printEnd("set");
 }
 
@@ -327,6 +339,17 @@ void mapTest()
 	personMap.insert(pair<WORD, PERSON_NODE>(3, per3));
 	personMap.insert(make_pair<WORD, PERSON_NODE>(4, per4));
 	personMap[5] = per5;
+	
+	//find(),找到就返回找到的位置的迭代器，否在返回尾部的迭代器
+	personIte ite = find(1);
+	if (ite != personMap.end())
+	{
+		WORD idIdx = (*ite).first;
+		PERSON_NODE per = (*ite).second;
+		cout << "id : " << idIdx << endl;
+		cout << "name : " << per.bName << endl;
+		cout << "height : " << per.dHeight << endl;
+	}
 
 	//empty(),begin(),end()
 	if (! personMap.empty())
@@ -346,6 +369,9 @@ void mapTest()
 
 	/*size()获取大小*/
 	cout << "size " << personMap.size() << endl;
+	
+	personMap.clear();
+	
 	printEnd("map");
 }
 
