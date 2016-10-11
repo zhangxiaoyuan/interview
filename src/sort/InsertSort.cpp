@@ -10,9 +10,9 @@ void insertSort(int* pArray, int arrLen)
 	{
 		for (int j = i - 1; j >= 0; j--)
 		{
-			if (pArray[j] > pArray[j+1])
+			if (pArray[j] > pArray[j + 1])
 			{
-				swapNum(pArray[j+1], pArray[j]);
+				swapNum(pArray[j + 1], pArray[j]);
 			}
 			else
 			{
