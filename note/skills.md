@@ -8,7 +8,7 @@
  TCP/IP协议、多进程编程、进程间通信、网络编程、SOCKET编程
  
 4.linux：
- 熟悉linux基础原理、常用工具、shell、dbg、linux下的开发、linux的后台架构设计
+ 熟悉linux基础原理、常用工具、shell、gdb、linux下的开发、linux的后台架构设计
  
 5.基础：
  常用数据结构、算法、STL标准库、设计模式、数据库系统、网络安全、面向对象、操作系统、软件工程
