@@ -28,6 +28,22 @@ list不能使用std::sort函数，因为std::sort必须支持随机读取iterato
 vc++的中list::size是 {return (_Size));  } ，而gcc中的使用SGI STL的中list::size是{ return std::distance(begin(), end()); } ，[一个是O(1),一个是O(N)](http://stackoverflow.com/questions/228908/is-listsize-really-on)。
 
 ##deque：
+deque没有容量的capacity的概念，因为它是动态的以分段连续空间组合而成，可以增加随时一段新的空间并连接起来，没有vector的重新分配的内存概念。  
 
+采用一块所谓的map作为主控，是map一小块连续空间，其中每个节点的元素是指针指向另一段连续线性空间，称为缓冲区，缓冲区默认为512bytes。   
 
+如果map满载，则重新分配一个map大小，然后将所有缓冲区头指针到copy新的map中。
 
+deque的迭代器很复杂，一个迭代器有4个指针：
+```c++
+T* cur;   //指一个缓冲区中的当前指向的节点
+T* first;  //指一个缓冲区的头节点
+T* last;   //指一个缓冲区的尾节点
+map_pointer node;  //指向map管控中心
+```
+
+deque中如果有元素，则采用两个迭代器start(ite)和finish(ite)。start(ite)的first指向第一个缓冲区的第一个元素，cur也指向第一个缓冲区的第一个元素，
+last则指向第一个的缓冲区最后一个节点(是否不论为空)，node指向map中第一个缓冲区的位置；而finish(ite)中的first指向最后一个缓冲区的第一个元素，
+last指向最后一个的缓冲区最后一个节点(是否不论为空)，cur指向最后一个缓冲区的中有元素的下一个空节点，node指向最后一个缓冲区在map中位置。
+
+http://blog.csdn.net/v_july_v/article/details/7382693
