@@ -46,4 +46,7 @@ deque中如果有元素，则采用两个迭代器start(ite)和finish(ite)。sta
 last则指向第一个的缓冲区最后一个节点(是否不论为空)，node指向map中第一个缓冲区的位置；而finish(ite)中的first指向最后一个缓冲区的第一个元素，
 last指向最后一个的缓冲区最后一个节点(是否不论为空)，cur指向最后一个缓冲区的中有元素的下一个空节点，node指向最后一个缓冲区在map中位置。
 
+map管理节点最少8个，是最多所需节点+2，前后各预留一个，扩充时可用。
+
+pop_back()和pop_front()，将收尾元素拿掉，无论从前还是从后，都需要考虑在某些情况下，将缓冲区释放
 http://blog.csdn.net/v_july_v/article/details/7382693
