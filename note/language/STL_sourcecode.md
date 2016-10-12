@@ -21,6 +21,13 @@ struct __list_node{
     T data;
 }
 ```
-从上可以看出，list显然是个双向链表，而且还是环状双向链表，因此只需要在尾部添加一个空白节点，就可以用一个指针link_type node表示整个链表的所有节点。  
+从上可以看出，__list显然是个双向链表，而且还是环状双向链表__，因此只需要在尾部添加一个空白节点，就可以用一个指针link_type node表示整个链表的所有节点。  
+
+list不能使用std::sort函数，因为std::sort必须支持随机读取iterator属性，因此只能使用的自带list.sort()函数，__采用的是快排__。
+
+vc++的中list::size是 {return (_Size));  } ，而gcc中的使用SGI STL的中list::size是{ return std::distance(begin(), end()); } ，[一个是O(1),一个是O(N)](http://stackoverflow.com/questions/228908/is-listsize-really-on)。
+
+##deque：
+
 
 
