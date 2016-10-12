@@ -4,7 +4,6 @@
 针对时间，则通过优秀的数据结构和算法进行化解，数据结构可以采用__Hash/堆/bit_map/数据库/二叉树等__，针对算法可以采用优秀的排序和查找算法，如__堆排序/快排/
 归并排序/二分查找等__.
 
-因为set/map/multiset/multimap都是基于RB-tree之上，所以有自动排序功能，
-而hash_set/hash_map/hash_multiset/hash_multimap都是基于hashtable之上，
+因为set/map/multiset/multimap都是基于RB-tree之上，所以有自动排序功能，而hash_set/hash_map/hash_multiset/hash_multimap都是基于hashtable之上，
 所以不含有自动排序功能，至于加个前缀multi_无非就是允许键值重复而已
 
