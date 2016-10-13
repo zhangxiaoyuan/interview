@@ -84,7 +84,7 @@ sort_heap()算法实现：
  
 make_heap()算法实现：
  + 这个算法用来将一个现有的vector转化为一个heap.
- ```c++
+```c++
  #include <algorithm> //堆算法所在头文件
  
  int ia[9] = {0,1,2,3,4,8,9,3,5};
@@ -104,7 +104,13 @@ make_heap()算法实现：
  print(ivec);  //8 7 4 3 5 0 2 3 1
  
  sort_heap(ivec.begin(), ivec.end());
- print(ivec);  //0 1 2 3 4 5 7 8
- 
-  
- ```
+ print(ivec);  //0 1 2 3 4 5 7 8 
+```
+
+##slist:
+single linked list 单向链表。不再标准SGI STL中，单链表耗用空间小，操作更快。
+
+slist只提供push_front(),在头部插入，因此slist中的元素次序与元素插入次序相反。两个slist交换，只要交换head即可。
+
+#关联容器：
+## 
