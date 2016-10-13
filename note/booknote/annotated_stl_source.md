@@ -113,4 +113,34 @@ single linked list 单向链表。不再标准SGI STL中，单链表耗用空间
 slist只提供push_front(),在头部插入，因此slist中的元素次序与元素插入次序相反。两个slist交换，只要交换head即可。
 
 #关联容器：
-## 
+##set:
+set的特性就是所有元素都会按照元素的键值自动被排序，set元素的**键值就是实值，实值就是键值**。因此set__不允许两个元素有相同的值__。
+
+set默认情况采用递增排序，**STL::find()函数采用的是循序搜寻**。
+
+set的迭代器是使用的RB-tree的constant ite,因此set不能通过迭代器iterator修改值。
+
+##map:
+map的所有元素都是pair<key,value>,不允许两个元素拥有相同的key值。map不能通过迭代器修改key值，但是可以修改value值。
+
+##multiset:
+和set基本一致，唯一差别是他允许键值重复，因为它的插入操作采用的是RB-tree的insert_equal()函数，而set采用的是insert_unique()函数。
+
+##multimap:
+和map基本一致，唯一差别是他允许键值重复，因为它的插入操作采用的是RB-tree的insert_equal()函数，而set采用的是insert_unique()函数。
+
+##hashtable:
+采用开链做法解决“碰撞”问题，hashtabl中的维护的list不是STL中的list或者slist，而是自己维护的hash table node，而桶聚合体采用的是vector,保证动态增加能力。
+```c++
+template<class value>
+struct __hashtable_node
+{  
+    __hashttable_node* next;
+    Value val;
+};
+```
+hashtable的t迭代器维护两个节点一个是当前list中的节点，一个是下一个桶的位置
+```c++
+node* cur；  //迭代器目前所指的节点
+hashtable* ht; //保持对y容器的连接关系，用于从一个bucketd跳转到另一个bucket
+```
