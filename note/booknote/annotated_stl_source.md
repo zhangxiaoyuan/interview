@@ -49,4 +49,98 @@ last指向最后一个的缓冲区最后一个节点(是否不论为空)，cur�
 map管理节点最少8个，是最多所需节点+2，前后各预留一个，扩充时可用。
 
 pop_back()和pop_front()，将收尾元素拿掉，无论从前还是从后，都需要考虑在某些情况下，将缓冲区释放
-http://blog.csdn.net/v_july_v/article/details/7382693
+
+
+##stack:
+stack是以deque为原型，将其接口改变，使其符合"先进后出"规律。
+
+由于stack是以底部容器完成其所有工作，具有这种“修改某物接口，形成另一种风貌”的性质，称为adapter适配器,而不能称之为container容器。
+
+stack的push()和pop()采用的是deque的push_back()和pop_back();
+```c++
+void push(const value_type& x){c.push_back(x);}
+void pop(){c.pop_back();}
+```
+stack不提供走访，功能不提供迭代器，list也可封装为stack，不过STL采用中deque作为stack的数据底层。
+
+##queue:
+queue是先进先出的数据结构，不允许遍历。默认以deque为底层容器，也是适配器adapter，不是容器container。也没有迭代器
+
+##priority queue:
+优先级队列，允许用户已任何次序将任何元素推入容器中，但是取出时是一定从优先级最高的元素开始取。 底层采用bianry max heap。
+
+##heap:
+使用可以array表示tree的方法，叫做隐式表述法，以vector代替array实现数组的自增长。STL使用的max-heap大顶堆。
+heap不提供遍历操作，因此没有迭代器，遵循完全二叉树的排列规则。
+
+push_heap()算法实现:
+ + 插入新元素时，总是插入到vector的最后end()处位置，然后一级一级调整每一个子树，直到满足二叉堆规律即可。
+
+pop_heap()算法实现：
+ + pop_heap()实际是将根元素(最大值)到防止底部容器vector的尾端节点，并没有被移走，只是了调换位置。如果要真实的移走，则可以使用底部容器vector的所的提供pop_back()操作函数。
+ 
+sort_heap()算法实现： 
+ + 从pop_heap()实际就可以看出来，每次pop_heap操作都将最大值放到底部容器vector的最尾端，因此只需要循环对整个heap做pop_heap操作就可以看得到一个递增序列。
+ 
+make_heap()算法实现：
+ + 这个算法用来将一个现有的vector转化为一个heap.
+```c++
+ #include <algorithm> //堆算法所在头文件
+ 
+ int ia[9] = {0,1,2,3,4,8,9,3,5};
+ vector<int> ivec(ia, ia + 9);
+ 
+ make_heap(ivec.begin(), ivec.end());
+ print(ivec); //9 5 8 3 4 0 2 3 1
+ 
+ ivec.push_back(7);
+ push_heap(ivec.begin(), ivec.end());
+ print(ivec); //9 7 8 3 5 0 2 3 1 4
+ 
+ pop_heap(ivec.begin(), ivec.end());
+ cout << ivec.back() << endl; //9. 此时9并没有从vector中移除，只是放到了数组的最末尾
+ print(ivec); //8 7 4 3 5 0 2 3 1 9
+ ivec.pop_back(); //此时就真正的移除了9
+ print(ivec);  //8 7 4 3 5 0 2 3 1
+ 
+ sort_heap(ivec.begin(), ivec.end());
+ print(ivec);  //0 1 2 3 4 5 7 8 
+```
+
+##slist:
+single linked list 单向链表。不再标准SGI STL中，单链表耗用空间小，操作更快。
+
+slist只提供push_front(),在头部插入，因此slist中的元素次序与元素插入次序相反。两个slist交换，只要交换head即可。
+
+#关联容器：
+##set:
+set的特性就是所有元素都会按照元素的键值自动被排序，set元素的**键值就是实值，实值就是键值**。因此set__不允许两个元素有相同的值__。
+
+set默认情况采用递增排序，**STL::find()函数采用的是循序搜寻**。
+
+set的迭代器是使用的RB-tree的constant ite,因此set不能通过迭代器iterator修改值。
+
+##map:
+map的所有元素都是pair<key,value>,不允许两个元素拥有相同的key值。map不能通过迭代器修改key值，但是可以修改value值。
+
+##multiset:
+和set基本一致，唯一差别是他允许键值重复，因为它的插入操作采用的是RB-tree的insert_equal()函数，而set采用的是insert_unique()函数。
+
+##multimap:
+和map基本一致，唯一差别是他允许键值重复，因为它的插入操作采用的是RB-tree的insert_equal()函数，而set采用的是insert_unique()函数。
+
+##hashtable:
+采用开链做法解决“碰撞”问题，hashtabl中的维护的list不是STL中的list或者slist，而是自己维护的hash table node，而桶聚合体采用的是vector,保证动态增加能力。
+```c++
+template<class value>
+struct __hashtable_node
+{  
+    __hashttable_node* next;
+    Value val;
+};
+```
+hashtable的t迭代器维护两个节点一个是当前list中的节点，一个是下一个桶的位置
+```c++
+node* cur；  //迭代器目前所指的节点
+hashtable* ht; //保持对y容器的连接关系，用于从一个bucketd跳转到另一个bucket
+```
