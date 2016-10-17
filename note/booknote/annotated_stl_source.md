@@ -144,3 +144,8 @@ hashtable的t迭代器维护两个节点一个是当前list中的节点，一个
 node* cur；  //迭代器目前所指的节点
 hashtable* ht; //保持对y容器的连接关系，用于从一个bucketd跳转到另一个bucket
 ```
+
+##hash_map/hash_set:
+基本和map/set用法类似，但是底层的数据结构不一样，hash_map/hash_set采用的是hash_table存放key值，使用场景上，map和hash_map的区别是map的key值是经过排序的，hash_map是散列的，map的查找是O(logn)，hash_map近似于O(1).
+
+#iterator实现：
