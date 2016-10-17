@@ -1,3 +1,4 @@
+#++序列容器++：
 ##vector:
 采用线性连续空间，两个迭代器start/finish分别指向配置得来的连续的空间中已经使用的范围，迭代器end_of_storage指向整块连续的空间尾部   
 
@@ -112,7 +113,7 @@ single linked list 单向链表。不再标准SGI STL中，单链表耗用空间
 
 slist只提供push_front(),在头部插入，因此slist中的元素次序与元素插入次序相反。两个slist交换，只要交换head即可。
 
-#关联容器：
+#++关联容器++：
 ##set:
 set的特性就是所有元素都会按照元素的键值自动被排序，set元素的**键值就是实值，实值就是键值**。因此set__不允许两个元素有相同的值__。
 
@@ -144,3 +145,8 @@ hashtable的t迭代器维护两个节点一个是当前list中的节点，一个
 node* cur；  //迭代器目前所指的节点
 hashtable* ht; //保持对y容器的连接关系，用于从一个bucketd跳转到另一个bucket
 ```
+
+##hash_map/hash_set:
+基本和map/set用法类似，但是底层的数据结构不一样，hash_map/hash_set采用的是hash_table存放key值，使用场景上，map和hash_map的区别是map的key值是经过排序的，hash_map是散列的，map的查找是O(logn)，hash_map近似于O(1).
+
+#++iterator实现++：
