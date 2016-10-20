@@ -8,7 +8,7 @@ inline function则会在其每一个使用者身上产生一个函数实体
 
 C++布局以及存取时间主要的额外负担是由virtual引起：
 > 
- virtual function：用以支持一个有效率的“执行期绑定”（runtime binding）
+ virtual function：用以支持一个有效率的“执行期绑定”（runtime binding）   
  virtual base class：用以实现“多次出现在继承体系中的base class，有一个单一而被共享的实体”
  
 ###2.c++对象模型：
@@ -21,5 +21,8 @@ C++布局以及存取时间主要的额外负担是由virtual引起：
  
  + 真实c++对象模型：
   由简单对象模型派生而来，对内存空间和存取时间进行了优化。将non-static data member存放于每一个class object中，static data member存放于class object之外，static & non-static member function也存放在所有class objects之外，virtual funcion以vptr和vtbl存放。Vptr的设置和重置都由每一个class的construct、destructor、copy assignment运算符自动完成。
+  > 
+   虚继承中，base class 不管在继承串链中被派生多少次，永远只会存在一个实体供所有子类共享。     
+   class istream : virtual public ios{...};
 
 
