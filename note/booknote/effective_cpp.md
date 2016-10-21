@@ -4,8 +4,8 @@ C++对象的成员变量的初始化动作发生在进入构造函数本体之�
 
 ####5.Know what functions C++ silently writes and calls:
 一个空的C++类经过编译器编译之后会默认生成4个函数：default默认构造函数、copy拷贝构造函数、析构函数、copy assignment操作符   
-copy assignment赋值操作符在类中如果包含了引用或者const成员变量时(因为引用和const成员赋初值之后不能修改,所以编译器不知道如何处理)，
-因此编译器就默认不生成copy assignment函数，需要手动自己指定  
+**copy assignment赋值操作符在类中如果包含了引用或者const成员变量时(因为引用和const成员赋初值之后不能修改,所以编译器不知道如何处理)，
+因此编译器就默认不生成copy assignment函数，需要手动自己指定**  
 
 ####6.Explicitly disallow the use of compiler-generated functions you do not want:
 为了防止编译器默认生成copy构造函数和copy assignment操作符，可将相应的构造函数声明为private并且不实现，或者使用Uncopyable这样的基类
