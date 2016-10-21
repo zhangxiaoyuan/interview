@@ -8,6 +8,9 @@
 因为set/map/multiset/multimap都是基于RB-tree之上，所以有自动排序功能，而hash_set/hash_map/hash_multiset/hash_multimap都是基于hashtable之上，
 所以不含有自动排序功能，至于加个前缀multi_无非就是允许键值重复而已
 
+TOP K问题很适合采用MapReduce框架解决，用户只需编写一个Map函数和两个Reduce函数，然后提交到Hadoop（采用Mapchain和Reducechain）上即可解决该问题。具体而言，就是首先根据数据值或者把数据hash（MD5）后的值按照范围划分到不同的机器上，最好可以让数据划分后依次读入内存，这样不同的机器赋值处理不同的数值范围，实际上就是Map。得到结果后，各个机器只需拿出各自出现次数最多的前N个数据，然后汇总，选出所有的数据中出现次数最多的前N个数据，这实际上就是Reduce的过程。对于Map函数，采用Hash算法，将Hash值相同的数据交给同一个Reduce task；对于第一个Reduce函数，采用HashMap统计出每个词出现的频率，对于第二个Reduce函数，统计所有Reduce task，输出数据中的top K 即可。
+
+
 ##海量数据处理基本思想：
 
 ###1.分而治之/hash映射 + hash统计 + 堆排/快排/归并排
