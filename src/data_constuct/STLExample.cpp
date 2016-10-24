@@ -389,3 +389,31 @@ mapTest();
 printEnd("main");
 return 0;
 }
+
+#include <iostream>
+#include <bitset>
+
+using namespace std;
+
+void main()
+{
+	bitset<256> bs;
+
+	bs.set(255,1);
+
+	cout << bs << endl;
+	cout << bs[255] << endl;
+	cout << bs[254] << endl;
+	cout << bs.any() << endl;
+	cout << bs.count() << endl;
+	bs.flip();
+	cout << bs[255] << endl;
+	cout << bs[254] << endl;
+	cout << bs.none() << endl;
+	cout << bs.size() << endl;
+	cout << bs.test(255) << endl;
+	cout << bs.to_string() << endl;
+	cout << bs.to_ulong() << endl;
+
+	return ;
+}
