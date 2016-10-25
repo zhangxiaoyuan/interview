@@ -13,4 +13,42 @@ FILE * fopen(const char * path,const char * mode);
 long ftell(FILE *stream);
  > 用于得到文件位置指针当前位置相对于文件首的偏移字节数。
  
-3.
+3.strcpy(char* pDest, const char* pSrc)实现：
+```c++
+#include <assert.h>
+char* strcpy(char* pDest, const char* pSrc)
+{
+    assert((pDest != NULL) && (pSrc != NULL));
+    char* pAddr = pDest;
+    while((*pDest++ = *pSrc++) != '\0')
+    return pAddr;
+}
+```
+
+4.什么时间需要初始化列表，而不是构造函数中赋值：
+当类中含有const、reference 成员变量；基类的构造函数都需要初始化表。
+
+5. New delete 与mallocfree 的联系与区别?
+都是在堆(heap)上进行动态的内存操作。用malloc函数需要指定内存分配的字节数并且不能初始化对象，new 会自动调用对象的构造函数。delete 会调用对象的destructor，而free 不会调用对象的destructor.
+
+6.main 函数执行以前，还会执行什么代码？
+全局对象的构造函数会在main 函数之前执行，为malloc分配必要的资源，等等。
+
+7.分别写出BOOL,int,float,指针类型的变量a 与“零”的比较语句。
+```c++
+BOOL : 　if ( !a ) or if(a)
+int : 　　if ( a ==0)
+float : const EXPRESSION EXP =0.000001;    if ( a < EXP&& a >-EXP)
+pointer :　if ( a != NULL) or if(a == NULL)
+```
+
+8.printf输出格式：
+[标志][输出最小宽度][.精度][长度]类型 
+ > 前4项表示可选
+**标志**：标志字符为 -、+、# 和空格四种
+**最下宽度**：用十进制整数来表示输出的最少位数。若实际位数多于定义的宽度，则按实际位数输出，若实际位数少于定义的宽度则补以空格或0
+**精度**：精度格式符以“.”开头，后跟十进制整数。本项的意义是：如果输出数字，则表示小数的位数；如果输出的是字符，则表示输出字符的个数；若实际位数大于所定义的精度数，则截去超过的部分。
+**长度**：长度格式符为h、l两种，h表示按短整型量输出，l表示按长整型量输出。
+**类型**：d-10进制带符号整数，o-8进制无符号整数，x-16进制无符号整数，u-10进制无符号整数，f-小数单双精度，c-字符，s-字符串
+
+
