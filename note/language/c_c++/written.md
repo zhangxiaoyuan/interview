@@ -69,3 +69,5 @@ pointer :　if ( a != NULL) or if(a == NULL)
 可以肯定的是#define和printf都是不是C语言的控制语句，C语言只有九种控制语句    
 printf是一个C标准库函数，函数原型定义在stdio.h。从严格意义上来说，库函数不属于C语言。   
 #define只是一个预处理命令，用来做替换，在编译的时候被展开罢了。    
+
+###[11.c++笔试题集合](http://blog.csdn.net/hackbuteer1/article/details/7926592)
