@@ -76,3 +76,7 @@ int main()
  m_count -2  
 
 
+###2.In C++, what does "explicit" mean? what does "protected" mean?    
+* c++中的explicit关键字用来修饰类的构造函数，表明该构造函数是显式的，在某些情况下，我们要求类的使用者必须显示调用类的构造函数时就需要使用explicit,反之默认类型转换可能会造成无法预期的问题。   
+* protected控制的是一个函数对一个类的成员（包括成员变量及成员方法）的访问权限。protected成员只有该类的成员函数及其派生类的成员函数可以访问    
+
