@@ -71,3 +71,4 @@ printf是一个C标准库函数，函数原型定义在stdio.h。从严格意义
 #define只是一个预处理命令，用来做替换，在编译的时候被展开罢了。    
 
 ###[11.c++笔试题集合](http://blog.csdn.net/hackbuteer1/article/details/7926592)
+###[12.c++面试笔试题目集合](http://blog.csdn.net/hanlin1985/article/details/2990895/)
