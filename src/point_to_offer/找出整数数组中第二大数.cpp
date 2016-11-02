@@ -1,3 +1,4 @@
+/*写一个函数找出一个整数数组中，第二大的数 （microsoft）*/
 const int MINNUMBER = -32767 ;
 int find_sec_max( int data[] , int count) //类似于1 4 4 4这样的序列将认为1是第二大数
 {
