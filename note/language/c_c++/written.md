@@ -66,11 +66,12 @@ pointer :　if ( a != NULL) or if(a == NULL)
 + 3.结构体大小对齐规则：结构体大小也就是sizeof的结果，必须是其内部成员中最大的对齐参数的整数倍，不足的要补齐。
 
 ###10.#define 和 printf 都不是C语句
-可以肯定的是#define和printf都是不是C语言的控制语句，C语言只有九种控制语句    
-printf是一个C标准库函数，函数原型定义在stdio.h。从严格意义上来说，库函数不属于C语言。   
-#define只是一个预处理命令，用来做替换，在编译的时候被展开罢了。  
+可以肯定的是#define和printf都是不是C语言的控制语句，C语言只有九种控制语句        
+printf是一个C标准库函数，函数原型定义在stdio.h。从严格意义上来说，库函数不属于C语言。       
+define只是一个预处理命令，用来做替换，在编译的时候被展开罢了。      
 
 ###11.字符串与字符指针：
+```c++
 char str1[] = "abc";
 char str2[] = "abc";
 const char str3[] = "abc";
@@ -79,23 +80,27 @@ const char *str5 = "abc";
 const char *str6 = "abc";
 char *str7 = "abc";
 char *str8 = "abc";
-cout << ( str1 == str2 ) << endl;
-cout << ( str3 == str4 ) << endl;
-cout << ( str5 == str6 ) << endl;
-cout << ( str7 == str8 ) << endl;
-结果是：0 0 1 1解答：str1,str2,str3,str4是数组变量，它们有各自的内存空间；而str5,str6,str7,str8是指针，它们指向相同的常量区域。
+cout << ( str1 == str2 ) << endl;  //0
+cout << ( str3 == str4 ) << endl;  //0
+cout << ( str5 == str6 ) << endl;  //1
+cout << ( str7 == str8 ) << endl;  //1
+```
+str1,str2,str3,str4是数组变量，它们有各自的内存空间；而str5,str6,str7,str8是指针，它们指向相同的常量区域。
 
 ###12.数组操作：
+```c++
 main()
 { int a[5]={1,2,3,4,5};
   int *ptr=(int *)(&a+1);
-  printf("%d,%d",*(a+1),*(ptr-1));
+  printf("%d,%d",*(a+1),*(ptr-1));//2,5
 }
-输出：2,5    
-*(a+1）就是a[1]，*(ptr-1)就是a[4],执行结果是2，5；&a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）int *ptr=(int *)(&a+1); 则ptr实际是&(a[5]),也就是a+5    
-原因如下：    
-&a是数组指针，其类型为 int (*)[5];而指针加1要根据指针类型加上一定的值，不同类型的指针+1之后增加的大小不同a是长度为5的int数组指针，所以要加 5*sizeof(int)所以ptr实际是a[5]    
-但是prt与(&a+1)类型是不一样的(这点很重要)，所以prt-1只会减去sizeof(int*)；    
+```   
+*(a+1）就是a[1]，*(ptr-1)就是a[4],执行结果是2，5；    
+&a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）int *ptr=(int *)(&a+1); 则ptr实际是&(a[5]),也就是a+5      
+
+原因如下：      
+&a是数组指针，其类型为 int (*)[5];而指针加1要根据指针类型加上一定的值，不同类型的指针+1之后增加的大小不同a是长度为5的int数组指针，所以要加 5*sizeof(int)所以ptr实际是a[5]，但是prt与(&a+1)类型是不一样的(这点很重要)，所以prt-1只会减去sizeof(int*)；    
+
 a,&a的地址是一样的，但意思不一样，a是数组首地址，也就是a[0]的地址，&a是对象（数组）首地址，a+1是数组下一元素的地址，即a[1],&a+1是下一个对象的地址，即a[5].    
 
 ###[11.c++笔试题集合](http://blog.csdn.net/hackbuteer1/article/details/7926592)
