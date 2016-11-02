@@ -68,7 +68,22 @@ pointer :　if ( a != NULL) or if(a == NULL)
 ###10.#define 和 printf 都不是C语句
 可以肯定的是#define和printf都是不是C语言的控制语句，C语言只有九种控制语句    
 printf是一个C标准库函数，函数原型定义在stdio.h。从严格意义上来说，库函数不属于C语言。   
-#define只是一个预处理命令，用来做替换，在编译的时候被展开罢了。    
+#define只是一个预处理命令，用来做替换，在编译的时候被展开罢了。  
+
+###11.字符串与字符指针：
+char str1[] = "abc";
+char str2[] = "abc";
+const char str3[] = "abc";
+const char str4[] = "abc";
+const char *str5 = "abc";
+const char *str6 = "abc";
+char *str7 = "abc";
+char *str8 = "abc";
+cout << ( str1 == str2 ) << endl;
+cout << ( str3 == str4 ) << endl;
+cout << ( str5 == str6 ) << endl;
+cout << ( str7 == str8 ) << endl;
+结果是：0 0 1 1解答：str1,str2,str3,str4是数组变量，它们有各自的内存空间；而str5,str6,str7,str8是指针，它们指向相同的常量区域。
 
 ###[11.c++笔试题集合](http://blog.csdn.net/hackbuteer1/article/details/7926592)
 ###[12.c++面试笔试题目集合](http://blog.csdn.net/hanlin1985/article/details/2990895/)
