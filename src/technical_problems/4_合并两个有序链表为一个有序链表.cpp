@@ -5,30 +5,7 @@ struct Node
     Node *next ;
 };
 
-/*(1)已知链表的头结点head,写一个函数把这个链表逆序 ( Intel)*/
-Node * ReverseList(Node *head) //链表逆序
-{
-    if ( head == NULL || head->next == NULL )
-        return head;
-    Node *pPre = head ;
-    Node *pCur = pPre->next ;
-    Node *pNext = pCur->next ;
-    pPre->next = NULL ;
-
-    while ( pNext != NULL )
-    {
-        pCur->next = pPre ;
-        pPre = pCur ;
-        pCUr = pNext ;
-        pNext = pNext->next ;
-    }
-    pCur->next = pPre ;
-    head = pCur ;
-    return head ;
-}
-
-/*(2)已知两个链表head1 和head2 各自有序，请把它们合并成一个链表依然有序。*/
-
+/*(1) 已知两个链表head1 和head2 各自有序，请把它们合并成一个链表依然有序。*/
 Node * Merge(Node *head1 , Node *head2)
 {
     if ( head1 == NULL)
@@ -76,7 +53,7 @@ Node * Merge(Node *head1 , Node *head2)
     return head ;
 }
 
-/*已知两个链表head1 和head2 各自有序，请把它们合并成一个链表依然有序，这次要求用递归方法进行*/
+/*(2) 已知两个链表head1 和head2 各自有序，请把它们合并成一个链表依然有序，这次要求用递归方法进行*/
 Node * MergeRecursive(Node *head1 , Node *head2)
 {
     if ( head1 == NULL )
