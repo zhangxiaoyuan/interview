@@ -1,3 +1,5 @@
+/*字符串相关处理函数：http://www.cppblog.com/dawnbreak/archive/2009/08/24/94262.html*/
+
 /*写出strlen函数具体实现*/
 /*写出strcpy函数具体实现*/
 /*写出strcpy函数具体实现，考虑地址重复的情况*/
