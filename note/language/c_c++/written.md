@@ -194,6 +194,11 @@ printf("%d",t.c);   //t.c为1，输出也是-1
 ```
 3个都是有符号数int嘛。编译器进行符号扩展
 
+###17.c语言中string常用函数使用原理：
+strlen(str1)：while循环直到遇到'\0'结束，统计个数.        
+strcpy(dest, src)：while循环src直到遇到'\0'结束copy，如果str2没有结束符，则会出现copy异常。  
+strcmp(dest, src)：while循环判断两个串中的每个字符是否相等。
+
 
 ###[11.c++笔试题集合](http://blog.csdn.net/hackbuteer1/article/details/7926592)
 ###[12.c++面试笔试题目集合](http://blog.csdn.net/hanlin1985/article/details/2990895/)
