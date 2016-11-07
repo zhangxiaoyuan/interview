@@ -1,3 +1,5 @@
+/*输入两颗二叉树ａ和ｂ，判断ｂ是否是ａ的子树*/
+
 
 bool BinaryTreeWide(BTreeNode* pTree1, BTreeNode* pTree2)
 {
