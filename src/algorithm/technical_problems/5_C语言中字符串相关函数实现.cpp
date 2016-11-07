@@ -141,3 +141,8 @@ int strcmp(const char *dest, const char *source)
    }
    return *dest - *source;
 }
+
+
+／*memcpy*／
+／*memmove*／
+／*memset*／
