@@ -2,6 +2,14 @@
 
 /*写出strlen函数具体实现*/
 /*写出strcpy函数具体实现*/
+char * strcpy( char *strDest, const char *strSrc ) 
+{
+　assert( (strDest != NULL) && (strSrc != NULL) );
+　char *address = strDest; 
+　while( (*strDest++ = * strSrc++) != ‘\0’ ); 
+　　return address;
+}
+
 /*写出strcpy函数具体实现，考虑地址重复的情况*/
 /*数字转换为字符串：123---->“123“*/
 /*字符串转换为数字: "123"----->123*/
