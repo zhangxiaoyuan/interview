@@ -5,7 +5,7 @@ int strlen( const char *str ) //输入参数const
 {
 　assert( strt != NULL ); //断言字符串地址非0
 　int len;
-　while( (*str++) != '' ) 
+　while( (*str++) != '\0' ) 
 　{ 
 　　len++; 
 　} 
