@@ -199,7 +199,7 @@ strlen(str1)：while循环直到遇到'\0'结束，统计个数.
 strcpy(dest, src)：while循环src直到遇到'\0'结束copy，如果str2没有结束符，则会出现copy异常。  
 strcmp(dest, src)：while循环判断两个串中的每个字符是否相等。
 
-###18.数组名与指针的关联和区别：
+###18.[数组名与指针的关联和区别](http://wenku.baidu.com/view/efd95e73a417866fb84a8eff.html)：
 * 1.数组名的内涵在于其指代实体是一种数据结构，这种数据结构就是数组；     
 ```c++
     int intArray[10];
