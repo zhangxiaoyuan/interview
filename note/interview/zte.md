@@ -3,8 +3,8 @@
 int* func()
 {
     int* ptem;
-    ptem = 10;
-    return ptem;
+    *ptem = 10;
+    return ptem;   //段错误
 }
 ```
 
@@ -37,7 +37,7 @@ void main()
     t_node node = {3,5,6};
     t_node* pnode = &node;
     
-    printf("%d\n", *(int*)pnode);
+    printf("%d\n", *(int*)pnode);  ／／3
 }
 ```
 
