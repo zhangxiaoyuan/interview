@@ -1,12 +1,15 @@
 1.###判断：
+```c++
 int* func()
 {
     int* ptem;
-    ptem = 10;
-    return ptem;
+    *ptem = 10;
+    return ptem;   //段错误
 }
+```
 
 2.###是否输出正常：
+```c+=
 int* func()
 {
     int arr[] = {1,2,3,4,5};
@@ -18,8 +21,10 @@ void main()
     int parr = func();
     printf("%d\n", parr);
 }
+```
 
 3.###输出值是多少：
+```c++
 typedef struct note
 {
     int a;
@@ -32,8 +37,9 @@ void main()
     t_node node = {3,5,6};
     t_node* pnode = &node;
     
-    printf("%d\n", *(int*)pnode);
+    printf("%d\n", *(int*)pnode);  ／／3
 }
+```
 
 ###4.编程题：
 输入一个整数，求出这个整数的二进制表示中1的总个数。
