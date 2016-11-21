@@ -31,7 +31,7 @@ SQL 的数据定义语言 (DDL) 部分使我们有能力创建或删除表格。
     (3)  <join_type> JOIN <right_table>     //left jion：表示要将左表中的所有数据添加到新生表中，right join：表示将右表
     (2)  ON <join_condition>         //表示join条件
     (4)  WHERE <where_condition>    //从整个结果集中过滤数据
-    (5)  GROUP BY <group_by_list>   //按照指定的列分组
+    (5)  GROUP BY <group_by_list>   //按照指定的列分组，即按照指定列的值进行去重
     (6)  HAVING <having_condition>   //在GROUP BY分组之后过滤组内的数据
     (9)  ORDER BY <order_by_condition>   //按照指定的列排序
     (10) LIMIT <limit_number>   //从第一个数字的当前行取出第二个数字个行书，如：LIMIT 10,20表示从第10行开始取出20行数据
