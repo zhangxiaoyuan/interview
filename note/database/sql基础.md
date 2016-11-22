@@ -26,7 +26,7 @@ DROP INDEX - 删除索引
 ```sql
 SELECT orderID, customer.custmer_id
 FROM order, customer
-WHERE order.customter_id = customer_customer_id
+WHERE order.customter_id = customer_customer_id;
 ```
 
 ###插入 insert into：
@@ -46,13 +46,13 @@ VALUES('Database System', 'CS-437', 'Comp. Sci', 4);
 update 语句可以在不改变整个元组的情况下改变其部分属性的值:  
 ```sql
 UPDATE instructor
-SET salary = salary*1.5
+SET salary = salary*1.5;
 ```
 update语句可以嵌套select语句对满足查询条件的数据处理：
 ```sql
 UPDATE instructor
 SET salary = salary*1.05
-WHERE salary < (SELECT avg(salary) FROM instructor)
+WHERE salary < (SELECT avg(salary) FROM instructor);
 ```
 SQL 语句提供case 语句，可以利用它在一条语句中执行多种更新
 ```sql
@@ -61,5 +61,12 @@ SET salary = case
     WHEN salary < 7000 THEN salary = salary*1.5
     WHEN salary = 7000 THEN salary = salary*1.05
     ELSE salary = salary * 1.03
-    END
+    END;
+```
+
+###删除 delete:
+DELETE 语句用于删除表中的记录。只能删除整个元组，而不能只删除某些属性上的值。  
+```sql
+DELETE FROM instructor
+WHERE salary < (SELECT avg(salary) FROM instrutor );
 ```
