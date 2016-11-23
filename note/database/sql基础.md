@@ -179,4 +179,47 @@ SQL语句执行顺序总共分为10步，第一步是FROM，最后一步是LIMIT
   10、LIMIT：取出指定行的记录，产生虚拟表VT10, 并将结果返回。   
 
 
+##2.DDL 创建删除：
 
+`CREATE DATABASE` 语句用于创建数据库，DROP DATABASE 语句用于删除数据库。下面的 SQL 语句创建一个名为 "my_db" 的数据库：
+
+
+```SQL
+CREATE DATABASE my_db;
+```
+
+`CREATE TABLE` 语句用于创建数据库中的表，表由行和列组成，每个表都必须有个表名。使用 DROP TABLE 语句来删除表。假设想要创建一个名为 "Persons" 的表，包含五列：PersonID、LastName、FirstName、Address 和 City。
+
+```SQL
+CREATE TABLE Persons
+(
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+```
+
+`ALTER TABLE` 语句用于在已有的表中添加、删除或修改列。
+
+```SQL
+ALTER TABLE table_name
+---
+ADD column_name datatype
+DROP COLUMN column_name
+MODIFY COLUMN column_name datatype // ALTER COLUMN column_name datatype
+```
+
+假设想要想要删除 "Person" 表中的 "DateOfBirth" 列，可以使用下面的 SQL 语句：
+
+    ALTER TABLE Persons
+    DROP COLUMN DateOfBirth
+CREATE INDEX 语句用于在表中创建索引，在不读取整个表的情况下，索引使数据库应用程序可以更快地查找数据。CREATE UNIQUE INDEX 在表上创建一个唯一的索引，不允许使用重复的值。DROP INDEX 语句用于删除表中的索引。
+
+假设在 "Persons" 表的 "LastName" 列上创建一个名为 "PIndex" 的索引：
+
+```SQL
+CREATE INDEX PIndex
+ON Persons (LastName)
+```
