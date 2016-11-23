@@ -223,3 +223,7 @@ CREATE INDEX 语句用于在表中创建索引，在不读取整个表的情况�
 CREATE INDEX PIndex
 ON Persons (LastName)
 ```
+
+
+##扩展阅读：
+[十步完全理解 SQL](http://blog.jobbole.com/55086/)
