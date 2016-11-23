@@ -70,3 +70,20 @@ DELETE 语句用于删除表中的记录。只能删除整个元组，而不能�
 DELETE FROM instructor
 WHERE salary < (SELECT avg(salary) FROM instrutor );
 ```
+
+###where子句：
+WHERE 子句用于提取那些满足指定标准的记录  
+```sql
+SELECT *
+FROM website
+WHERE country='CN';
+```
+以下运算符都可以运用于Where子句：   
+=等于   <小于   >大于   <=小于等于    >=等于    <>(!=)不等于     between在某个范围     in多个可能值       
+like搜索多种模式：%匹配任意字符串   下划线：匹配任意字符    
+如下：查找 student表中所有电话号码(列名：telephone)的第一位为8或6，第三位为0的电话号码   
+```sql
+SELECT telephone
+FROM student
+WHERE telephone like '[8,6]_%';
+```
