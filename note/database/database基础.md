@@ -37,7 +37,7 @@ create view v as <query expression>;
  * 单一触发器不能与多个操作相关
  * 触发器不能更新和覆盖，如果想更新一个触发器必须先删除，再创建
  
- ###触发器怎么工作的?
+###触发器怎么工作的?
 答：触发器主要是通过事件进行触发而被执行的，当对某一表进行诸如UPDATE、 INSERT、 DELETE 这些操作时，数据库就会自动执行触发器所定义的SQL 语句，从而确保对数据的处理必须符合由这些SQL 语句所定义的规则
 
 ##4.[MySql常用命令](http://www.cnblogs.com/zhangzhu/archive/2013/07/04/3172486.html)
