@@ -114,6 +114,25 @@ select website.name, website.url, sum(log.count) as nums
 from website inner join log on website.id = log.id where website.id >= 3
 group by website.name having sum(log.count)>200
 ```
+
 ###order by子句：
-ORDER BY 关键字用于对结果集按照一个列或者多个列进行排序，默认按照升序对记录进行排序。
+ORDER BY 关键字用于对结果集按照一个列或者多个列进行排序，默认按照升序对记录进行排序。ASC：升序、DESC:降序
+```sql
+select website.name, website.url, sum(log.count) as nums 
+from website inner join log on website.id = log.id where website.id >1
+group by website.name having sum(log.count)>200
+order by nums
+```
+
+###聚合函数：
+SQL 拥有很多可用于计数和计算的内建函数，聚合函数计算从列中取得的值，返回一个单一的值，常用的聚合函数如下：
+|   函数名称   |    解释                  |
+|-------------|--------------------------|
+|    AVG()    |   返回数值列的平均值       |
+|    SUM()    |   返回数值列的总和         |
+|   COUNT()   |   返回匹配指定条件的行数个数|
+|   FIRST()   | 返回指定列中第一个记录的值  |
+|   LAST()    | 返回指定列中最后一个记录的值|
+|    MAX()    |   返回指定列的最大值       |
+|    MIN()    |   返回指定列的最小值       |
 
