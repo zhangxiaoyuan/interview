@@ -21,6 +21,36 @@ SQL 的数据定义语言 (DDL) 部分使我们有能力创建或删除表格。
 * DROP INDEX - 删除索引
 
 * 索引实际上就是数据结构，MySQL使用的主要是B－tree和B+tree进行索引的查询。
+###SQL特性：
+ * 1.SQL是**声明**一个结果集的属性，而不是获取结果集的指令，不是告诉计算机怎么获取结果；
+ * 2.SQL语句不是按照语法编写顺序执行，具体执行顺序见后面；
+ * 3.SQL语句的核心是对表的引用；
+ * 4.要理解 JOIN 是构建连接表的关键词，并不是 SELECT 语句的一部分；
+ * 5.记着要尽量使用 JOIN 进行表的连接，永远不要在 FROM 后面使用逗号连接表；
+ * 6.SQL语句中的不同连接方式
+  * EQIU JOIN： 
+   * Inner Join(普通连接):JOIN
+   * Outer Join(外连接): LFET JOIN、RIGTH JOIN、FULL OUTER JOIN
+  * SEMI JOIN：
+   这种连接关系在 SQL 中有两种表现方式：使用 IN，或者使用 EXISTS。
+   ```sql
+    -- Using IN
+    FROM author
+    WHERE author.id IN (SELECT book.author_id FROM book)
+
+    -- Using EXISTS
+    FROM author
+    WHERE EXISTS (SELECT 1 FROM book WHERE book.author_id = author.id)
+   ```
+  * ANTI JOIN:
+   这种连接的关系跟 SEMI JOIN 刚好相反。在 IN 或者 EXISTS 前加一个 NOT 关键字就能使用这种连接
+  * CROSS JOIN：
+   这个连接过程就是两个连接的表的乘积：即将第一张表的每一条数据分别对应第二张表的每条数据。我们之前见过，这就是逗号在 FROM 语句中的用法
+  * DIVISION：
+   DIVISION 的确是一个怪胎。简而言之，如果 JOIN 是一个乘法运算，那么 DIVISION 就是 JOIN 的逆过程。DIVISION 的关系很难用 SQL 表达出来
+ * 7.SQL 中如同变量的派生表；
+ * 8.GROUP BY，再次强调一次，是在表的引用上进行了操作，将其转换为一种新的引用方式；
+ * 9.
 
 ##1.SQL DML 增删改查：
 ###查询 select：
