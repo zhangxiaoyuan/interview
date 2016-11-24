@@ -2,7 +2,7 @@
 ###1、数字类型：
 MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
 
-* 整数: tinyint、smallint、mediumint、int、bigint
+* __整数__: tinyint、smallint、mediumint、int、bigint
 
 | 类型 | 范围 |
 |------| -----|
@@ -12,7 +12,7 @@ MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
 | int | 4个字节 范围(-2147483648~2147483647) |
 | bigint | 8个字节 范围(+-9.22*10的18次方)  |
 
-* 浮点型：float、double、real、decimal
+* __浮点型__：float、double、real、decimal
 
 | 类型 | 范围 |
 |------|-----|
@@ -23,9 +23,9 @@ MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
 > 设一个字段定义为float(5,3)，如果插入一个数123.45678,实际数据库里存的是123.457，总个数以实际为准，即6位。
 
 ###2、字符串类型：
-* 字符串: char、varchar
-* 文本: tinytext、text、mediumtext、longtext
-* 二进制(可用来存储图片、音乐等): tinyblob、blob、mediumblob、longblob
+* __字符串__: char、varchar
+* __文本__: tinytext、text、mediumtext、longtext
+* __二进制(可用来存储图片、音乐等)__: tinyblob、blob、mediumblob、longblob
 
 | 类型 | 含义 |
 |------|------|
@@ -59,3 +59,34 @@ MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
 
 > 若定义一个字段为timestamp，这个字段里的时间数据会随其他字段修改的时候自动刷新，所以这个数据类型的字段可以存放这条记录最后被修改的时间。
 
+
+##2.数据类型属性：
+* **`auto_increment`** ：
+ 为新插入的行赋一个唯一的整数标识符，为列赋此属性将为每个新插入的行赋值为上一次插入的ID+1。MySQL要求将auto_increment属性用于作为主键的列。
+ ```sql
+ id smallint not null auto_increment primary key
+ ```
+ 
+* **`default`**:
+ 确保在没有任何值可用的情况下，赋予某个常量值，这个值必须是常量，因为MySQL不允许插入函数或表达式值.此外，此属性无法用于BLOB或TEXT列。如果已经为此列指定了NULL属性，没有指定默认值时默认值将为NULL，否则默认值将依赖于字段的数据类型。
+ ```sql
+ subscribed enum('0', '1') not null default '0'
+ ```
+* __`index`__:
+ 如果所有其他因素都相同，要加速数据库查询，使用索引通常是最重要的一个步骤。索引一个列会为该列创建一个有序的键数组，每个键指向其相应的表行。以后针对输入条件可以搜索这个有序的键数组，与搜索整个未索引的表相比，这将在性能方面得到极大的提升。
+ ```sql
+ create table employees
+ (
+     id varchar(9) not null,
+     firstname varchar(15) not null,
+     lastname varchar(25) not null,
+     email varchar(45) not null,
+     phone varchar(10) not null,
+     index lastname(lastname),
+     primary key(id)
+ );
+ ```
+ 或者使用创建索引的方式：
+ ```sql
+ create index lastname on employees (lastname(7));
+ ```
