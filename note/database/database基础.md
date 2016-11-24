@@ -54,7 +54,7 @@ create view v as <query expression>;
 数据库模式(db schema):数据库的逻辑设计
 数据库实例(db instance)：给定时刻数据库中数据的一个快照
 
-##7.SQL中不同连接方式：    
+##7.[SQL中不同连接方式](http://blog.jobbole.com/40443/)：    
 * EQIU JOIN：       
  + Inner Join(普通连接):JOIN    
  + Outer Join(外连接): LFET JOIN、RIGTH JOIN、FULL OUTER JOIN         
