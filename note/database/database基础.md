@@ -54,4 +54,30 @@ create view v as <query expression>;
 数据库模式(db schema):数据库的逻辑设计
 数据库实例(db instance)：给定时刻数据库中数据的一个快照
 
+##7.SQL中不同连接方式：    
+* EQIU JOIN：       
+   * Inner Join(普通连接):JOIN         
+   * Outer Join(外连接): LFET JOIN、RIGTH JOIN、FULL OUTER JOIN         
+* SEMI JOIN：   
+   - 这种连接关系在 SQL 中有两种表现方式：使用 IN，或者使用 EXISTS。       
+    ```sql
+     -- Using IN
+     FROM author
+     WHERE author.id IN (SELECT book.author_id FROM book)
+
+     -- Using EXISTS
+     FROM author
+     WHERE EXISTS (SELECT 1 FROM book WHERE book.author_id = author.id)
+    ```
+  
+* ANTI JOIN:   
+   这种连接的关系跟 SEMI JOIN 刚好相反。在 IN 或者 EXISTS 前加一个 NOT 关键字就能使用这种连接  
+   
+* CROSS JOIN：    
+   这个连接过程就是两个连接的表的乘积：即将第一张表的每一条数据分别对应第二张表的每条数据。我们之前见过，这就是逗号在 FROM 语句中的用法     
+   
+* DIVISION：    
+   DIVISION 的确是一个怪胎。简而言之，如果 JOIN 是一个乘法运算，那么 DIVISION 就是 JOIN 的逆过程。DIVISION 的关系很难用 SQL 表达出来    
+  
+
 
