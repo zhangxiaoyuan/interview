@@ -112,3 +112,7 @@ MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
 ```sql
 email varchar(45) unique
 ```
+
+##3.扩展阅读：
+[[MySQL处理数据库和表的常用命令](http://www.jellythink.com/archives/646)]
+[[MySQL数据类型和属性](http://www.jellythink.com/archives/642)]
