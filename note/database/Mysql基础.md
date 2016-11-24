@@ -1,5 +1,5 @@
 ##1.Mysql数据类型：
-###数字类型：
+###1、数字类型：
 MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
 
 * 整数: tinyint、smallint、mediumint、int、bigint
@@ -22,7 +22,7 @@ MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
 
 例如：设一个字段定义为float(5,3)，如果插入一个数123.45678,实际数据库里存的是123.457，总个数以实际为准，即6位。
 
-###字符串类型：
+###2、字符串类型：
 * 字符串: char、varchar
 * 文本: tinytext、text、mediumtext、longtext
 * 二进制(可用来存储图片、音乐等): tinyblob、blob、mediumblob、longblob
@@ -48,7 +48,7 @@ MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
  + text类型不能有默认值。
  + varchar可直接创建索引，text创建索引要指定前多少个字符。varchar查询速度快于text。
 
-###时间与日期：
+###3、时间与日期：
 
 | 类型 | 含义 |
 |------|------|
