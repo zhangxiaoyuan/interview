@@ -90,3 +90,4 @@ MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
  ```sql
  create index lastname on employees (lastname(7));
  ```
+ > 这一次只索引了名字的前7个字符，因为可能不需要其它字母来区分不同的名字。因为使用较小的索引时性能更好，所以应当在实践中尽量使用小的索引。
