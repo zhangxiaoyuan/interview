@@ -74,20 +74,41 @@ MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
  ```
 * __`index`__:
  如果所有其他因素都相同，要加速数据库查询，使用索引通常是最重要的一个步骤。索引一个列会为该列创建一个有序的键数组，每个键指向其相应的表行。以后针对输入条件可以搜索这个有序的键数组，与搜索整个未索引的表相比，这将在性能方面得到极大的提升。
+ 
  ```sql
- create table employees
- (
-     id varchar(9) not null,
-     firstname varchar(15) not null,
-     lastname varchar(25) not null,
-     email varchar(45) not null,
-     phone varchar(10) not null,
-     index lastname(lastname),
-     primary key(id)
- );
+  create table employees
+  (
+      id varchar(9) not null,
+      firstname varchar(15) not null,
+      lastname varchar(25) not null,
+      email varchar(45) not null,
+      phone varchar(10) not null,
+      index lastname(lastname),
+      primary key(id)
+  );
  ```
+ 
  或者使用创建索引的方式：
+ 
  ```sql
  create index lastname on employees (lastname(7));
  ```
+ 
  > 这一次只索引了名字的前7个字符，因为可能不需要其它字母来区分不同的名字。因为使用较小的索引时性能更好，所以应当在实践中尽量使用小的索引。
+
+* __`not null`__:
+如果将一个列定义为not null，将不允许向该列插入null值。建议在重要情况下始终使用not null属性，因为它提供了一个基本验证，确保已经向查询传递了所有必要的值
+
+* __`null`__:
+为列指定null属性时，该列可以保持为空，而不论行中其它列是否已经被填充。记住，null精确的说法是“无”，而不是空字符串或0。
+
+* __`primary key`__:
+属性用于确保指定行的唯一性，指定为主键的列中，值不能重复，也不能为空。为指定为主键的列赋予auto_increment属性是很常见的，因为此列不必与行数据有任何关系，而只是作为一个唯一标识符。主键有两种：
+ * 单字段主键：如果输入到数据库中的每行都已经有不可修改的唯一标识符，一般会使用单字段主键。注意，此主键一旦设置就不能再修改。
+ * 多字段主键：如果记录中任何一个字段都不可能保证唯一性，就可以使用多字段主键。这时，多个字段联合起来确保唯一性。如果出现这种情况，指定一个auto_increment整数作为主键是更好的办法。
+
+* __`unique`__:
+被赋予unique属性的列将确保所有值都有不同的值，只是null值可以重复。一般会指定一个列为unique，以确保该列的所有值都不同。
+```sql
+email varchar(45) unique
+```
