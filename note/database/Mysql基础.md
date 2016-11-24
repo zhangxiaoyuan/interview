@@ -3,6 +3,7 @@
 MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
 
 * 整数: tinyint、smallint、mediumint、int、bigint
+
 | 类型 | 范围 |
 |------| -----|
 | tinyint |  1个字节 范围(-128~127) |
@@ -12,6 +13,7 @@ MySQL使用标准的 ANSI SQL 数字类型，支持整型和浮点数。
 | bigint | 8个字节 范围(+-9.22*10的18次方)  |
 
 * 浮点型：float、double、real、decimal
+
 | 类型 | 范围 |
 |------|-----|
 | float(m,d) | 单精度浮点型，8位精度(4字节)，m总个数，d小数位 |
