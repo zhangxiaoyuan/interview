@@ -29,10 +29,10 @@ create table Teacher(
 Tid varchar(10),
 Tname varchar(10)
 );
-insert into Teacher values('01' , N'张三');
-insert into Teacher values('02' , N'李四');
-insert into Teacher values('03' , N'王五');
-insert into Teacher values('04' , N'汪二蛋');
+insert into Teacher values('01' , '张三');
+insert into Teacher values('02' , '李四');
+insert into Teacher values('03' , '王五');
+insert into Teacher values('04' , '汪二蛋');
 
 create table SC(
 Sid varchar(10),
@@ -59,4 +59,15 @@ insert into SC values('07' , '02' , 89);
 insert into SC values('07' , '03' , 98);
 insert into SC values('08' , '03' , 98);
 insert into SC values('09' , '03' , 98);
-insert into SC values('10' , '04' , 59)
+insert into SC values('10' , '04' , 59);
+
+
+
+#1.查询”01”课程比”02”课程成绩高的学生的信息及课程分数
+select s*, b.score, c.score
+from Student as s,SC as b, SC as c
+where s.Sid = b.Sid
+and s.Sid = c.Sid
+and b.Cid = '01' and c.Cid='02'
+and b.score > c.score;
+
