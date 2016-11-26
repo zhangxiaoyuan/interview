@@ -21,6 +21,17 @@ SQL 的数据定义语言 (DDL) 部分使我们有能力创建或删除表格。
 * DROP INDEX - 删除索引
 
 * 索引实际上就是数据结构，MySQL使用的主要是B－tree和B+tree进行索引的查询。
+###[SQL特性](http://blog.jobbole.com/55086/)：
+ * 1.SQL是**声明**一个结果集的属性，而不是获取结果集的指令，不是告诉计算机怎么获取结果；
+ * 2.SQL语句不是按照语法编写顺序执行，具体执行顺序见后面；
+ * 3.SQL语句的核心是对表的引用；
+ * 4.要理解 JOIN 是构建连接表的关键词，并不是 SELECT 语句的一部分；
+ * 5.记着要尽量使用 JOIN 进行表的连接，永远不要在 FROM 后面使用逗号连接表； 
+ * 6.[SQL中不同的连接方式](https://github.com/zhangxiaoyuan/interview/blob/master/note/database/database%E5%9F%BA%E7%A1%80.md#7sql中不同连接方式--)
+ * 7.SQL 中如同变量的派生表；
+ * 8.GROUP BY，再次强调一次，是在表的引用上进行了操作，将其转换为一种新的引用方式；
+ * 9.SQL 语句中的 SELECT 实质上是对关系的映射；
+ * 10.
 
 ##1.SQL DML 增删改查：
 ###查询 select：
