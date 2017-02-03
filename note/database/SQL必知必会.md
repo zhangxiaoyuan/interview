@@ -50,7 +50,8 @@ SELECT prod_id, prod_price, prod_name
 FROM Products
 ORDER BY prod_price DESC;
 ```
-> 默认采用升序排列，DESC表示降序排列，如果有多个列排序，DESC关键字应用到直接位于其前面的列名称
+ > 默认采用升序排列，DESC表示降序排列，如果有多个列排序，DESC关键字应用到直接位于其前面的列名称
+ 
 ```sql
 SELECT prod_id, prod_price, prod_name
 FROM Products
