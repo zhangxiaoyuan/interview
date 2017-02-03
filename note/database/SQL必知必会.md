@@ -73,6 +73,31 @@ FROM Products
 WHERE prod_price < 10;
 ```
 
+####3.不匹配检查：
+```sql
+SELECT vend_id, prod_name
+FROM Products
+WHERE vend_id <> 'DLL01'; 
+或者 WHERE vend_id != 'DLL01';
+```
+> 单引号用于限定字符串类型的数据，数字类型数据不需要
+
+####4.范围值检查
+```sql
+SELECT prod_name, prod_price 
+FROM Products
+WHERE prod_price BETWEEN 5 AND 10;
+```
+
+####5.空值检查
+```sql
+SELECT prod_name
+FROM Products
+WHERE prod_price IS NULL;
+```
+> NULL表示空值，与0、空字符、空格不一样
+
+
 
 
 
