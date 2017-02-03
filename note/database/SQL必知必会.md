@@ -26,7 +26,7 @@ SELECT prod_name
 FROM Products
 ORDER BY prod_name;
 ```
-> ORDER BY子句中使用的列可以是显示所选择的列，也可以是非检索的列，即可以用别的非检索列做排序
+> ORDER BY子句中使用的列可以是显示所选择的列，也可以是非检索的列，即可以用别的非检索列做排序,ORDER BY子句放在最后位置
 
 ####2.按多个列排序：
 ```sql
@@ -57,3 +57,42 @@ SELECT prod_id, prod_price, prod_name
 FROM Products
 ORDER BY prod_price DESC, prod_name;
 ```
+
+###[过滤数据]
+####1.使用where子句：
+```sql
+SELECT prod_name, prod_price
+FROM Products
+WHERE prod_price = 3.49;
+```
+
+####2.检查单个值：
+```sql
+SELECT prod_name, prod_price
+FROM Products
+WHERE prod_price < 10;
+```
+
+
+
+
+
+###[高级数据过滤]
+
+###[用通配符进行过滤]
+
+###[]
+
+###[]
+
+###[]
+
+###[]
+
+###[]
+
+###[]
+
+###[]
+
+###[]
