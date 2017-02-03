@@ -1,6 +1,7 @@
 ##[SQL必知必会] 学习笔记
 
 ###[排序检索数据]
+ * * * 
 ####1.检索单个列:
 ```sql
 SELECT prod_name
@@ -18,6 +19,7 @@ FROM Products;
 ```
 
 ###[排序检索数据]
+ * * * 
 ####1.排序数据：
 ```sql
 SELECT prod_name 
