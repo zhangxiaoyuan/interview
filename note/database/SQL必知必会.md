@@ -99,9 +99,28 @@ WHERE prod_price IS NULL;
 
 
 ###[高级数据过滤]
-####1.
+> 逻辑操作符：用来联结或改变WHERE子句中的子句的关键字 
 
-
+####1.AND操作符
+```sql
+SELECT prod_id, prod_price, prod_name
+FROM Products
+WHERE vend_id = 'DLL01' AND prod_price <= 4;
+```
+####2.OR操作符：
+```sql
+SELECT prod_id, prod_name, prod_price
+FROM Products
+WHERE vend_id = 'DLL01' OR vend_id = 'BRS01';
+```
+> 如果第一个条件满足，则后面的条件不再计算，提高查询效率
+####3.计算次序：
+> AND和OR的计算次序，AND优先级更高，因此要注意计算顺序，尽量使用圆括号保证
+```sql
+SELECT prod_id, prod_name, prod_price
+FROM Products
+WHERE (vend_id = 'DLL01' OR vend_id = 'BSR01') AND proc_price >= 10;
+```
 ###[用通配符进行过滤]
 
 ###[]
