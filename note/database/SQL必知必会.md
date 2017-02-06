@@ -1,6 +1,6 @@
 ##[SQL必知必会] 学习笔记
 
-###[排序检索数据]
+###[**排序检索数据**]
 ####1.检索单个列:
 ```sql
 SELECT prod_name
@@ -19,7 +19,7 @@ SELECT *
 FROM Products;
 ```
 
-###[排序检索数据]
+###[**排序检索数据**]
 ####1.排序数据：
 ```sql
 SELECT prod_name 
@@ -58,7 +58,7 @@ FROM Products
 ORDER BY prod_price DESC, prod_name;
 ```
 
-###[过滤数据]
+###[**过滤数据**]
 ####1.使用where子句：
 ```sql
 SELECT prod_name, prod_price
@@ -98,7 +98,7 @@ WHERE prod_price IS NULL;
 > NULL表示空值，与0、空字符、空格不一样
 
 
-###[高级数据过滤]
+###[**高级数据过滤**]
 > 逻辑操作符：用来联结或改变WHERE子句中的子句的关键字 
 
 ####1.AND操作符
@@ -143,7 +143,7 @@ ORDER BY prod_name;
 > NOT操作符只有一个功能，否定其后的任何条件，因为NOT从不自己单独使用，
 
 
-###[用通配符进行过滤]
+###[**用通配符进行过滤**]
 > 使用通配符，必须使用LIKE操作符，通配符只能用于文本字段，不能用于非文本数据类型
 
 ####1.%通配符：表示
