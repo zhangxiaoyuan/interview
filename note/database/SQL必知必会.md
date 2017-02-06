@@ -175,7 +175,36 @@ ORDER BY cust_contact;
 * 1.不要过分使用通配符，尽量选择其他操作符，减少通配符的使用；
 * 2.在使用通配符时，不要放在搜索模式的开始处，开始处的通配符搜索起来是最慢的
 
-###[创建计算字段]
+###**[创建计算字段]**
+####1.拼接字段：
+```sql
+SELECT vend_name || '(' || vend_country || ')' 
+AS vend_title
+FROM Vendors
+ORDER BY vend_name;
+```
+```sql
+SELECT vend_name + '(' + vend_country + ')'
+AS vend_title
+FROM Vendors
+ORDER BY vend_name;
+```
+```mysql
+SELECT CONCAT(vend_name, '(', vend_country, ')') 
+FROM Vendors
+ORDER BY vend_name;
+```
+> oracle使用||拼接，有的DBMS使用+拼接，MySQL不支持这两种，使用函函数CONCAT()实现
+> RTRIM()函数去掉串右边空格，LTRIM()函数去掉串左边空格，TRIM()函数去掉串左右两边空格
+
+####2.算术计算：
+```sql
+SELECT prod_id, quality, item_price, 
+       quality * item_price AS  expanded_price
+FROM OrderItems
+WHERE order_num = 20008;
+```
+> 支持 + - * / 四则运算，可以使用圆括号区分优先级
 
 ###[使用数据处理函数]
 
