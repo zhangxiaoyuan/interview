@@ -107,6 +107,7 @@ SELECT prod_id, prod_price, prod_name
 FROM Products
 WHERE vend_id = 'DLL01' AND prod_price <= 4;
 ```
+
 ####2.OR操作符：
 ```sql
 SELECT prod_id, prod_name, prod_price
@@ -114,13 +115,25 @@ FROM Products
 WHERE vend_id = 'DLL01' OR vend_id = 'BRS01';
 ```
 > 如果第一个条件满足，则后面的条件不再计算，提高查询效率
+
 ####3.计算次序：
 > AND和OR的计算次序，AND优先级更高，因此要注意计算顺序，尽量使用圆括号保证
+
 ```sql
 SELECT prod_id, prod_name, prod_price
 FROM Products
 WHERE (vend_id = 'DLL01' OR vend_id = 'BSR01') AND proc_price >= 10;
 ```
+
+####4.IN操作符：
+```sql
+SELECT prod_id, prod_name, prod_price
+FROM Products
+WHERE vend_id IN ('DLL01', 'BSR01')
+ORDER BY prod_name;
+```
+>  IN操作符也表示取值范围，但是是单点的不连续的条件集合，但是BETWEEN是连续条件的集合.IN操作符更类似于OR操作符，多个条件中某一个满足即可。
+
 ###[用通配符进行过滤]
 
 ###[]
