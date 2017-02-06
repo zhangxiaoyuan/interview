@@ -117,13 +117,12 @@ WHERE vend_id = 'DLL01' OR vend_id = 'BRS01';
 > 如果第一个条件满足，则后面的条件不再计算，提高查询效率
 
 ####3.计算次序：
-> AND和OR的计算次序，AND优先级更高，因此要注意计算顺序，尽量使用圆括号保证
-
 ```sql
 SELECT prod_id, prod_name, prod_price
 FROM Products
 WHERE (vend_id = 'DLL01' OR vend_id = 'BSR01') AND proc_price >= 10;
 ```
+> AND和OR的计算次序，AND优先级更高，因此要注意计算顺序，尽量使用圆括号保证
 
 ####4.IN操作符：
 ```sql
@@ -134,15 +133,44 @@ ORDER BY prod_name;
 ```
 >  IN操作符也表示取值范围，但是是单点的不连续的条件集合，但是BETWEEN是连续条件的集合.IN操作符更类似于OR操作符，多个条件中某一个满足即可。
 
+####5.NOT操作符：
+```sql
+SELECT prod_id, prod_price, prod_name
+FROM Products
+WHERE NOT vend_id = 'DLL01' 或 WHERE vend_id <> 'DLL01'
+ORDER BY prod_name;
+```
+> NOT操作符只有一个功能，否定其后的任何条件，因为NOT从不自己单独使用，
+
+
 ###[用通配符进行过滤]
+> 使用通配符，必须使用LIKE操作符，通配符只能用于文本字段，不能用于非文本数据类型
 
-###[]
+####1.%通配符：表示
+```sql
+SELECT prod_id, prod_name, prod_price
+FROM Products
+WHERE prod_name LIKE 'Fish%' 或 WHERE prod_name LIKE '%bean bag%' 或 WHERE prod_name LIKE 'F%Y';
+```
+> %表示任意字符出现任何次数，包括可以匹配0个字符。
 
-###[]
+####2.*_*下划线通配符：
+```sql
+SELECT prod_id, prod_name, prod_price
+FROM Products
+WHERE prod_name LIKE '_ inch teddy bear';
+```
+> 下划线*_*通配符和%通配符的不同：下划线*_*通配符总是匹配一个字符，而%通配符可以匹配0个到n个字符。
 
-###[]
+####3.方括号[]通配符：
 
-###[]
+###[创建计算字段]
+
+###[使用数据处理函数]
+
+###[汇总数据]
+
+###[分组数据]
 
 ###[]
 
