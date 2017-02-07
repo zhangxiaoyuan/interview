@@ -281,3 +281,89 @@ WHERE order_data BETWEEN to_date('01-JAN-2004') AND to_date('31-DEC-2004');
 |  SQRT()  |     返回一个数的平方根             |
 |  TAN()   |     返回一个角度的正切             | 
 
+###[汇总数据]
+####1.聚集函数：
+|  函数    |     解释    |
+|:---------|:------------|
+| AVG()    |  返回某列的平均值 |
+| COUNT()  |  返回某列的行数   |
+| MAX()    |  返回某列的最大值 |
+| MIN()    |  返回某列的最小值  |
+| SUM()    |  返回某列值之和    |
+
+>  运行在行组上，计算和返回单个值的函数
+
+####2.AVG()函数:
+```sql
+SELECT AVG(prod_prices) AS avg_price
+FROM Products;
+```
+```sql
+SELECT AVG(prod_price) AS dll01_avg_price
+FROM Products
+WHERE vend_id = 'DLL01';
+```
+> AVG()函数只能作用于单列;
+
+####3.COUNT()函数：
+```sql
+SELECT COUNT(*) AS cust_count
+FROM Customers;
+```
+```sql
+SELECT COUNT(cust_email) AS cust_count
+FROM Customer;  //这个表示cust_email列中有值才统计
+```
+> 使用COUNT(\*)表示对表中的行的数目进行计算，不论列中的值为NULL或为空或有值；使用COUNT(column)表示对特定列中有值的行进行统计，忽略NULL值。
+
+####4.MAX()和MIN()函数：
+```sql
+SELECT MAX(cust_price) AS max_price
+FROM Products;
+```
+```sql
+SELECT MIN(cust_price) AS min_price
+FROM Products;
+```
+
+####5.SUM()函数：
+```sql
+SELECT SUM(quality) AS items_count_sum
+FROM OrderItems
+WHERE order_num = 20005;
+```
+```sql
+SELECT SUM(quality * item_price) AS total_price
+FROM OrderItems
+WHERE order_num = 20005;
+```
+
+####6.聚集函数的特殊使用：聚集不同值
+```sql
+SELECT AVG(DISTINCT prod_price) AS avg_price
+FROM Products
+WHERE vend_id = 'DLL01';
+```
+> 上面5个聚集函数都可以再指定聚集参数(ALL/DISTINCT)，默认为ALL表示对所有行执行计算；__DISTINCT表示去除重复值的行，只对包含不同值的行计算__;
+
+__DISTINCT必须只能用于指定列名，不能使用于COUNT(\*)，也不能使用于计算式或表达式__;
+
+####7.组合聚集函数：
+```sql
+SELECT COUNT(*) AS row_cnt, 
+       MIN(prod_price) AS min_price,
+       MAX(prod_price) AS max_price,
+       AVG(prod_price) AS avg_price,
+       SUM(prod_price) AS sum_price,
+       COUNT(DISTINCT proc_desc) AS prod_desc
+FROM Products;
+```
+###[分组数据]
+####1.数据分组：
+
+> 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。
+
+####2.GROUP BY分组：
++ GROUP BY子句可以包含任何数目的列，可以对分组进行嵌套；
++ 如果在GROUP BY子句中进行了嵌套，数据将在最后规定的分组上进行汇总；
++ 
