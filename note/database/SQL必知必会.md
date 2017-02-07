@@ -236,6 +236,7 @@ ORDER BY vend_name;
 |  UPPER()  |   将串转换为大写                       |
 |  LTRIM()  |   去掉串左边的空格                     |
 |  RTRIM()  |   去掉串右边的空格                     |
+|  TRIM()   |   去掉串左右两边的空格                 |
 | SOUNDEX() |   返回与给定词发音类似的所有词          |
 
 > SOUNDEX()使用举例：有个顾客名为Michael Green,但是再录入时拼写错误为Michelle Green,导致直接查询cust_contact = 'Micheal Green'查询不出来，则可以使用SOUNDEX()函数实现
@@ -247,3 +248,34 @@ WHERE SOUNDEX(cust_contact) = SOUNDEX('Micheal Green');
 ```
 
 > 这个例子中，WHERE子句使用了SOUNDEX()函数来转换cust_contact列值和搜索串为他们的SOUNDEX值，因为Michael Green和Michelle Green发音相似，所以他们的SOUNDEX值匹配，因此WHERE子句能正确的过滤出了所需的数据。
+
+####4.日期和时间处理函数：
+```mysql
+SELECT order_num
+FROM Orders
+WHERE YEAR(order_date) = 2004;
+```
+
+```oracle
+SELECT order_num
+FROM Orders
+WHERE to_number(to_char(order_date, 'YY')) = 2004;
+```
+```orcale
+SELECT order_num
+FROM Orders
+WHERE order_data BETWEEN to_date('01-JAN-2004') AND to_date('31-DEC-2004');
+```
+> 各DBMS的日期处理函数差异比较大，移植性最差，分开讨论，oracle的日期格式为DD-MMM-YYYY
+
+####5.数值处理函数：
+|   函数   |           说明                    |
+|:---------|:---------------------------------|
+|  ABS()   |     返回一个数的绝对值             |
+|  COS()   |     返回一个角度的余弦             |
+|  EXP()   |     返回一个数的指数值             |
+|   PI()   |     返回圆周率                    | 
+|  SIN()   |     返回一个角度的正弦             |
+|  SQRT()  |     返回一个数的平方根             |
+|  TAN()   |     返回一个角度的正切             | 
+
