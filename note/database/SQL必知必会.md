@@ -358,3 +358,12 @@ SELECT COUNT(*) AS row_cnt,
        COUNT(DISTINCT proc_desc) AS prod_desc
 FROM Products;
 ```
+###[分组数据]
+####1.数据分组：
+
+> 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。
+
+####2.GROUP BY分组：
++ GROUP BY子句可以包含任何数目的列，可以对分组进行嵌套；
++ 如果在GROUP BY子句中进行了嵌套，数据将在最后规定的分组上进行汇总；
++ 
