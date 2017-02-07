@@ -256,12 +256,12 @@ FROM Orders
 WHERE YEAR(order_date) = 2004;
 ```
 
-```sql oracle
+```sql_oracle
 SELECT order_num
 FROM Orders
 WHERE to_number(to_char(order_date, 'YY')) = 2004;
 ```
-```sql oracle
+```sql_oracle
 SELECT order_num
 FROM Orders
 WHERE order_data BETWEEN to_date('01-JAN-2004') AND to_date('31-DEC-2004');
