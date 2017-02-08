@@ -361,9 +361,31 @@ FROM Products;
 ###[分组数据]
 ####1.数据分组：
 
-> 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。
+> 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。包括GROUP BY和HAVING子句。
 
 ####2.GROUP BY分组：
 + GROUP BY子句可以包含任何数目的列，可以对分组进行嵌套；
 + 如果在GROUP BY子句中进行了嵌套，数据将在最后规定的分组上进行汇总；
-+ 
++ GROUP BY子句中使用的列都必须是检索列或者有效的表达式(不能是聚集函数)，如果在SELECT中使用表达式，则必须在GROUP BY子句中指定相同表达式，不能使用别名
++ 除聚集计算语句以外，SELECT语句中的每个列都必须在GROUP BY子句中给出(返回集中的字段，要么包含在GROUP BY子句中作为分组依据，要么就包含在聚集函数中作为一个结果。)
++ 如果分组列中有NULL值，则NULL值作为一个分组返回，如果列中有多行NULL值，他们将分为一组；
++ GROUP BY子句必须出现在WHERE子句之后，ORDER BY子句之前；
++ 有部分DBMS支持在GROUP BY中使用可选的ALL子句，这个子句用于返回所有子句，即使在WHERE中过滤了也可以返回分组，只不过此时返回NULL。
+
+####3.HAVING过滤分组：
+```sql
+SELECT cust_id, COUNT(*) AS orders
+FROM Orders
+GROUP BY cust_id
+HAVING COUNT(*) >= 2; 
+```
+```sql
+SELECT vend_id, COUNT(*) AS num_prods
+FROM Products
+WHERE prod_price > 4
+GROUP BY vend_id
+HAVING COUNT(*) >= 2;
+```
+> WHERE和HAVING的却别：WHERE过滤行，HAVING过滤分组；因为WHERE在数据分组之前过滤，HAVING在数据分组之后过滤；HAVING全部与GROUP BY结合使用。如果没有GROUP BY的话，HAVING和WHERE基本可以通用。
+
+####4.
