@@ -439,3 +439,7 @@ SELECT cust_name, cust_contact, (SELECT COUNT(*) FROM Orders WHERE Orders.cust_i
 FROM Customers
 ORDER BY cust_name;
 ```
+
+###**[联结表]**
+####1.联结：
++ SQL最强大的功能之一就是能够在数据查询的执行过程中联结(join)表；
