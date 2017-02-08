@@ -396,3 +396,46 @@ HAVING COUNT(*) >= 2;
 |任意列都可以使用 | 只能使用选择列或者表达式列，而且必须使用每个选择列表达式 |
 |不一定需要       | 如果与聚集函数一起使用列(或表达列)，则必须使用 |
 
+```sql
+SELECT order_num, COUNT(*) AS items, SUM(quantity) AS prodCnt
+FROM OrderItems
+GROUP BY order_num
+HAVING COUNT(*) >= 3
+ORDER BY items, order_num;
+```   
+
+> 一般在使用GROUP BY时，应该也要使用ORDER BY, 这是保证数据正确排序的唯一方式，不能依赖于GROUP BY的默认排序。
+
+####5.SELECT子句顺序：
+|  子句   |   说明 | 是否必须使用 |
+|:--------|:-------|:------------|
+| SELECT  | 要返回的列或者表达式  |  是  |
+| FROM | 从中检索数据的表 | 仅在从表中选择数据时使用  |
+| WHERE  | 行级过滤  | 否，仅在从表中过滤行级数据时 |
+| GROUP BY | 分组说明 | 否，仅在按分组计算聚集时使用 |
+| HAVING | 组级过滤 | 否，在GROUP BY分组数据过滤时使用|
+| ORDER BY | 输出排序顺序 | 否，对最终的输出结果进行排序|
+
+###**[使用子查询]**
+####1.利用子查询进行过滤：
+```sql
+SELECT cust_name, cust_contact
+FROM Customers
+WHERE cust_id IN (
+                  SELECT cust_id
+                  FROM Orders
+                  WHERE order_num IN (
+                                      SELECT odder_num
+                                      FROM OrderItems
+                                      WHERE prod_id = 'RGAN01'));
+```
+> SELECT语句重，子查询总是从内向外处理的。把一条SELECT语句返回的结果用于另一条SELECT语句的WHERE子句。
+
+* 作为子查询的SELECT语句只能查询单个列，如果检索多个列则返回错误；子查询最常用的就是在WHERE子句的IN操作符中。
+
+####2.作为计算字段使用子查询：
+```sql
+SELECT cust_name, cust_contact, (SELECT COUNT(*) FROM Orders WHERE Orders.cust_id = Customers.cust_id) AS order_count
+FROM Customers
+ORDER BY cust_name;
+```
