@@ -435,7 +435,8 @@ WHERE cust_id IN (
 
 ####2.作为计算字段使用子查询：
 ```sql
-SELECT cust_name, cust_contact, (SELECT COUNT(*) FROM Orders WHERE Orders.cust_id = Customers.cust_id) AS order_count
+SELECT cust_name, cust_contact, 
+(SELECT COUNT(*) FROM Orders WHERE Orders.cust_id = Customers.cust_id) AS order_count
 FROM Customers
 ORDER BY cust_name;
 ```
@@ -443,3 +444,10 @@ ORDER BY cust_name;
 ###**[联结表]**
 ####1.联结：
 + SQL最强大的功能之一就是能够在数据查询的执行过程中联结(join)表；
+
+####2.创建联结：
+```sql
+SELECT vend_name, prod_name, prod_price
+FROM Vendords, Products
+WHERE Vendors.vend_id = Products.vend_id;
+```
