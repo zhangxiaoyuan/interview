@@ -415,39 +415,3 @@ ORDER BY items, order_num;
 | GROUP BY | 分组说明 | 否，仅在按分组计算聚集时使用 |
 | HAVING | 组级过滤 | 否，在GROUP BY分组数据过滤时使用|
 | ORDER BY | 输出排序顺序 | 否，对最终的输出结果进行排序|
-
-###**[使用子查询]**
-####1.利用子查询进行过滤：
-```sql
-SELECT cust_name, cust_contact
-FROM Customers
-WHERE cust_id IN (
-                  SELECT cust_id
-                  FROM Orders
-                  WHERE order_num IN (
-                                      SELECT odder_num
-                                      FROM OrderItems
-                                      WHERE prod_id = 'RGAN01'));
-```
-> SELECT语句重，子查询总是从内向外处理的。把一条SELECT语句返回的结果用于另一条SELECT语句的WHERE子句。
-
-* 作为子查询的SELECT语句只能查询单个列，如果检索多个列则返回错误；子查询最常用的就是在WHERE子句的IN操作符中。
-
-####2.作为计算字段使用子查询：
-```sql
-SELECT cust_name, cust_contact, 
-(SELECT COUNT(*) FROM Orders WHERE Orders.cust_id = Customers.cust_id) AS order_count
-FROM Customers
-ORDER BY cust_name;
-```
-
-###**[联结表]**
-####1.联结：
-+ SQL最强大的功能之一就是能够在数据查询的执行过程中联结(join)表；
-
-####2.创建联结：
-```sql
-SELECT vend_name, prod_name, prod_price
-FROM Vendords, Products
-WHERE Vendors.vend_id = Products.vend_id;
-```
