@@ -27,3 +27,6 @@ info frame:查看当前函数帧的信息
 up:往调用链上游移动，看看caller是谁  
 down:往调用链下游移动，看看callee是谁  
 return:从选定栈执行返回到caller  
+
+
+[GDB调试命令详解](http://blog.csdn.net/haoel/article/details/2879)
